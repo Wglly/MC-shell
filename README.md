@@ -6,6 +6,8 @@
 [![Compositors](https://img.shields.io/badge/desktop-Niri_%7C_Hyprland-8957e5?style=flat-square)](#how-compositor-support-works)
 [![Quickshell](https://img.shields.io/badge/Quickshell-0.3.2-4f7cff?style=flat-square)](https://quickshell.org)
 
+**English** · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md)
+
 A **Minecraft-styled desktop shell** for [Quickshell](https://quickshell.org), made for
 **Hyprland** and **niri**. Status bar, player-inventory dock, launcher, control centre,
 settings screen, desktop widgets, side baskets, power menu and toasts — all rendered like
@@ -234,7 +236,7 @@ XF86MonBrightnessDown { spawn "mc-shell" "ipc" "call" "shell" "brightnessDown"; 
 | `shell workspaces` / `backend` | debug readouts |
 | `shell language <auto\|en\|zh_CN\|zh_TW>` | switch language |
 | `shell preset <classic\|cave\|snow\|desert\|village\|winxp\|win95>` | switch theme preset |
-| `shell wallpaper <plains\|sunset\|night\|cave\|snow\|desert\|village>` | apply a built-in wallpaper |
+| `shell wallpaper <loading>` | apply the bundled wallpaper |
 | `shell set <dotted.key> <value>` | write any setting, e.g. `set bar.position left` |
 | `shell settingsTab <0-6>` | open a settings tab |
 
