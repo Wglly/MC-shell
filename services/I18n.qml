@@ -104,6 +104,10 @@ QtObject {
             "settings.dock.columns": "GRID COLUMNS", "settings.dock.rows": "GRID ROWS",
             "settings.dock.avoid": "AUTO-AVOID WINDOWS",
             "settings.dock.hoverZone": "EDGE SENSOR",
+            "dock.menu.title": "APP",
+            "dock.menu.pin": "PIN TO DOCK",
+            "common.cancel": "CANCEL",
+            "dock.menu.unpin": "REMOVE FROM DOCK",
 
             "settings.widgets.title": "DESKTOP WIDGETS",
             "settings.widgets.hint": "Drag widgets on the desktop to move them.",
@@ -215,6 +219,10 @@ QtObject {
             "settings.dock.columns": "网格列数", "settings.dock.rows": "网格行数",
             "settings.dock.avoid": "自动避让窗口",
             "settings.dock.hoverZone": "边缘感应区",
+            "dock.menu.title": "应用",
+            "dock.menu.pin": "固定到 Dock",
+            "common.cancel": "取消",
+            "dock.menu.unpin": "从 Dock 移除",
 
             "settings.widgets.title": "桌面组件",
             "settings.widgets.hint": "在桌面上拖动组件即可移动位置。",
@@ -326,6 +334,10 @@ QtObject {
             "settings.dock.columns": "網格列數", "settings.dock.rows": "網格行數",
             "settings.dock.avoid": "自動避讓視窗",
             "settings.dock.hoverZone": "邊緣感應區",
+            "dock.menu.title": "應用",
+            "dock.menu.pin": "固定到 Dock",
+            "common.cancel": "取消",
+            "dock.menu.unpin": "從 Dock 移除",
 
             "settings.widgets.title": "桌面元件",
             "settings.widgets.hint": "在桌面上拖曳元件即可移動位置。",

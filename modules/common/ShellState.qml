@@ -14,6 +14,38 @@ QtObject {
     // side baskets are opened on demand from the bar
     // space the dock needs on its edge (driven by Dock.qml)
     property int dockReserve: 0
+
+    // small context menu for dock slots (right click)
+    property var dockMenu: ({ visible: false, name: "", path: "", pinned: false, canPin: false })
+
+    function openDockMenu(app) {
+        ShellState.dockMenu = {
+            visible: true,
+            name: app.name,
+            path: app.path,
+            pinned: app.pinned === true,
+            canPin: app.path !== ""
+        };
+    }
+
+    function closeDockMenu() {
+        var m = ShellState.dockMenu;
+        ShellState.dockMenu = { visible: false, name: m.name, path: m.path, pinned: m.pinned, canPin: m.canPin };
+    }
+
+    function toggleDockPin(path) {
+        var id = path.split("/").pop();
+        if (id === "")
+            return;
+        var list = Settings.get("dock.pinned", []).slice();
+        var i = list.indexOf(id);
+        if (i >= 0)
+            list.splice(i, 1);
+        else
+            list.push(id);
+        Settings.set("dock.pinned", list);
+        ShellState.closeDockMenu();
+    }
     property bool leftBasket: false
     property bool rightBasket: false
 

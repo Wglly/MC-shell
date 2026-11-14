@@ -194,6 +194,10 @@ ShellRoot {
         targetScreen: shell.primaryScreen
     }
 
+    DockMenu {
+        targetScreen: shell.primaryScreen
+    }
+
     Sidebar {
         side: "left"
         targetScreen: shell.primaryScreen

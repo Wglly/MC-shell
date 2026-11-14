@@ -36,7 +36,8 @@ PanelWindow {
     readonly property var player: Mpris.players.values.length > 0 ? Mpris.players.values[0] : null
 
     property bool hovered: false
-    property bool expanded: root.hovered || (!root.autoHide && !root.shouldAvoid)
+    property bool expanded: root.hovered || ShellState.dockMenu.visible === true
+        || (!root.autoHide && !root.shouldAvoid)
 
     // Leaving the dock waits a moment before collapsing, so an accidental 1px
     // exit does not make the dock flicker.
@@ -270,7 +271,7 @@ PanelWindow {
                                 if (!app)
                                     return;
                                 if (mouse.button === Qt.RightButton)
-                                    root.togglePin(app);
+                                    ShellState.openDockMenu(app);
                                 else if (app.windowId && app.windowId !== "")
                                     Compositor.focusWindow(app.windowId);
                                 else
@@ -351,7 +352,7 @@ PanelWindow {
         return out.slice(0, root.columns * root.rows);
     }
 
-    function togglePin(app) {
+    function togglePin(app) { // kept for the settings page
         var id = app.path !== "" ? app.path.split("/").pop() : "";
         if (id === "")
             return;
