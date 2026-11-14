@@ -223,17 +223,34 @@ PanelWindow {
                                     texture: Theme.texturePath("stone")
                                     textureOpacity: 0.35
 
-                                    PixelText {
+                                    Row {
                                         anchors.left: parent.left
                                         anchors.leftMargin: 8
                                         anchors.right: parent.right
                                         anchors.rightMargin: 8
                                         anchors.verticalCenter: parent.verticalCenter
-                                        elide: Text.ElideRight
-                                        text: Settings.get("overview.titles", true)
-                                            ? modelData.title : (modelData.appId || modelData.title)
-                                        font.pixelSize: 10
-                                        color: Theme.text
+                                        spacing: 6
+
+                                        Image {
+                                            width: 14
+                                            height: 14
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            visible: modelData.appId !== ""
+                                            source: modelData.appId !== ""
+                                                ? Quickshell.iconPath(modelData.appId, "") : ""
+                                            smooth: false
+                                            mipmap: false
+                                        }
+
+                                        PixelText {
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            width: parent.width - 22
+                                            elide: Text.ElideRight
+                                            text: Settings.get("overview.titles", true)
+                                                ? modelData.title : (modelData.appId || modelData.title)
+                                            font.pixelSize: 10
+                                            color: Theme.text
+                                        }
                                     }
 
                                     MouseArea {
