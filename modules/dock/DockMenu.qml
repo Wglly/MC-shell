@@ -33,7 +33,7 @@ PanelWindow {
 
     McPanel {
         width: 250
-        height: 108
+        height: 146
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 150
@@ -61,6 +61,16 @@ PanelWindow {
                 visible: menu.state.canPin === true
                 label: menu.state.pinned ? I18n.t("dock.menu.unpin") : I18n.t("dock.menu.pin")
                 onClicked: ShellState.toggleDockPin(menu.state.path)
+            }
+
+            McButton {
+                width: parent.width
+                height: 26
+                label: I18n.t("dock.menu.basket")
+                onClicked: {
+                    ShellState.closeDockMenu();
+                    ShellState.leftBasket = !ShellState.leftBasket;
+                }
             }
 
             McButton {

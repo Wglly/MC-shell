@@ -108,6 +108,9 @@ QtObject {
             "dock.menu.pin": "PIN TO DOCK",
             "common.cancel": "CANCEL",
             "dock.menu.unpin": "REMOVE FROM DOCK",
+            "dock.menu.basket": "OPEN BASKET",
+            "dock.toast.pinned": "Pinned to dock",
+            "dock.toast.unpinned": "Removed from dock",
 
             "settings.widgets.title": "DESKTOP WIDGETS",
             "settings.widgets.hint": "Drag widgets on the desktop to move them.",
@@ -223,6 +226,9 @@ QtObject {
             "dock.menu.pin": "固定到 Dock",
             "common.cancel": "取消",
             "dock.menu.unpin": "从 Dock 移除",
+            "dock.menu.basket": "打开物品篮",
+            "dock.toast.pinned": "已固定到 Dock",
+            "dock.toast.unpinned": "已从 Dock 移除",
 
             "settings.widgets.title": "桌面组件",
             "settings.widgets.hint": "在桌面上拖动组件即可移动位置。",
@@ -338,6 +344,9 @@ QtObject {
             "dock.menu.pin": "固定到 Dock",
             "common.cancel": "取消",
             "dock.menu.unpin": "從 Dock 移除",
+            "dock.menu.basket": "開啟物品籃",
+            "dock.toast.pinned": "已固定到 Dock",
+            "dock.toast.unpinned": "已從 Dock 移除",
 
             "settings.widgets.title": "桌面元件",
             "settings.widgets.hint": "在桌面上拖曳元件即可移動位置。",

@@ -39,10 +39,14 @@ QtObject {
             return;
         var list = Settings.get("dock.pinned", []).slice();
         var i = list.indexOf(id);
-        if (i >= 0)
+        var name = id.replace(/\.desktop$/, "");
+        if (i >= 0) {
             list.splice(i, 1);
-        else
+            Notifs.toast(I18n.t("dock.toast.unpinned"), name);
+        } else {
             list.push(id);
+            Notifs.toast(I18n.t("dock.toast.pinned"), name);
+        }
         Settings.set("dock.pinned", list);
         ShellState.closeDockMenu();
     }

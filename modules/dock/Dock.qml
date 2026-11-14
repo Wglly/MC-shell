@@ -261,6 +261,17 @@ PanelWindow {
                             border.color: Theme.outline
                         }
 
+                        // pinned marker (gold, top-left)
+                        Rectangle {
+                            anchors.left: parent.left
+                            anchors.top: parent.top
+                            anchors.margins: 2
+                            width: 4
+                            height: 4
+                            visible: app !== null && app.pinned === true
+                            color: Theme.gold
+                        }
+
                         MouseArea {
                             anchors.fill: parent
                             hoverEnabled: true

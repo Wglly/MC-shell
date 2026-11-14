@@ -43,6 +43,27 @@ QtObject {
         root.items = list;
     }
 
+    // Simple self-made toast (no NotificationServer involved).
+    function toast(title, body) {
+        var entry = {
+            key: root.nextKey++,
+            at: Date.now(),
+            app: "MC-shell",
+            summary: title || "",
+            body: body || "",
+            icon: "",
+            node: null
+        };
+        var hist = root.history.slice();
+        hist.unshift(entry);
+        root.history = hist.slice(0, 40);
+        if (root.dnd)
+            return;
+        var list = root.items.slice();
+        list.push(entry);
+        root.items = list;
+    }
+
     function dismiss(key) {
         var list = [];
         for (var i = 0; i < root.items.length; i++) {
