@@ -36,6 +36,7 @@ QtObject {
                 autoHide: false,
                 iconSize: 42,
                 showMedia: true,      // mini player + dashboard button row
+                avoidWindows: true,   // tuck the dock away while apps are open
                 columns: 9,           // free grid: 1..12
                 rows: 3,              // free grid: 1..6
                 pinned: ["firefox.desktop", "org.gnome.Nautilus.desktop", "kitty.desktop",

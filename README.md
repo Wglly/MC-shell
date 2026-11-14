@@ -60,6 +60,14 @@ A wooden inventory basket of app slots whose **rows and columns are free** (1–
 move the dock to **any of the four edges**, or let it auto-hide behind a 4px strip. Empty
 slots are drawn too, because an inventory without empty slots isn't an inventory.
 
+Besides pinned apps the dock lists **everything running on the current workspace** (green
+dot = running window). Left click focuses the window or launches the app, **right click
+pins / unpins** it. With **auto-avoid** (default) the dock tucks itself into its 4px strip
+while the workspace has windows, comes back by itself on an empty desktop, and expands when
+the pointer touches the strip — so it never covers a window.
+
+![Dock](docs/screenshots/23-dock-running.png)
+
 The dock also carries a **mini media player** (title/artist + prev/play/next) and a
 **dashboard button**; both can be switched off in Settings → Dock.
 
@@ -94,7 +102,7 @@ One tab per feature group, all changes apply live and are written to
 - **Wallpaper** — enable MC-shell's own background layer, image path, fallback colour, fill mode
 - **Bar** — visibility, edge, thickness, which HUD parts to show
 - **Theme** — five presets, plus accent + highlight colours, block textures, UI scale
-- **Dock** — visibility, edge, auto-hide, icon size, **grid rows/columns**, pinned apps
+- **Dock** — visibility, edge, auto-hide, **auto-avoid windows**, icon size, **grid rows/columns**, pinned apps
 - **Widgets** — enable each desktop card, reset its position, weather city, visualiser bar count
 - **Side baskets** — left/right basket on-off, width, and which widgets they carry
 - **Overview** — enable, cards per row, desktops shown, window titles, backdrop darkness

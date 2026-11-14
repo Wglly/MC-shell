@@ -35,11 +35,20 @@ PanelWindow {
 
     readonly property var player: Mpris.players.values.length > 0 ? Mpris.players.values[0] : null
 
-    property bool expanded: !root.autoHide
+    property bool hovered: false
+    property bool expanded: root.hovered || (!root.autoHide && !root.shouldAvoid)
 
     screen: targetScreen
     color: "transparent"
     visible: enabled
+    // When apps are open the dock tucks itself away (a 4px strip stays at the
+    // edge, hovering it brings the dock back), so it never covers a window.
+    function boolSetting(key, def) {
+        var v = Settings.get(key, def);
+        return v === true || v === "true" || v === 1;
+    }
+    readonly property bool avoidWindows: root.boolSetting("dock.avoidWindows", true)
+    readonly property bool shouldAvoid: root.avoidWindows && Compositor.activeWindowCount > 0
     exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Top
 
@@ -75,8 +84,8 @@ PanelWindow {
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
-        onEntered: root.expanded = true
-        onExited: if (root.autoHide) root.expanded = false
+        onEntered: root.hovered = true
+        onExited: root.hovered = false
     }
 
     // --------------------------------------------------------------- contents
@@ -205,12 +214,34 @@ PanelWindow {
                         icon: app && app.icon !== "" ? Quickshell.iconPath(app.icon, "") : ""
                         label: app ? app.name.charAt(0) : ""
 
+                        Rectangle {
+                            anchors.right: parent.right
+                            anchors.bottom: parent.bottom
+                            anchors.margins: 2
+                            width: 5
+                            height: 5
+                            visible: app !== null && app.running === true
+                            color: Theme.grass
+                            border.width: 1
+                            border.color: Theme.outline
+                        }
+
                         MouseArea {
                             anchors.fill: parent
                             hoverEnabled: true
                             enabled: app !== null
+                            acceptedButtons: Qt.LeftButton | Qt.RightButton
                             cursorShape: Qt.PointingHandCursor
-                            onClicked: if (app) Apps.launch(app)
+                            onClicked: {
+                                if (!app)
+                                    return;
+                                if (mouse.button === Qt.RightButton)
+                                    root.togglePin(app);
+                                else if (app.windowId && app.windowId !== "")
+                                    Compositor.focusWindow(app.windowId);
+                                else
+                                    Apps.launch(app);
+                            }
                         }
                     }
                 }
@@ -219,23 +250,83 @@ PanelWindow {
     }
 
     // ------------------------------------------------------------- app mapping
+    readonly property var runningApps: {
+        var out = [];
+        var seen = {};
+        var ws = Compositor.focusedId;
+        var list = Compositor.windows;
+        for (var i = 0; i < list.length; i++) {
+            var w = list[i];
+            if (w.workspaceId !== ws)
+                continue;
+            var cls = "" + (w.appId || w.title || "");
+            var key = cls.toLowerCase();
+            if (key === "" || seen[key])
+                continue;
+            seen[key] = true;
+            var app = Apps.findByClass(cls);
+            out.push({
+                name: app ? app.name : (cls.charAt(0).toUpperCase() + cls.slice(1)),
+                icon: app ? app.icon : "",
+                path: app ? app.path : "",
+                windowId: w.id,
+                running: true,
+                pinned: false
+            });
+        }
+        return out;
+    }
+
     readonly property var dockApps: {
         var pinned = Settings.get("dock.pinned", []);
         var all = Apps.apps;
         var out = [];
-        for (var i = 0; i < pinned.length && out.length < root.columns * root.rows; i++) {
+        for (var i = 0; i < pinned.length; i++) {
             var id = pinned[i];
             for (var j = 0; j < all.length; j++) {
                 if (all[j].path.endsWith("/" + id)) {
-                    out.push(all[j]);
+                    out.push({ name: all[j].name, icon: all[j].icon, path: all[j].path,
+                               windowId: "", running: false, pinned: true });
                     break;
                 }
             }
         }
-        if (out.length === 0) {
-            for (var k = 0; k < all.length && out.length < 12; k++)
-                out.push(all[k]);
+        var run = root.runningApps;
+        for (var r = 0; r < run.length; r++) {
+            var ra = run[r];
+            var dup = -1;
+            for (var k = 0; k < out.length; k++) {
+                var a = out[k];
+                if (a.path !== "" && ra.path !== "" ? a.path === ra.path : a.name === ra.name) {
+                    dup = k;
+                    break;
+                }
+            }
+            if (dup >= 0) {
+                out[dup] = { name: out[dup].name, icon: out[dup].icon, path: out[dup].path,
+                             windowId: ra.windowId, running: true, pinned: out[dup].pinned };
+            } else {
+                out.push(ra);
+            }
         }
-        return out;
+        if (out.length === 0) {
+            for (var f = 0; f < all.length && out.length < 12; f++)
+                out.push({ name: all[f].name, icon: all[f].icon, path: all[f].path,
+                           windowId: "", running: false, pinned: false });
+        }
+        return out.slice(0, root.columns * root.rows);
+    }
+
+    function togglePin(app) {
+        var id = app.path !== "" ? app.path.split("/").pop() : "";
+        if (id === "")
+            return;
+        var list = Settings.get("dock.pinned", []).slice();
+        var i = list.indexOf(id);
+        if (i >= 0)
+            list.splice(i, 1);
+        else
+            list.push(id);
+        Settings.set("dock.pinned", list);
     }
 }

@@ -102,6 +102,7 @@ QtObject {
             "settings.dock.autohide": "AUTO HIDE", "settings.dock.iconSize": "ICON SIZE",
             "settings.dock.pinned": "PINNED APPS", "settings.dock.pinnedHint": "One desktop-file id per line",
             "settings.dock.columns": "GRID COLUMNS", "settings.dock.rows": "GRID ROWS",
+            "settings.dock.avoid": "AUTO-AVOID WINDOWS",
 
             "settings.widgets.title": "DESKTOP WIDGETS",
             "settings.widgets.hint": "Drag widgets on the desktop to move them.",
@@ -211,6 +212,7 @@ QtObject {
             "settings.dock.autohide": "自动隐藏", "settings.dock.iconSize": "图标大小",
             "settings.dock.pinned": "固定应用", "settings.dock.pinnedHint": "每行一个 desktop 文件名",
             "settings.dock.columns": "网格列数", "settings.dock.rows": "网格行数",
+            "settings.dock.avoid": "自动避让窗口",
 
             "settings.widgets.title": "桌面组件",
             "settings.widgets.hint": "在桌面上拖动组件即可移动位置。",
@@ -320,6 +322,7 @@ QtObject {
             "settings.dock.autohide": "自動隱藏", "settings.dock.iconSize": "圖示大小",
             "settings.dock.pinned": "固定應用程式", "settings.dock.pinnedHint": "每行一個 desktop 檔名",
             "settings.dock.columns": "網格列數", "settings.dock.rows": "網格行數",
+            "settings.dock.avoid": "自動避讓視窗",
 
             "settings.widgets.title": "桌面元件",
             "settings.widgets.hint": "在桌面上拖曳元件即可移動位置。",

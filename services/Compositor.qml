@@ -118,6 +118,16 @@ QtObject {
         return root.niriWindows;
     }
 
+    readonly property int activeWindowCount: {
+        var ws = root.focusedId;
+        var n = 0;
+        var list = root.windows;
+        for (var i = 0; i < list.length; i++)
+            if (list[i].workspaceId === ws)
+                n++;
+        return n;
+    }
+
     function applyNiriWindows(raw) {
         var out = [];
         try {

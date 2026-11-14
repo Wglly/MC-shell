@@ -75,6 +75,18 @@ Column {
 
     SettingRow {
         width: parent.width
+        label: I18n.t("settings.dock.avoid")
+
+        McButton {
+            anchors.right: parent.right
+            label: Settings.get("dock.avoidWindows", true) ? I18n.t("common.on") : I18n.t("common.off")
+            checked: Settings.get("dock.avoidWindows", true)
+            onClicked: Settings.toggle("dock.avoidWindows")
+        }
+    }
+
+    SettingRow {
+        width: parent.width
         label: I18n.t("settings.dock.iconSize")
 
         Row {

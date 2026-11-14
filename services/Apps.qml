@@ -70,6 +70,25 @@ done
         scan.running = true;
     }
 
+    // Match a window class (e.g. "firefox") to a desktop entry.
+    function findByClass(cls) {
+        var key = ("" + cls).toLowerCase().replace(/\s+/g, "");
+        if (key === "")
+            return null;
+        for (var i = 0; i < root.apps.length; i++) {
+            var app = root.apps[i];
+            var base = app.path.split("/").pop().replace(/\.desktop$/, "").toLowerCase().replace(/\s+/g, "");
+            if (base === key || app.name.toLowerCase().replace(/\s+/g, "") === key)
+                return app;
+        }
+        return null;
+    }
+
+    function desktopIdFor(cls) {
+        var app = root.findByClass(cls);
+        return app ? app.path.split("/").pop() : "";
+    }
+
     function launch(app) {
         if (!app || !app.exec)
             return;
