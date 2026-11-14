@@ -48,6 +48,7 @@ QtObject {
             "bar.launcher": "INVENTORY", "bar.power": "POWER", "bar.settings": "SETTINGS",
             "bar.volume": "VOL", "bar.network": "NET", "bar.battery": "BAT",
             "bar.day": "DAY",
+            "bar.dayFormat": "DAY {d}  {t}",
 
             "launcher.title": "INVENTORY", "launcher.search": "Search items…",
             "launcher.hint": "TYPE TO SEARCH   ·   ENTER = LAUNCH   ·   ESC = CLOSE",
@@ -122,6 +123,7 @@ QtObject {
             "bar.launcher": "物品栏", "bar.power": "电源", "bar.settings": "设置",
             "bar.volume": "音量", "bar.network": "网络", "bar.battery": "电量",
             "bar.day": "第",
+            "bar.dayFormat": "第 {d} 天  {t}",
 
             "launcher.title": "物品栏", "launcher.search": "搜索物品…",
             "launcher.hint": "输入搜索   ·   回车 = 启动   ·   ESC = 关闭",
@@ -196,6 +198,7 @@ QtObject {
             "bar.launcher": "物品欄", "bar.power": "電源", "bar.settings": "設定",
             "bar.volume": "音量", "bar.network": "網路", "bar.battery": "電量",
             "bar.day": "第",
+            "bar.dayFormat": "第 {d} 天  {t}",
 
             "launcher.title": "物品欄", "launcher.search": "搜尋物品…",
             "launcher.hint": "輸入搜尋   ·    Enter = 啟動   ·   ESC = 關閉",

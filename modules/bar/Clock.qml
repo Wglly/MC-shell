@@ -17,7 +17,9 @@ Item {
         anchors.centerIn: parent
         text: root.compact
             ? Util.clockText(root.now)
-            : I18n.t("bar.day") + " " + Util.dayNumber(root.now) + "  " + Util.clockText(root.now)
+            : I18n.t("bar.dayFormat")
+                .replace("{d}", Util.dayNumber(root.now))
+                .replace("{t}", Util.clockText(root.now))
         font.pixelSize: root.compact ? 11 : Theme.fontNormal
         color: Theme.gold
     }

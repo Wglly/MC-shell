@@ -31,7 +31,9 @@ McPanel {
             color: Theme.text
         }
         PixelText {
-            text: I18n.t("bar.day") + " " + Util.dayNumber(root.now)
+            text: I18n.t("bar.dayFormat")
+                .replace("{d}", Util.dayNumber(root.now))
+                .replace("{t}", Util.clockText(root.now))
             font.pixelSize: 11
             color: Theme.textDim
         }

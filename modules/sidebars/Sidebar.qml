@@ -33,8 +33,25 @@ PanelWindow {
     anchors.bottom: true
 
     implicitWidth: panelWidth
+
+    // Avoid the bar and the dock when they share an edge with this basket.
+    readonly property bool dockVisible: Settings.get("dock.visible", true) === true
+    readonly property string dockPos: Settings.get("dock.position", "bottom")
+    readonly property int dockIcon: Settings.get("dock.iconSize", 42)
+    readonly property int dockVertSize: 3 * (dockIcon + 3) + 14
+    readonly property int dockHorizSize: 9 * (dockIcon + 3) + 14
+
     margins.top: (barPos === "top" ? barThickness : 0) + 6
     margins.bottom: (barPos === "bottom" ? barThickness : 0) + 6
+        + (dockVisible && dockPos === "bottom" ? dockHorizSize + 4 : 0)
+    margins.left: side === "left"
+        ? (barPos === "left" ? barThickness : 0) + 4
+          + (dockVisible && dockPos === "left" ? dockVertSize + 4 : 0)
+        : 0
+    margins.right: side === "right"
+        ? (barPos === "right" ? barThickness : 0) + 4
+          + (dockVisible && dockPos === "right" ? dockVertSize + 4 : 0)
+        : 0
 
     McPanel {
         anchors.fill: parent
