@@ -28,20 +28,19 @@ McPanel {
     readonly property string current: Settings.get("wallpaper.path", "")
 
     property var folderImages: []
-    property string urlText: ""
-    property string fetchStatus: ""
-    readonly property string cacheDir: (Quickshell.env("HOME") || "") + "/.cache/mc-shell/wallpapers"
+    // text of the folder-path field (prefilled with the active folder)
+    property string folderDraft: ""
+    property string statusText: ""
 
-    function fetchUrl() {
-        if (root.urlText === "" || fetcher.running)
+    function applyFolder() {
+        var path = ("" + root.folderDraft).trim();
+        if (path === "")
             return;
-        var out = root.cacheDir + "/wall-" + Date.now() + ".png";
-        root.fetchStatus = I18n.t("widget.wallpaper.downloading");
-        fetcher.target = out;
-        fetcher.command = ["sh", "-c",
-            "mkdir -p \"$1\" && curl -fsSL --max-time 40 \"$2\" -o \"$3\"",
-            "sh", root.cacheDir, root.urlText, out];
-        fetcher.running = true;
+        if (path.indexOf("file://") === 0)
+            path = path.substring(7);
+        Settings.set("wallpaper.folder", path);
+        root.statusText = "";
+        root.refresh();
     }
 
     Process {
@@ -50,25 +49,21 @@ McPanel {
         stdout: StdioCollector {
             onStreamFinished: {
                 var t = ("" + text).trim();
-                if (t !== "")
-                    root.urlText = t;
+                if (t !== "") {
+                    root.folderDraft = t;
+                    root.applyFolder();
+                } else {
+                    root.statusText = I18n.t("widget.wallpaper.pasteEmpty");
+                }
             }
         }
     }
 
-    Process {
-        id: fetcher
-        property string target: ""
-        onExited: {
-            if (exitCode === 0 && target !== "") {
-                root.fetchStatus = "";
-                root.pick("file://" + target);
-            } else {
-                root.fetchStatus = I18n.t("widget.wallpaper.failed");
-            }
-        }
+    Component.onCompleted: root.folderDraft = root.folder
+    onFolderChanged: {
+        root.folderDraft = root.folder;
+        root.refresh();
     }
-    onFolderChanged: root.refresh()
 
     function pick(path) {
         Settings.set("wallpaper.path", path);
@@ -203,8 +198,9 @@ McPanel {
             McTextField {
                 width: parent.width - 110
                 height: 24
-                placeholder: I18n.t("widget.wallpaper.url")
-                onEdited: value => root.urlText = value
+                text: root.folderDraft
+                placeholder: I18n.t("widget.wallpaper.folderPath")
+                onEdited: value => root.folderDraft = value
             }
             McButton {
                 width: 50
@@ -215,18 +211,18 @@ McPanel {
             McButton {
                 width: 46
                 height: 24
-                label: "GET"
-                onClicked: root.fetchUrl()
+                label: I18n.t("widget.wallpaper.apply")
+                onClicked: root.applyFolder()
             }
         }
 
         PixelText {
             width: parent.width
             elide: Text.ElideRight
-            text: "" + (root.fetchStatus !== "" ? root.fetchStatus
+            text: "" + (root.statusText !== "" ? root.statusText
                 : (I18n.t("widget.wallpaper.folder") + ": " + root.folder))
             font.pixelSize: 8
-            color: root.fetchStatus === I18n.t("widget.wallpaper.failed") ? Theme.red : Theme.cardTextDim
+            color: root.statusText !== "" ? Theme.red : Theme.cardTextDim
         }
 
         Flickable {
