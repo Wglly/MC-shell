@@ -18,8 +18,18 @@ QtObject {
     readonly property bool isNiri: !isHyprland && (Quickshell.env("NIRI_SOCKET") || "") !== ""
     readonly property string backend: isHyprland ? "hyprland" : (isNiri ? "niri" : "none")
 
+    // Hyprland >= 0.5x can run its config in Lua; the IPC dispatcher syntax
+    // changes with it (hl.dsp.* instead of the legacy "dispatcher arg" strings).
+    readonly property bool hyprLua: root.isHyprland && Hyprland.usingLua
+
+    function hyprAddr(id) {
+        var a = "" + id;
+        return a.indexOf("0x") === 0 ? a : "0x" + a;
+    }
+
     // ------------------------------------------------------------- niri state
     property var niriList: []
+    property var niriWindows: []
     property int niriFocusedId: -1
     property string niriTitle: ""
     property string niriAppId: ""
@@ -80,10 +90,118 @@ QtObject {
         return root.niriOutput;
     }
 
+    // ------------------------------------------------------------- windows
+    function mapHyprWindows(list) {
+        var out = [];
+        if (!list)
+            return out;
+        for (var i = 0; i < list.length; i++) {
+            var w = list[i];
+            if (!w)
+                continue;
+            var cls = "";
+            if (w.lastIpcObject && w.lastIpcObject.class)
+                cls = "" + w.lastIpcObject.class;
+            out.push({
+                id: w.address,
+                title: w.title || cls || "window",
+                appId: cls,
+                workspaceId: w.workspace ? w.workspace.id : -1
+            });
+        }
+        return out;
+    }
+
+    readonly property var windows: {
+        if (root.backend === "hyprland")
+            return root.mapHyprWindows(Hyprland.toplevels.values);
+        return root.niriWindows;
+    }
+
+    function applyNiriWindows(raw) {
+        var out = [];
+        try {
+            var arr = JSON.parse(raw);
+            for (var i = 0; i < arr.length; i++) {
+                var w = arr[i];
+                out.push({
+                    id: "" + w.id,
+                    title: w.title || w.app_id || "window",
+                    appId: w.app_id || "",
+                    workspaceId: w.workspace_id
+                });
+            }
+        } catch (e) {
+            return;
+        }
+        root.niriWindows = out;
+    }
+
+    function moveWindow(windowId, workspaceId) {
+        if (root.backend === "hyprland") {
+            if (root.hyprLua) {
+                // No dispatcher targets an arbitrary window, so focus it and
+                // move the (now) active window in one Lua dispatch.
+                Hyprland.dispatch("function() hl.dispatch(hl.dsp.focus({window=hl.get_window(\"address:"
+                    + root.hyprAddr(windowId) + "\")})); hl.dispatch(hl.dsp.window.move({workspace="
+                    + workspaceId + "})) end");
+            }
+            else
+                Hyprland.dispatch("movetoworkspacesilent " + workspaceId + ",address:" + root.hyprAddr(windowId));
+            return;
+        }
+        if (root.backend === "niri") {
+            var ws = root.findNiri(workspaceId);
+            if (!ws)
+                return;
+            mover.command = ["sh", "-c",
+                "niri msg action focus-window --id " + windowId + " >/dev/null 2>&1; "
+                + "niri msg action move-window-to-workspace " + ws.idx];
+            if (!mover.running)
+                mover.running = true;
+        }
+    }
+
+    function focusWindow(windowId) {
+        if (root.backend === "hyprland") {
+            if (root.hyprLua)
+                Hyprland.dispatch("hl.dsp.focus({window=hl.get_window(\"address:"
+                    + root.hyprAddr(windowId) + "\")})");
+            else
+                Hyprland.dispatch("focuswindow address:" + root.hyprAddr(windowId));
+            return;
+        }
+        if (root.backend === "niri") {
+            focuser.command = ["niri", "msg", "action", "focus-window", "--id", "" + windowId];
+            if (!focuser.running)
+                focuser.running = true;
+        }
+    }
+
+    property Process mover: Process {
+        command: ["true"]
+        onExited: root.scheduleRefresh()
+    }
+
+    property Process focuser: Process {
+        command: ["true"]
+        onExited: root.scheduleRefresh()
+    }
+
+    property Process niriWindowList: Process {
+        command: ["niri", "msg", "--json", "windows"]
+        stdout: StdioCollector {
+            onStreamFinished: root.applyNiriWindows(text)
+        }
+    }
+
     // --------------------------------------------------------------- actions
     function focusWorkspace(id) {
         if (root.backend === "hyprland") {
-            Hyprland.dispatch("workspace " + id);
+            if (root.hyprLua)
+                Hyprland.dispatch("hl.dsp.focus({workspace=" + id + "})");
+            else
+                Hyprland.dispatch("workspace " + id);
             return;
         }
         if (root.backend === "niri") {
@@ -190,6 +308,7 @@ QtObject {
             root.refreshQueued = false;
             niriWorkspaces.running = true;
             niriWindow.running = true;
+            niriWindowList.running = true;
         }
     }
 

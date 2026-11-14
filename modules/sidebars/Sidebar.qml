@@ -38,8 +38,11 @@ PanelWindow {
     readonly property bool dockVisible: Settings.get("dock.visible", true) === true
     readonly property string dockPos: Settings.get("dock.position", "bottom")
     readonly property int dockIcon: Settings.get("dock.iconSize", 42)
-    readonly property int dockVertSize: 3 * (dockIcon + 3) + 14
-    readonly property int dockHorizSize: 9 * (dockIcon + 3) + 14
+    readonly property int dockCols: Settings.get("dock.columns", 9)
+    readonly property int dockRows: Settings.get("dock.rows", 3)
+    // vertical dock: columns are drawn on the Y axis (transposed grid)
+    readonly property int dockVertSize: dockRows * (dockIcon + 3) + 14
+    readonly property int dockHorizSize: dockCols * (dockIcon + 3) + 14
 
     margins.top: (barPos === "top" ? barThickness : 0) + 6
     margins.bottom: (barPos === "bottom" ? barThickness : 0) + 6

@@ -72,6 +72,7 @@ QtObject {
             "settings.tab.general": "GENERAL", "settings.tab.wallpaper": "WALLPAPER",
             "settings.tab.bar": "BAR", "settings.tab.theme": "THEME", "settings.tab.dock": "DOCK",
             "settings.tab.widgets": "WIDGETS", "settings.tab.sidebars": "SIDEBARS",
+            "settings.tab.overview": "OVERVIEW",
 
             "settings.general.language": "LANGUAGE", "settings.general.languageHint": "AUTO follows your system locale",
             "settings.general.shortcuts": "SHORTCUTS",
@@ -96,6 +97,7 @@ QtObject {
             "settings.dock.visible": "SHOW DOCK", "settings.dock.position": "DOCK POSITION",
             "settings.dock.autohide": "AUTO HIDE", "settings.dock.iconSize": "ICON SIZE",
             "settings.dock.pinned": "PINNED APPS", "settings.dock.pinnedHint": "One desktop-file id per line",
+            "settings.dock.columns": "GRID COLUMNS", "settings.dock.rows": "GRID ROWS",
 
             "settings.widgets.title": "DESKTOP WIDGETS",
             "settings.widgets.hint": "Drag widgets on the desktop to move them.",
@@ -110,6 +112,15 @@ QtObject {
             "widget.visualizer.bars": "BARS",
 
             "osd.volume": "VOLUME", "osd.brightness": "BRIGHTNESS",
+            "overview.title": "OVERVIEW", "overview.hint": "DRAG A WINDOW ONTO ANOTHER DESKTOP   ·   ESC = CLOSE",
+            "overview.desktop": "DESKTOP", "overview.empty": "EMPTY", "overview.more": "MORE",
+            "overview.current": "CURRENT",
+            "settings.overview.enabled": "ENABLE OVERVIEW",
+            "settings.overview.columns": "CARDS PER ROW",
+            "settings.overview.desktops": "DESKTOPS SHOWN",
+            "settings.overview.titles": "SHOW WINDOW TITLES",
+            "settings.overview.backdrop": "BACKDROP DARKNESS",
+            "settings.overview.note": "Open with mc-shell ipc call shell overview; drag a window card onto another desktop to move it.",
             "sidebar.left": "LEFT BASKET", "sidebar.right": "RIGHT BASKET",
             "weather.loading": "SCANNING SKY…", "weather.unavailable": "NO SIGNAL",
             "dock.empty": "NO APPS"
@@ -147,6 +158,7 @@ QtObject {
             "settings.tab.general": "通用", "settings.tab.wallpaper": "壁纸",
             "settings.tab.bar": "状态栏", "settings.tab.theme": "主题", "settings.tab.dock": "应用篮",
             "settings.tab.widgets": "桌面组件", "settings.tab.sidebars": "侧边篮",
+            "settings.tab.overview": "桌面概览",
 
             "settings.general.language": "语言", "settings.general.languageHint": "自动：跟随系统语言环境",
             "settings.general.shortcuts": "快捷键",
@@ -171,6 +183,7 @@ QtObject {
             "settings.dock.visible": "显示应用篮", "settings.dock.position": "应用篮位置",
             "settings.dock.autohide": "自动隐藏", "settings.dock.iconSize": "图标大小",
             "settings.dock.pinned": "固定应用", "settings.dock.pinnedHint": "每行一个 desktop 文件名",
+            "settings.dock.columns": "网格列数", "settings.dock.rows": "网格行数",
 
             "settings.widgets.title": "桌面组件",
             "settings.widgets.hint": "在桌面上拖动组件即可移动位置。",
@@ -185,6 +198,15 @@ QtObject {
             "widget.visualizer.bars": "柱数",
 
             "osd.volume": "音量", "osd.brightness": "亮度",
+            "overview.title": "桌面概览", "overview.hint": "把窗口卡片拖到另一个桌面即可移动   ·   ESC = 关闭",
+            "overview.desktop": "桌面", "overview.empty": "空", "overview.more": "更多",
+            "overview.current": "当前",
+            "settings.overview.enabled": "启用桌面概览",
+            "settings.overview.columns": "每行卡片数",
+            "settings.overview.desktops": "显示桌面数",
+            "settings.overview.titles": "显示窗口标题",
+            "settings.overview.backdrop": "背景暗度",
+            "settings.overview.note": "用 mc-shell ipc call shell overview 打开；把窗口卡片拖到另一个桌面即可移动窗口。",
             "sidebar.left": "左侧边篮", "sidebar.right": "右侧边篮",
             "weather.loading": "正在观测天空…", "weather.unavailable": "无信号",
             "dock.empty": "没有应用"
@@ -222,6 +244,7 @@ QtObject {
             "settings.tab.general": "一般", "settings.tab.wallpaper": "桌布",
             "settings.tab.bar": "狀態列", "settings.tab.theme": "主題", "settings.tab.dock": "應用籃",
             "settings.tab.widgets": "桌面元件", "settings.tab.sidebars": "側邊籃",
+            "settings.tab.overview": "桌面概覽",
 
             "settings.general.language": "語言", "settings.general.languageHint": "自動：跟隨系統語言環境",
             "settings.general.shortcuts": "快速鍵",
@@ -246,6 +269,7 @@ QtObject {
             "settings.dock.visible": "顯示應用籃", "settings.dock.position": "應用籃位置",
             "settings.dock.autohide": "自動隱藏", "settings.dock.iconSize": "圖示大小",
             "settings.dock.pinned": "固定應用程式", "settings.dock.pinnedHint": "每行一個 desktop 檔名",
+            "settings.dock.columns": "網格列數", "settings.dock.rows": "網格行數",
 
             "settings.widgets.title": "桌面元件",
             "settings.widgets.hint": "在桌面上拖曳元件即可移動位置。",
@@ -260,6 +284,15 @@ QtObject {
             "widget.visualizer.bars": "柱數",
 
             "osd.volume": "音量", "osd.brightness": "亮度",
+            "overview.title": "桌面概览", "overview.hint": "把窗口卡片拖到另一个桌面即可移动   ·   ESC = 关闭",
+            "overview.desktop": "桌面", "overview.empty": "空", "overview.more": "更多",
+            "overview.current": "当前",
+            "settings.overview.enabled": "启用桌面概览",
+            "settings.overview.columns": "每行卡片数",
+            "settings.overview.desktops": "显示桌面数",
+            "settings.overview.titles": "显示窗口标题",
+            "settings.overview.backdrop": "背景暗度",
+            "settings.overview.note": "用 mc-shell ipc call shell overview 打开；把窗口卡片拖到另一个桌面即可移动窗口。",
             "sidebar.left": "左側邊籃", "sidebar.right": "右側邊籃",
             "weather.loading": "正在觀測天空…", "weather.unavailable": "無訊號",
             "dock.empty": "沒有應用程式"

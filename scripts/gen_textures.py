@@ -344,6 +344,21 @@ def weather_icons() -> None:
     pixel_icon(storm, {"X": (170, 170, 170, 255), "Y": (255, 220, 90, 255)}, "icon_storm.png")
 
 
+def overview_icon() -> None:
+    rows = [
+        "XX XX XX ",
+        "XX XX XX ",
+        "         ",
+        "XX XX XX ",
+        "XX XX XX ",
+        "         ",
+        "XX XX XX ",
+        "XX XX XX ",
+        "         ",
+    ]
+    pixel_icon(rows, {"X": (255, 204, 77, 255)}, "icon_overview.png")
+
+
 def main() -> None:
     save(noisy_tile("#866043", 14, 1, speckle=6), "dirt.png")
     save(noisy_tile("#7e7e7e", 10, 2, speckle=4), "stone.png")
@@ -360,6 +375,7 @@ def main() -> None:
     power_icon()
     book_icon()
     weather_icons()
+    overview_icon()
     icon = block_icon().resize((512, 512), Image.NEAREST)
     icon.save(ROOT / "assets" / "icon.png")
     print("wrote assets/icon.png (512x512)")

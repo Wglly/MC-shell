@@ -17,11 +17,14 @@ PanelWindow {
     readonly property bool autoHide: Settings.get("dock.autoHide", false) === true
     readonly property int iconSize: Math.max(28, Math.min(64, Settings.get("dock.iconSize", 42)))
     readonly property int slotPad: 3
-    readonly property int columns: 9
-    readonly property int rows: 3
+    // Free grid: rows/columns come straight from Settings.
+    readonly property int columns: Math.max(1, Math.min(12, Settings.get("dock.columns", 9)))
+    readonly property int rows: Math.max(1, Math.min(6, Settings.get("dock.rows", 3)))
 
-    readonly property int panelW: (vertical ? root.rows : root.columns) * (root.iconSize + root.slotPad) + 14
-    readonly property int panelH: (vertical ? root.columns : root.rows) * (root.iconSize + root.slotPad) + 14
+    readonly property int gridCols: root.vertical ? root.rows : root.columns
+    readonly property int gridRows: root.vertical ? root.columns : root.rows
+    readonly property int panelW: root.gridCols * (root.iconSize + root.slotPad) + 14
+    readonly property int panelH: root.gridRows * (root.iconSize + root.slotPad) + 14
 
     property bool expanded: !root.autoHide
 
@@ -79,8 +82,8 @@ PanelWindow {
         Grid {
             id: grid
             anchors.centerIn: parent
-            columns: root.vertical ? root.rows : root.columns
-            rows: root.vertical ? root.columns : root.rows
+            columns: root.gridCols
+            rows: root.gridRows
             spacing: root.slotPad
 
             Repeater {

@@ -13,6 +13,7 @@ import qs.modules.dock
 import qs.modules.sidebars
 import qs.modules.widgets
 import qs.modules.settings
+import qs.modules.overview
 import qs.modules.power
 import qs.modules.wallpaper
 import qs.services
@@ -99,6 +100,8 @@ ShellRoot {
 
     SettingsWindow { }
 
+    Overview { }
+
     PowerMenu { }
 
     Osd {
@@ -128,6 +131,9 @@ ShellRoot {
         function power(): void {
             ShellState.toggleOverlay("power");
         }
+        function overview(): void {
+            ShellState.toggleOverlay("overview");
+        }
         function close(): void {
             ShellState.closeOverlay();
         }
@@ -142,6 +148,12 @@ ShellRoot {
         }
         function stepWorkspace(delta: int): void {
             Compositor.step(delta);
+        }
+        function moveWindow(windowId: string, workspaceId: int): void {
+            Compositor.moveWindow(windowId, workspaceId);
+        }
+        function windows(): string {
+            return JSON.stringify(Compositor.windows);
         }
         function volumeUp(): void {
             Audio.step(1);

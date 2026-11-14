@@ -27,6 +27,10 @@ blocks, hotbar slots and stone GUI panels.
 |---|---|
 | ![Settings widgets](docs/screenshots/8-settings-widgets.png) | ![Settings sidebars](docs/screenshots/9-settings-sidebars.png) |
 
+| Desktop overview (drag windows between desktops) | Settings · overview |
+|---|---|
+| ![Overview](docs/screenshots/13-overview.png) | ![Overview settings](docs/screenshots/15-settings-overview.png) |
+
 | Power menu | Options / OSD |
 |---|---|
 | ![Power menu](docs/screenshots/10-power.png) | ![Control centre](docs/screenshots/3-control-center.png) ![OSD](docs/screenshots/12-osd.png) |
@@ -40,9 +44,22 @@ NET / VOL / BAT chips, tray icons, settings and power buttons. The bar can sit o
 column automatically.
 
 ### Dock — the player inventory
-A wooden 9×3 inventory basket of app slots. Pin your apps, change the icon size, move the
-dock to **any of the four edges**, or let it auto-hide behind a 4px strip. Empty slots are
-drawn too, because an inventory without empty slots isn't an inventory.
+A wooden inventory basket of app slots whose **rows and columns are free** (1–12 columns ×
+1–6 rows, e.g. the classic 9×3 or a compact 5×2). Pin your apps, change the icon size,
+move the dock to **any of the four edges**, or let it auto-hide behind a 4px strip. Empty
+slots are drawn too, because an inventory without empty slots isn't an inventory.
+
+![Dock grid settings](docs/screenshots/14-settings-dock-grid.png)
+
+### Desktop overview
+A full-screen grid of desktops with every window as a draggable card. Drop a card on
+another desktop to move the window there; click a card to jump to that window. The number
+of cards per row, how many desktops are shown, titles and backdrop darkness are all in
+Settings → Overview.
+
+- Hyprland: exact window move via `hl.dsp.window.move` (Lua configs) or
+  `movetoworkspacesilent` (legacy configs).
+- niri: focuses the window, then `niri msg action move-window-to-workspace`.
 
 ### Launcher
 Searchable app grid (type / arrows / Enter / Esc), mouse wheel scrolling.
@@ -55,9 +72,10 @@ One tab per feature group, all changes apply live and are written to
 - **Wallpaper** — enable MC-shell's own background layer, image path, fallback colour, fill mode
 - **Bar** — visibility, edge, thickness, which HUD parts to show
 - **Theme** — accent + highlight colours, bar/panel block texture, UI scale, texture preview
-- **Dock** — visibility, edge, auto-hide, icon size, pinned apps
+- **Dock** — visibility, edge, auto-hide, icon size, **grid rows/columns**, pinned apps
 - **Widgets** — enable each desktop card, reset its position, weather city, visualiser bar count
 - **Side baskets** — left/right basket on-off, width, and which widgets they carry
+- **Overview** — enable, cards per row, desktops shown, window titles, backdrop darkness
 
 ### Desktop widgets
 Draggable cards on the wallpaper layer: **clock**, **weather** (wttr.in, no API key),
@@ -127,6 +145,7 @@ Everything is exposed over Quickshell IPC:
 bind = SUPER, D, exec, mc-shell ipc call shell launcher
 bind = SUPER, X, exec, mc-shell ipc call shell control
 bind = SUPER, C, exec, mc-shell ipc call shell settings
+bind = SUPER, TAB, exec, mc-shell ipc call shell overview
 bind = SUPER, P, exec, mc-shell ipc call shell power
 bind = , XF86AudioRaiseVolume,  exec, mc-shell ipc call shell volumeUp
 bind = , XF86AudioLowerVolume,  exec, mc-shell ipc call shell volumeDown
@@ -140,6 +159,7 @@ bind = , XF86MonBrightnessDown, exec, mc-shell ipc call shell brightnessDown
 Mod+D { spawn "mc-shell" "ipc" "call" "shell" "launcher"; }
 Mod+X { spawn "mc-shell" "ipc" "call" "shell" "control"; }
 Mod+C { spawn "mc-shell" "ipc" "call" "shell" "settings"; }
+Mod+Tab { spawn "mc-shell" "ipc" "call" "shell" "overview"; }
 Mod+P { spawn "mc-shell" "ipc" "call" "shell" "power"; }
 XF86AudioRaiseVolume { spawn "mc-shell" "ipc" "call" "shell" "volumeUp"; }
 XF86AudioLowerVolume { spawn "mc-shell" "ipc" "call" "shell" "volumeDown"; }
@@ -156,7 +176,10 @@ XF86MonBrightnessDown { spawn "mc-shell" "ipc" "call" "shell" "brightnessDown"; 
 | `shell close` | close whatever is open |
 | `shell volumeUp` / `volumeDown` / `volumeMute` | audio + OSD |
 | `shell brightnessUp` / `brightnessDown` | brightness + OSD |
+| `shell overview` | toggle the desktop overview |
 | `shell focus <id>` / `stepWorkspace <±1>` | workspace control |
+| `shell windows` | JSON window list (debug) |
+| `shell moveWindow <windowId> <desktopId>` | move a window to a desktop |
 | `shell workspaces` / `backend` | debug readouts |
 | `shell language <auto\|en\|zh_CN\|zh_TW>` | switch language |
 | `shell set <dotted.key> <value>` | write any setting, e.g. `set bar.position left` |
@@ -170,7 +193,9 @@ Settings are edited in the GUI and stored as JSON:
 {
   "language": "auto",
   "bar":   { "position": "top", "visible": true, "thickness": 40, "showStats": true },
-  "dock":  { "position": "bottom", "iconSize": 42, "autoHide": false, "pinned": ["firefox.desktop"] },
+  "dock":  { "position": "bottom", "iconSize": 42, "columns": 9, "rows": 3,
+             "autoHide": false, "pinned": ["firefox.desktop"] },
+  "overview": { "enabled": true, "columns": 3, "desktops": 6, "showTitles": true },
   "theme": { "accent": "#5fbf4f", "gold": "#ffcc4d", "barTexture": "deepslate", "panelTexture": "dirt" },
   "wallpaper": { "enabled": false, "path": "", "color": "#101418", "fillMode": "fill" },
   "widgets": { "clock": { "enabled": true, "x": 0.06, "y": 0.10 } },
@@ -211,6 +236,7 @@ modules/control/                options / control centre
 modules/settings/               settings window + 7 pages
 modules/widgets/                clock, weather, visualiser, calendar, stats cards + desktop hosts
 modules/sidebars/               left/right baskets
+modules/overview/               desktop overview + window drag
 modules/wallpaper/              background layer
 modules/power/                  title-screen power menu
 modules/osd/                    XP-bar OSD

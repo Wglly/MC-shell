@@ -35,6 +35,8 @@ QtObject {
                 visible: true,
                 autoHide: false,
                 iconSize: 42,
+                columns: 9,           // free grid: 1..12
+                rows: 3,              // free grid: 1..6
                 pinned: ["firefox.desktop", "org.gnome.Nautilus.desktop", "kitty.desktop",
                          "org.gnome.Console.desktop", "org.gnome.TextEditor.desktop",
                          "libreoffice-writer.desktop", "steam.desktop"]
@@ -63,6 +65,13 @@ QtObject {
             sidebars: {
                 left: { enabled: true, width: 260, widgets: ["stats", "calendar"] },
                 right: { enabled: true, width: 260, widgets: ["music", "weather"] }
+            },
+            overview: {
+                enabled: true,
+                columns: 3,           // workspace cards per row
+                desktops: 6,          // how many desktops to show
+                showTitles: true,
+                backdrop: 0.72
             },
             power: {
                 confirm: true

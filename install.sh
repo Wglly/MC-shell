@@ -80,6 +80,7 @@ Keybindings (Hyprland):
 
     bind = SUPER, D, exec, mc-shell ipc call shell launcher
     bind = SUPER, X, exec, mc-shell ipc call shell control
+    bind = SUPER, TAB, exec, mc-shell ipc call shell overview
     bind = , XF86AudioRaiseVolume,  exec, mc-shell ipc call shell volumeUp
     bind = , XF86AudioLowerVolume,  exec, mc-shell ipc call shell volumeDown
     bind = , XF86AudioMute,         exec, mc-shell ipc call shell volumeMute
@@ -90,6 +91,7 @@ Keybindings (niri, config.kdl):
 
     Mod+D { spawn "mc-shell" "ipc" "call" "shell" "launcher"; }
     Mod+X { spawn "mc-shell" "ipc" "call" "shell" "control"; }
+    Mod+Tab { spawn "mc-shell" "ipc" "call" "shell" "overview"; }
     XF86AudioRaiseVolume { spawn "mc-shell" "ipc" "call" "shell" "volumeUp"; }
     XF86AudioLowerVolume { spawn "mc-shell" "ipc" "call" "shell" "volumeDown"; }
     XF86AudioMute        { spawn "mc-shell" "ipc" "call" "shell" "volumeMute"; }

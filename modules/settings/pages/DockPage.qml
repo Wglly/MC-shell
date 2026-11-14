@@ -87,6 +87,54 @@ Column {
 
     SettingRow {
         width: parent.width
+        label: I18n.t("settings.dock.columns")
+
+        Row {
+            anchors.right: parent.right
+            spacing: 8
+
+            McSlider {
+                width: 168
+                value: (Settings.get("dock.columns", 9) - 1) / 11
+                onMoved: v => Settings.set("dock.columns", Math.round(1 + v * 11))
+            }
+            PixelText {
+                anchors.verticalCenter: parent.verticalCenter
+                width: 30
+                text: Settings.get("dock.columns", 9)
+                font.pixelSize: Theme.fontSmall
+                color: Theme.textOnPanel
+                styleColor: "#ffffff"
+            }
+        }
+    }
+
+    SettingRow {
+        width: parent.width
+        label: I18n.t("settings.dock.rows")
+
+        Row {
+            anchors.right: parent.right
+            spacing: 8
+
+            McSlider {
+                width: 168
+                value: (Settings.get("dock.rows", 3) - 1) / 5
+                onMoved: v => Settings.set("dock.rows", Math.round(1 + v * 5))
+            }
+            PixelText {
+                anchors.verticalCenter: parent.verticalCenter
+                width: 30
+                text: Settings.get("dock.rows", 3)
+                font.pixelSize: Theme.fontSmall
+                color: Theme.textOnPanel
+                styleColor: "#ffffff"
+            }
+        }
+    }
+
+    SettingRow {
+        width: parent.width
         label: I18n.t("settings.dock.pinned")
         hint: I18n.t("settings.dock.pinnedHint")
 
@@ -115,12 +163,33 @@ Column {
         texture: Theme.texturePath("oak_planks")
         textureOpacity: 0.95
 
-        PixelText {
+        Column {
             anchors.centerIn: parent
-            text: Settings.get("dock.position", "bottom").toUpperCase()
-                  + "   " + Settings.get("dock.pinned", []).length + " APPS"
-            font.pixelSize: Theme.fontSmall
-            color: Theme.text
+            spacing: 6
+
+            PixelText {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: Settings.get("dock.columns", 9) + " × " + Settings.get("dock.rows", 3)
+                      + "   " + Settings.get("dock.pinned", []).length + " APPS"
+                font.pixelSize: Theme.fontSmall
+                color: Theme.text
+            }
+
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: 3
+
+                Repeater {
+                    model: Math.min(12, Settings.get("dock.columns", 9))
+                    delegate: Rectangle {
+                        width: 14
+                        height: 14
+                        color: "#3b3b3b"
+                        border.width: 1
+                        border.color: "#000000"
+                    }
+                }
+            }
         }
     }
 }

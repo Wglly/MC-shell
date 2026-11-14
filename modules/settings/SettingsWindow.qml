@@ -31,7 +31,8 @@ PanelWindow {
         { key: "theme", page: "pages/ThemePage.qml" },
         { key: "dock", page: "pages/DockPage.qml" },
         { key: "widgets", page: "pages/WidgetsPage.qml" },
-        { key: "sidebars", page: "pages/SidebarsPage.qml" }
+        { key: "sidebars", page: "pages/SidebarsPage.qml" },
+        { key: "overview", page: "pages/OverviewPage.qml" }
     ]
 
     Rectangle {

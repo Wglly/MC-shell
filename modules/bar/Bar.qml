@@ -100,6 +100,12 @@ PanelWindow {
             Slot {
                 width: 30
                 height: 30
+                icon: Qt.resolvedUrl("../../assets/textures/icon_overview.png")
+                onClicked: ShellState.toggleOverlay("overview")
+            }
+            Slot {
+                width: 30
+                height: 30
                 icon: Qt.resolvedUrl("../../assets/textures/icon_gear.png")
                 onClicked: ShellState.toggleOverlay("settings")
             }
@@ -167,6 +173,13 @@ PanelWindow {
                 visible: Settings.get("bar.showTray", true)
             }
 
+            Slot {
+                width: 30
+                height: 30
+                x: Math.round((parent.width - width) / 2)
+                icon: Qt.resolvedUrl("../../assets/textures/icon_overview.png")
+                onClicked: ShellState.toggleOverlay("overview")
+            }
             Slot {
                 width: 30
                 height: 30
