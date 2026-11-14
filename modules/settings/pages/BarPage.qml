@@ -184,6 +184,14 @@ Column {
                 anchors.right: parent.right
                 spacing: 4
 
+                McButton {
+                    implicitWidth: 44
+                    label: Settings.get("bar.items." + rowItem.keyName, true) === true
+                        ? I18n.t("common.on") : I18n.t("common.off")
+                    checked: Settings.get("bar.items." + rowItem.keyName, true) === true
+                    onClicked: Settings.toggle("bar.items." + rowItem.keyName)
+                }
+
                 Repeater {
                     model: ["left", "center", "right"]
 

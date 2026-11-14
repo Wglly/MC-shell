@@ -24,6 +24,10 @@ PanelWindow {
     readonly property var centerItems: root.sections && root.sections.center ? root.sections.center : []
     readonly property var rightItems: root.sections && root.sections.right ? root.sections.right : []
 
+    function itemEnabled(key) {
+        return Settings.get("bar.items." + key, true) === true;
+    }
+
     function inSection(section, key) {
         var list = root.sections ? root.sections[section] : null;
         return !!list && list.indexOf(key) >= 0;
@@ -63,119 +67,119 @@ PanelWindow {
             spacing: 6
             BarItem {
                 kind: "launcher"
-                visible: root.inSection("left", "launcher")
+                visible: root.itemEnabled("launcher") && root.inSection("left", "launcher")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "workspaces"
-                visible: root.inSection("left", "workspaces")
+                visible: root.itemEnabled("workspaces") && root.inSection("left", "workspaces")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "title"
-                visible: root.inSection("left", "title")
+                visible: root.itemEnabled("title") && root.inSection("left", "title")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "clock"
-                visible: root.inSection("left", "clock")
+                visible: root.itemEnabled("clock") && root.inSection("left", "clock")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "media"
-                visible: root.inSection("left", "media")
+                visible: root.itemEnabled("media") && root.inSection("left", "media")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "stats"
-                visible: root.inSection("left", "stats")
+                visible: root.itemEnabled("stats") && root.inSection("left", "stats")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "net"
-                visible: root.inSection("left", "net")
+                visible: root.itemEnabled("net") && root.inSection("left", "net")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "volume"
-                visible: root.inSection("left", "volume")
+                visible: root.itemEnabled("volume") && root.inSection("left", "volume")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "battery"
-                visible: root.inSection("left", "battery")
+                visible: root.itemEnabled("battery") && root.inSection("left", "battery")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "tray"
-                visible: root.inSection("left", "tray")
+                visible: root.itemEnabled("tray") && root.inSection("left", "tray")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "user"
-                visible: root.inSection("left", "user")
+                visible: root.itemEnabled("user") && root.inSection("left", "user")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "basketLeft"
-                visible: root.inSection("left", "basketLeft")
+                visible: root.itemEnabled("basketLeft") && root.inSection("left", "basketLeft")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "basketRight"
-                visible: root.inSection("left", "basketRight")
+                visible: root.itemEnabled("basketRight") && root.inSection("left", "basketRight")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "overview"
-                visible: root.inSection("left", "overview")
+                visible: root.itemEnabled("overview") && root.inSection("left", "overview")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "dashboard"
-                visible: root.inSection("left", "dashboard")
+                visible: root.itemEnabled("dashboard") && root.inSection("left", "dashboard")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "settings"
-                visible: root.inSection("left", "settings")
+                visible: root.itemEnabled("settings") && root.inSection("left", "settings")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "power"
-                visible: root.inSection("left", "power")
+                visible: root.itemEnabled("power") && root.inSection("left", "power")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
@@ -188,119 +192,119 @@ PanelWindow {
             spacing: 6
             BarItem {
                 kind: "launcher"
-                visible: root.inSection("center", "launcher")
+                visible: root.itemEnabled("launcher") && root.inSection("center", "launcher")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "workspaces"
-                visible: root.inSection("center", "workspaces")
+                visible: root.itemEnabled("workspaces") && root.inSection("center", "workspaces")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "title"
-                visible: root.inSection("center", "title")
+                visible: root.itemEnabled("title") && root.inSection("center", "title")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "clock"
-                visible: root.inSection("center", "clock")
+                visible: root.itemEnabled("clock") && root.inSection("center", "clock")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "media"
-                visible: root.inSection("center", "media")
+                visible: root.itemEnabled("media") && root.inSection("center", "media")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "stats"
-                visible: root.inSection("center", "stats")
+                visible: root.itemEnabled("stats") && root.inSection("center", "stats")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "net"
-                visible: root.inSection("center", "net")
+                visible: root.itemEnabled("net") && root.inSection("center", "net")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "volume"
-                visible: root.inSection("center", "volume")
+                visible: root.itemEnabled("volume") && root.inSection("center", "volume")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "battery"
-                visible: root.inSection("center", "battery")
+                visible: root.itemEnabled("battery") && root.inSection("center", "battery")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "tray"
-                visible: root.inSection("center", "tray")
+                visible: root.itemEnabled("tray") && root.inSection("center", "tray")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "user"
-                visible: root.inSection("center", "user")
+                visible: root.itemEnabled("user") && root.inSection("center", "user")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "basketLeft"
-                visible: root.inSection("center", "basketLeft")
+                visible: root.itemEnabled("basketLeft") && root.inSection("center", "basketLeft")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "basketRight"
-                visible: root.inSection("center", "basketRight")
+                visible: root.itemEnabled("basketRight") && root.inSection("center", "basketRight")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "overview"
-                visible: root.inSection("center", "overview")
+                visible: root.itemEnabled("overview") && root.inSection("center", "overview")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "dashboard"
-                visible: root.inSection("center", "dashboard")
+                visible: root.itemEnabled("dashboard") && root.inSection("center", "dashboard")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "settings"
-                visible: root.inSection("center", "settings")
+                visible: root.itemEnabled("settings") && root.inSection("center", "settings")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "power"
-                visible: root.inSection("center", "power")
+                visible: root.itemEnabled("power") && root.inSection("center", "power")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
@@ -313,119 +317,119 @@ PanelWindow {
             spacing: 6
             BarItem {
                 kind: "launcher"
-                visible: root.inSection("right", "launcher")
+                visible: root.itemEnabled("launcher") && root.inSection("right", "launcher")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "workspaces"
-                visible: root.inSection("right", "workspaces")
+                visible: root.itemEnabled("workspaces") && root.inSection("right", "workspaces")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "title"
-                visible: root.inSection("right", "title")
+                visible: root.itemEnabled("title") && root.inSection("right", "title")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "clock"
-                visible: root.inSection("right", "clock")
+                visible: root.itemEnabled("clock") && root.inSection("right", "clock")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "media"
-                visible: root.inSection("right", "media")
+                visible: root.itemEnabled("media") && root.inSection("right", "media")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "stats"
-                visible: root.inSection("right", "stats")
+                visible: root.itemEnabled("stats") && root.inSection("right", "stats")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "net"
-                visible: root.inSection("right", "net")
+                visible: root.itemEnabled("net") && root.inSection("right", "net")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "volume"
-                visible: root.inSection("right", "volume")
+                visible: root.itemEnabled("volume") && root.inSection("right", "volume")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "battery"
-                visible: root.inSection("right", "battery")
+                visible: root.itemEnabled("battery") && root.inSection("right", "battery")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "tray"
-                visible: root.inSection("right", "tray")
+                visible: root.itemEnabled("tray") && root.inSection("right", "tray")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "user"
-                visible: root.inSection("right", "user")
+                visible: root.itemEnabled("user") && root.inSection("right", "user")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "basketLeft"
-                visible: root.inSection("right", "basketLeft")
+                visible: root.itemEnabled("basketLeft") && root.inSection("right", "basketLeft")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "basketRight"
-                visible: root.inSection("right", "basketRight")
+                visible: root.itemEnabled("basketRight") && root.inSection("right", "basketRight")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "overview"
-                visible: root.inSection("right", "overview")
+                visible: root.itemEnabled("overview") && root.inSection("right", "overview")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "dashboard"
-                visible: root.inSection("right", "dashboard")
+                visible: root.itemEnabled("dashboard") && root.inSection("right", "dashboard")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "settings"
-                visible: root.inSection("right", "settings")
+                visible: root.itemEnabled("settings") && root.inSection("right", "settings")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
             }
             BarItem {
                 kind: "power"
-                visible: root.inSection("right", "power")
+                visible: root.itemEnabled("power") && root.inSection("right", "power")
                 active: visible
                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
                 vertical: false
@@ -445,119 +449,119 @@ PanelWindow {
             spacing: 6
             BarItem {
                 kind: "launcher"
-                visible: root.inSection("left", "launcher")
+                visible: root.itemEnabled("launcher") && root.inSection("left", "launcher")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "workspaces"
-                visible: root.inSection("left", "workspaces")
+                visible: root.itemEnabled("workspaces") && root.inSection("left", "workspaces")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "title"
-                visible: root.inSection("left", "title")
+                visible: root.itemEnabled("title") && root.inSection("left", "title")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "clock"
-                visible: root.inSection("left", "clock")
+                visible: root.itemEnabled("clock") && root.inSection("left", "clock")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "media"
-                visible: root.inSection("left", "media")
+                visible: root.itemEnabled("media") && root.inSection("left", "media")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "stats"
-                visible: root.inSection("left", "stats")
+                visible: root.itemEnabled("stats") && root.inSection("left", "stats")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "net"
-                visible: root.inSection("left", "net")
+                visible: root.itemEnabled("net") && root.inSection("left", "net")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "volume"
-                visible: root.inSection("left", "volume")
+                visible: root.itemEnabled("volume") && root.inSection("left", "volume")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "battery"
-                visible: root.inSection("left", "battery")
+                visible: root.itemEnabled("battery") && root.inSection("left", "battery")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "tray"
-                visible: root.inSection("left", "tray")
+                visible: root.itemEnabled("tray") && root.inSection("left", "tray")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "user"
-                visible: root.inSection("left", "user")
+                visible: root.itemEnabled("user") && root.inSection("left", "user")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "basketLeft"
-                visible: root.inSection("left", "basketLeft")
+                visible: root.itemEnabled("basketLeft") && root.inSection("left", "basketLeft")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "basketRight"
-                visible: root.inSection("left", "basketRight")
+                visible: root.itemEnabled("basketRight") && root.inSection("left", "basketRight")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "overview"
-                visible: root.inSection("left", "overview")
+                visible: root.itemEnabled("overview") && root.inSection("left", "overview")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "dashboard"
-                visible: root.inSection("left", "dashboard")
+                visible: root.itemEnabled("dashboard") && root.inSection("left", "dashboard")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "settings"
-                visible: root.inSection("left", "settings")
+                visible: root.itemEnabled("settings") && root.inSection("left", "settings")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "power"
-                visible: root.inSection("left", "power")
+                visible: root.itemEnabled("power") && root.inSection("left", "power")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
@@ -570,119 +574,119 @@ PanelWindow {
             spacing: 6
             BarItem {
                 kind: "launcher"
-                visible: root.inSection("center", "launcher")
+                visible: root.itemEnabled("launcher") && root.inSection("center", "launcher")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "workspaces"
-                visible: root.inSection("center", "workspaces")
+                visible: root.itemEnabled("workspaces") && root.inSection("center", "workspaces")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "title"
-                visible: root.inSection("center", "title")
+                visible: root.itemEnabled("title") && root.inSection("center", "title")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "clock"
-                visible: root.inSection("center", "clock")
+                visible: root.itemEnabled("clock") && root.inSection("center", "clock")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "media"
-                visible: root.inSection("center", "media")
+                visible: root.itemEnabled("media") && root.inSection("center", "media")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "stats"
-                visible: root.inSection("center", "stats")
+                visible: root.itemEnabled("stats") && root.inSection("center", "stats")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "net"
-                visible: root.inSection("center", "net")
+                visible: root.itemEnabled("net") && root.inSection("center", "net")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "volume"
-                visible: root.inSection("center", "volume")
+                visible: root.itemEnabled("volume") && root.inSection("center", "volume")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "battery"
-                visible: root.inSection("center", "battery")
+                visible: root.itemEnabled("battery") && root.inSection("center", "battery")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "tray"
-                visible: root.inSection("center", "tray")
+                visible: root.itemEnabled("tray") && root.inSection("center", "tray")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "user"
-                visible: root.inSection("center", "user")
+                visible: root.itemEnabled("user") && root.inSection("center", "user")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "basketLeft"
-                visible: root.inSection("center", "basketLeft")
+                visible: root.itemEnabled("basketLeft") && root.inSection("center", "basketLeft")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "basketRight"
-                visible: root.inSection("center", "basketRight")
+                visible: root.itemEnabled("basketRight") && root.inSection("center", "basketRight")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "overview"
-                visible: root.inSection("center", "overview")
+                visible: root.itemEnabled("overview") && root.inSection("center", "overview")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "dashboard"
-                visible: root.inSection("center", "dashboard")
+                visible: root.itemEnabled("dashboard") && root.inSection("center", "dashboard")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "settings"
-                visible: root.inSection("center", "settings")
+                visible: root.itemEnabled("settings") && root.inSection("center", "settings")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "power"
-                visible: root.inSection("center", "power")
+                visible: root.itemEnabled("power") && root.inSection("center", "power")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
@@ -695,119 +699,119 @@ PanelWindow {
             spacing: 6
             BarItem {
                 kind: "launcher"
-                visible: root.inSection("right", "launcher")
+                visible: root.itemEnabled("launcher") && root.inSection("right", "launcher")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "workspaces"
-                visible: root.inSection("right", "workspaces")
+                visible: root.itemEnabled("workspaces") && root.inSection("right", "workspaces")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "title"
-                visible: root.inSection("right", "title")
+                visible: root.itemEnabled("title") && root.inSection("right", "title")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "clock"
-                visible: root.inSection("right", "clock")
+                visible: root.itemEnabled("clock") && root.inSection("right", "clock")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "media"
-                visible: root.inSection("right", "media")
+                visible: root.itemEnabled("media") && root.inSection("right", "media")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "stats"
-                visible: root.inSection("right", "stats")
+                visible: root.itemEnabled("stats") && root.inSection("right", "stats")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "net"
-                visible: root.inSection("right", "net")
+                visible: root.itemEnabled("net") && root.inSection("right", "net")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "volume"
-                visible: root.inSection("right", "volume")
+                visible: root.itemEnabled("volume") && root.inSection("right", "volume")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "battery"
-                visible: root.inSection("right", "battery")
+                visible: root.itemEnabled("battery") && root.inSection("right", "battery")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "tray"
-                visible: root.inSection("right", "tray")
+                visible: root.itemEnabled("tray") && root.inSection("right", "tray")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "user"
-                visible: root.inSection("right", "user")
+                visible: root.itemEnabled("user") && root.inSection("right", "user")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "basketLeft"
-                visible: root.inSection("right", "basketLeft")
+                visible: root.itemEnabled("basketLeft") && root.inSection("right", "basketLeft")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "basketRight"
-                visible: root.inSection("right", "basketRight")
+                visible: root.itemEnabled("basketRight") && root.inSection("right", "basketRight")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "overview"
-                visible: root.inSection("right", "overview")
+                visible: root.itemEnabled("overview") && root.inSection("right", "overview")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "dashboard"
-                visible: root.inSection("right", "dashboard")
+                visible: root.itemEnabled("dashboard") && root.inSection("right", "dashboard")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "settings"
-                visible: root.inSection("right", "settings")
+                visible: root.itemEnabled("settings") && root.inSection("right", "settings")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true
             }
             BarItem {
                 kind: "power"
-                visible: root.inSection("right", "power")
+                visible: root.itemEnabled("power") && root.inSection("right", "power")
                 active: visible
                 anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
                 vertical: true

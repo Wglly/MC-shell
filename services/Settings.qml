@@ -29,6 +29,12 @@ QtObject {
                 showTitle: true,
                 showClock: true,
                 thickness: 40,
+                items: {
+                    launcher: true, workspaces: true, title: true, clock: true,
+                    media: true, stats: true, net: true, volume: true, battery: true,
+                    tray: true, user: true, basketLeft: true, basketRight: true,
+                    overview: true, dashboard: true, settings: true, power: true
+                },
                 sections: {
                     left: ["launcher", "workspaces", "title"],
                     center: ["clock"],
