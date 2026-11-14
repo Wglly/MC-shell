@@ -17,8 +17,10 @@ PanelWindow {
     // subclasses declare their natural size; the settings scale multiplies it
     property real baseWidth: 260
     property real baseHeight: 140
-    readonly property real widgetScale: Math.max(0.6, Math.min(1.8,
-        Settings.get("widgets.scale", 1.0)))
+    readonly property real globalScale: Settings.get("widgets.scale", 1.0)
+    readonly property real ownScale: Settings.get("widgets." + base.widgetKey + ".scale", 1.0)
+    readonly property real widgetScale: Math.max(0.4, Math.min(2.4,
+        base.globalScale * base.ownScale))
 
     screen: targetScreen
     color: "transparent"

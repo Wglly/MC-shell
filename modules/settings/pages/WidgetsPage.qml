@@ -96,9 +96,24 @@ Column {
                 anchors.right: parent.right
                 spacing: 6
 
+                McSlider {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 96
+                    value: (Settings.get("widgets." + modelData + ".scale", 1.0) - 0.5) / 1.5
+                    onMoved: v => Settings.set("widgets." + modelData + ".scale",
+                                               Math.round((0.5 + v * 1.5) * 100) / 100)
+                }
+                PixelText {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 40
+                    text: Math.round(Settings.get("widgets." + modelData + ".scale", 1.0) * 100) + "%"
+                    font.pixelSize: 9
+                    color: Theme.textOnPanel
+                    styleColor: Theme.panelTextShadow
+                }
                 McButton {
                     label: "POS"
-                    implicitWidth: 58
+                    implicitWidth: 46
                     onClicked: page.resetPosition(modelData)
                 }
                 McButton {

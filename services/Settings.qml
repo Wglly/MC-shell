@@ -80,13 +80,13 @@ QtObject {
                 fillMode: "fill"      // fill | fit | tile
             },
             widgets: {
-                clock: { enabled: true, x: 0.06, y: 0.10, showDate: true },
-                weather: { enabled: true, x: 0.06, y: 0.32, city: "" },
-                visualizer: { enabled: true, x: 0.06, y: 0.54, bars: 32 },
-                calendar: { enabled: false, x: 0.06, y: 0.76 },
-                stats: { enabled: false, x: 0.76, y: 0.10 },
-                media: { enabled: false, x: 0.06, y: 0.66 },
-                user: { enabled: true, x: 0.76, y: 0.30 }
+                clock: { enabled: true, x: 0.06, y: 0.10, showDate: true, scale: 1.0 },
+                weather: { enabled: true, x: 0.06, y: 0.32, city: "", scale: 1.0 },
+                visualizer: { enabled: true, x: 0.06, y: 0.54, bars: 32, scale: 1.0 },
+                calendar: { enabled: false, x: 0.06, y: 0.76, scale: 1.0 },
+                stats: { enabled: false, x: 0.76, y: 0.10, scale: 1.0 },
+                media: { enabled: false, x: 0.06, y: 0.66, scale: 1.0 },
+                user: { enabled: true, x: 0.76, y: 0.30, scale: 1.0 }
             },
             dashboard: {
                 enabled: true
