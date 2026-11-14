@@ -59,6 +59,9 @@ PanelWindow {
     }
     readonly property bool avoidWindows: root.boolSetting("dock.avoidWindows", true)
     readonly property int hoverZone: Math.max(6, Math.min(48, Settings.get("dock.hoverZone", 12)))
+    readonly property int capacity: root.columns * root.rows
+    // the last cell is always the launcher button
+    readonly property url launcherIcon: Qt.resolvedUrl("../../assets/textures/icon_launcher.png")
     readonly property bool shouldAvoid: root.avoidWindows && Compositor.activeWindowCount > 0
     exclusionMode: ExclusionMode.Ignore
     // Tell the transparent spacer window how much room the dock needs; the spacer
@@ -235,19 +238,21 @@ PanelWindow {
                 id: grid
                 anchors.centerIn: parent
                 columns: root.gridCols
-                rows: root.gridRows
                 spacing: root.slotPad
 
                 Repeater {
-                    model: root.columns * root.rows
+                    model: root.capacity
 
                     delegate: Slot {
-                        readonly property var app: index < root.dockApps.length ? root.dockApps[index] : null
+                        readonly property bool isLauncher: index === root.capacity - 1
+                        readonly property var app: (!isLauncher && index < root.dockApps.length)
+                            ? root.dockApps[index] : null
 
                         width: root.iconSize
                         height: root.iconSize
-                        icon: app && app.icon !== "" ? Quickshell.iconPath(app.icon, "") : ""
-                        label: app ? app.name.charAt(0) : ""
+                        icon: isLauncher ? root.launcherIcon
+                            : (app && app.icon !== "" ? Quickshell.iconPath(app.icon, "") : "")
+                        label: app && !isLauncher ? app.name.charAt(0) : ""
 
                         Rectangle {
                             anchors.right: parent.right
@@ -275,15 +280,22 @@ PanelWindow {
                         MouseArea {
                             anchors.fill: parent
                             hoverEnabled: true
-                            enabled: app !== null
+                            enabled: app !== null || isLauncher
                             acceptedButtons: Qt.LeftButton | Qt.RightButton
                             cursorShape: Qt.PointingHandCursor
-                            onClicked: {
+                            onClicked: mouse => {
+                                if (isLauncher) {
+                                    ShellState.toggleOverlay("launcher");
+                                    return;
+                                }
                                 if (!app)
                                     return;
-                                if (mouse.button === Qt.RightButton)
+                                if (mouse.button === Qt.RightButton) {
                                     ShellState.openDockMenu(app);
-                                else if (app.windowId && app.windowId !== "")
+                                    return;
+                                }
+                                // left click: raise the running window, or launch the app
+                                if (app.windowId && app.windowId !== "")
                                     Compositor.focusWindow(app.windowId);
                                 else
                                     Apps.launch(app);
@@ -311,14 +323,12 @@ PanelWindow {
                 continue;
             seen[key] = true;
             var app = Apps.findByClass(cls);
-            out.push({
-                name: app ? app.name : (cls.charAt(0).toUpperCase() + cls.slice(1)),
-                icon: app ? app.icon : "",
-                path: app ? app.path : "",
-                windowId: w.id,
-                running: true,
-                pinned: false
-            });
+            if (app) {
+                out.push(Object.assign({}, app, { windowId: w.id, running: true, pinned: false }));
+            } else {
+                out.push({ name: cls.charAt(0).toUpperCase() + cls.slice(1), icon: "",
+                           path: "", windowId: w.id, running: true, pinned: false });
+            }
         }
         return out;
     }
@@ -331,8 +341,7 @@ PanelWindow {
             var id = pinned[i];
             for (var j = 0; j < all.length; j++) {
                 if (all[j].path.endsWith("/" + id)) {
-                    out.push({ name: all[j].name, icon: all[j].icon, path: all[j].path,
-                               windowId: "", running: false, pinned: true });
+                    out.push(Object.assign({}, all[j], { windowId: "", running: false, pinned: true }));
                     break;
                 }
             }
@@ -349,18 +358,16 @@ PanelWindow {
                 }
             }
             if (dup >= 0) {
-                out[dup] = { name: out[dup].name, icon: out[dup].icon, path: out[dup].path,
-                             windowId: ra.windowId, running: true, pinned: out[dup].pinned };
+                out[dup] = Object.assign({}, out[dup], { windowId: ra.windowId, running: true });
             } else {
                 out.push(ra);
             }
         }
         if (out.length === 0) {
             for (var f = 0; f < all.length && out.length < 12; f++)
-                out.push({ name: all[f].name, icon: all[f].icon, path: all[f].path,
-                           windowId: "", running: false, pinned: false });
+                out.push(Object.assign({}, all[f], { windowId: "", running: false, pinned: false }));
         }
-        return out.slice(0, root.columns * root.rows);
+        return out.slice(0, Math.max(0, root.capacity - 1));
     }
 
     function togglePin(app) { // kept for the settings page

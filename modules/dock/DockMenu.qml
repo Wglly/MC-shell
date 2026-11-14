@@ -26,6 +26,23 @@ PanelWindow {
     anchors.left: true
     anchors.right: true
 
+    function applyPin() {
+        var id = ("" + menu.state.path).split("/").pop();
+        if (id === "")
+            return;
+        var list = Settings.get("dock.pinned", []).slice();
+        var i = list.indexOf(id);
+        var pinned = i < 0;
+        if (pinned)
+            list.push(id);
+        else
+            list.splice(i, 1);
+        Settings.set("dock.pinned", list);
+        Notifs.toast(pinned ? I18n.t("dock.toast.pinned") : I18n.t("dock.toast.unpinned"),
+                     menu.state.name);
+        ShellState.closeDockMenu();
+    }
+
     MouseArea {
         anchors.fill: parent
         onClicked: ShellState.closeDockMenu()
@@ -33,7 +50,7 @@ PanelWindow {
 
     McPanel {
         width: 250
-        height: 146
+        height: 108
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 150
@@ -60,17 +77,7 @@ PanelWindow {
                 height: 26
                 visible: menu.state.canPin === true
                 label: menu.state.pinned ? I18n.t("dock.menu.unpin") : I18n.t("dock.menu.pin")
-                onClicked: ShellState.toggleDockPin(menu.state.path)
-            }
-
-            McButton {
-                width: parent.width
-                height: 26
-                label: I18n.t("dock.menu.basket")
-                onClicked: {
-                    ShellState.closeDockMenu();
-                    ShellState.leftBasket = !ShellState.leftBasket;
-                }
+                onClicked: menu.applyPin()
             }
 
             McButton {

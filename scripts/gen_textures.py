@@ -517,6 +517,17 @@ def luna_tiles() -> None:
     save(task, "winxp_task.png")
 
 
+def launcher_icon() -> None:
+    rows = [
+        "X X X",
+        "     ",
+        "X X X",
+        "     ",
+        "X X X",
+    ]
+    pixel_icon(rows, {"X": (255, 226, 138, 255)}, "icon_launcher.png")
+
+
 def basket_icons() -> None:
     left = [
         "XXXXXXXXX",
@@ -563,6 +574,7 @@ def main() -> None:
     overview_icon()
     themed_tiles()
     basket_icons()
+    launcher_icon()
     dashboard_icon()
     user_icon()
     retro_tiles()

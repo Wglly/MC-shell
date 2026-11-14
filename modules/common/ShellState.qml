@@ -33,23 +33,6 @@ QtObject {
         ShellState.dockMenu = { visible: false, name: m.name, path: m.path, pinned: m.pinned, canPin: m.canPin };
     }
 
-    function toggleDockPin(path) {
-        var id = path.split("/").pop();
-        if (id === "")
-            return;
-        var list = Settings.get("dock.pinned", []).slice();
-        var i = list.indexOf(id);
-        var name = id.replace(/\.desktop$/, "");
-        if (i >= 0) {
-            list.splice(i, 1);
-            Notifs.toast(I18n.t("dock.toast.unpinned"), name);
-        } else {
-            list.push(id);
-            Notifs.toast(I18n.t("dock.toast.pinned"), name);
-        }
-        Settings.set("dock.pinned", list);
-        ShellState.closeDockMenu();
-    }
     property bool leftBasket: false
     property bool rightBasket: false
 
