@@ -56,8 +56,8 @@ Every bar item (workspaces, title, clock, media, stats, net, volume, battery, tr
 baskets, overview, dashboard, settings, power …) has its own **on/off switch** and can be
 assigned to the **left / centre / right** section in Settings → Status bar → Placement.
 
-Clicking the CPU/RAM HUD opens a **system panel**: CPU / memory / swap bars, load 1-5-15,
-uptime, process count and the five busiest processes.
+Clicking the CPU/RAM HUD opens a **system panel**: CPU / memory / swap / disk bars, live
+network rates, load 1-5-15, uptime, process count and the five busiest processes.
 
 The bar also shows the **user avatar** (left of settings) — click it for a profile popup with
 host, uptime and session, anchored right under the avatar.

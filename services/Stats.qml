@@ -19,6 +19,24 @@ QtObject {
     property real swapTotal: 0       // GiB
     property int processes: 0
     property var top: []             // [{ name, cpu, mem }]
+    property real diskUsed: 0        // GiB
+    property real diskTotal: 0       // GiB
+    property real diskRatio: 0
+    property real netRx: 0           // bytes / second
+    property real netTx: 0
+    property var prevRx: -1
+    property var prevTx: -1
+    property var prevNetTime: -1
+
+    function rateText(bps) {
+        if (bps < 1024)
+            return Math.round(bps) + " B/s";
+        if (bps < 1048576)
+            return (bps / 1024).toFixed(1) + " KB/s";
+        if (bps < 1073741824)
+            return (bps / 1048576).toFixed(1) + " MB/s";
+        return (bps / 1073741824).toFixed(2) + " GB/s";
+    }
     property bool ready: false
 
     property var prevTotal: -1
@@ -83,6 +101,43 @@ QtObject {
             }
         }
 
+        // --- disk (df)
+        if (parts.length > 5) {
+            var df = (parts[5] || "").trim().split(/\s+/);
+            if (df.length >= 4) {
+                var total = parseFloat(df[1]) || 0;
+                var used = parseFloat(df[2]) || 0;
+                root.diskTotal = total / 1073741824;
+                root.diskUsed = used / 1073741824;
+                root.diskRatio = total > 0 ? used / total : 0;
+            }
+        }
+
+        // --- network (/proc/net/dev)
+        if (parts.length > 6) {
+            var rx = 0, tx = 0;
+            var lines = (parts[6] || "").split("\n");
+            for (var n = 0; n < lines.length; n++) {
+                var mm = lines[n].match(/^\s*([^:]+):\s*(.*)$/);
+                if (!mm || mm[1].trim() === "lo")
+                    continue;
+                var fld = mm[2].trim().split(/\s+/);
+                if (fld.length >= 9) {
+                    rx += parseInt(fld[0], 10) || 0;
+                    tx += parseInt(fld[8], 10) || 0;
+                }
+            }
+            var now = Date.now();
+            if (root.prevNetTime > 0 && now > root.prevNetTime) {
+                var dt = (now - root.prevNetTime) / 1000;
+                root.netRx = Math.max(0, (rx - root.prevRx) / dt);
+                root.netTx = Math.max(0, (tx - root.prevTx) / dt);
+            }
+            root.prevRx = rx;
+            root.prevTx = tx;
+            root.prevNetTime = now;
+        }
+
         if (parts.length > 4) {
             var rows = (parts[4] || "").trim().split("\n");
             var list = [];
@@ -98,7 +153,7 @@ QtObject {
     }
 
     property Process sampler: Process {
-        command: ["sh", "-c", "cat /proc/stat; echo @@; cat /proc/meminfo; echo @@; cat /proc/uptime; echo @@; cat /proc/loadavg; echo @@; ps -eo comm,%cpu,%mem --no-headers --sort=-%cpu | head -5"]
+        command: ["sh", "-c", "cat /proc/stat; echo @@; cat /proc/meminfo; echo @@; cat /proc/uptime; echo @@; cat /proc/loadavg; echo @@; ps -eo comm,%cpu,%mem --no-headers --sort=-%cpu | head -5; echo @@; df -B1 / | tail -1; echo @@; cat /proc/net/dev"]
         stdout: StdioCollector {
             onStreamFinished: root.parse(text)
         }
