@@ -129,6 +129,10 @@ One tab per feature group, all changes apply live and are written to
 A **capture card** in the side basket takes region/full screenshots with `grim` + `slurp`
 (saved to `~/Pictures/Screenshots`) and records the screen with `wf-recorder`
 (`~/Videos/Recordings`); both buttons can be switched on/off in Settings → Shell control.
+The shell also registers compositor global shortcuts `mc-shell:screenshot` and
+`mc-shell:record` — on Hyprland bind them with
+`hl.bind("Print", hl.dsp.global("mc-shell:screenshot"))`, or use
+`mc-shell ipc call shell screenshot` directly.
 
 The user card (and its bar popup) has a **KEEP AWAKE** toggle that holds a Wayland idle
 inhibitor from the bar surface, so the session stays awake while it is on. `mc-shell ipc call

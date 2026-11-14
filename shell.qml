@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Io
+import Quickshell.Hyprland
 import Quickshell.Wayland
 import Quickshell.Services.Pipewire
 import QtQuick
@@ -33,6 +34,22 @@ ShellRoot {
             if (status === FontLoader.Ready)
                 Theme.fontFamily = name;
         }
+    }
+
+    // Compositor-side global shortcuts (Hyprland): bind them with
+    //   hl.bind("Print", hl.dsp.global("mc-shell:screenshot"))
+    GlobalShortcut {
+        appid: "mc-shell"
+        name: "screenshot"
+        description: "MC-shell: screenshot"
+        onPressedChanged: if (pressed) Capture.screenshot()
+    }
+
+    GlobalShortcut {
+        appid: "mc-shell"
+        name: "record"
+        description: "MC-shell: toggle screen recording"
+        onPressedChanged: if (pressed) Capture.toggleRecording()
     }
 
     // Theme colours come from Settings but live in the common module, so we
