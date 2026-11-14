@@ -106,7 +106,7 @@ per-component toggles in Settings → Side baskets:
 
 | Left (default) | Right (default) |
 |---|---|
-| **Performance monitor** (CPU/RAM bars, load, uptime) · **Wallpaper picker** (three built-in pixel scenes, a folder picker to import any local directory, reload) · **Widget manager** (add/remove desktop widgets) | **Player card** · **Toggle grid** (Wi-Fi / BT / mic / DND) · **Volume + brightness sliders** · **Messages** (history, DND, clear) |
+| **Performance monitor** (CPU/RAM bars, load, uptime) · **Wallpaper picker** (three built-in pixel scenes + native folder picker to import any local directory + reload) · **Widget manager** (add/remove desktop widgets) | **Player card** · **Toggle grid** (Wi-Fi / BT / mic / DND) · **Volume + brightness sliders** · **Messages** (history, DND, clear) |
 
 | Left basket | Right basket |
 |---|---|

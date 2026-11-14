@@ -25,10 +25,23 @@ McPanel {
     readonly property string current: Settings.get("wallpaper.path", "")
 
     property var folderImages: []
+    onFolderChanged: root.refresh()
 
     function pick(path) {
         Settings.set("wallpaper.path", path);
         Settings.set("wallpaper.enabled", true);
+    }
+
+    property bool pendingRefresh: false
+    property string listingFolder: ""
+
+    function refresh() {
+        root.listingFolder = root.folder;
+        if (lister.running) {
+            root.pendingRefresh = true;
+            return;
+        }
+        lister.running = true;
     }
 
     Process {
@@ -37,19 +50,30 @@ McPanel {
         stdout: StdioCollector {
             onStreamFinished: {
                 var out = [];
-                var lines = (this.text || "").split("\n");
+                var lines = (text || "").split("\n");
                 for (var i = 0; i < lines.length; i++) {
                     var n = lines[i].trim();
                     if (!n)
                         continue;
-                    if (!/\\.(png|jpe?g|webp)$/i.test(n))
+                    if (!/\.(png|jpe?g|webp)$/i.test(n))
                         continue;
-                    out.push("file://" + root.folder + "/" + n);
+                    out.push("file://" + root.listingFolder + "/" + n);
                 }
                 root.folderImages = out;
             }
         }
-        Component.onCompleted: running = true
+        onExited: {
+            if (root.pendingRefresh) {
+                root.pendingRefresh = false;
+                root.refresh();
+            }
+        }
+        Component.onCompleted: initialTimer.restart()
+    }
+
+    property Timer initialTimer: Timer {
+        interval: 700
+        onTriggered: root.refresh()
     }
 
     Column {
