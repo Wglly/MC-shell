@@ -63,15 +63,5 @@ McPanel {
                 onClicked: if (root.player) root.player.next()
             }
         }
-
-        VisualizerCard {
-            width: parent.width
-            height: 44
-            implicitWidth: 0
-            implicitHeight: 0
-            background: "transparent"
-            texture: ""
-            visible: false
-        }
     }
 }
