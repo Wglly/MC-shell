@@ -52,6 +52,10 @@ Windows 95 — each one a full palette + block-texture set, switchable from Sett
 
 ### Bar (4 edges)
 
+Every bar item (workspaces, title, clock, media, stats, net, volume, battery, tray, user,
+baskets, overview, dashboard, settings, power …) can be assigned to the **left / centre /
+right** section in Settings → Status bar → Placement.
+
 The bar also shows the **user avatar** (left of settings) — click it for a profile popup with
 host, uptime and session, anchored right under the avatar.
 

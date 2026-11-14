@@ -87,7 +87,9 @@ QtObject {
             "settings.bar.visible": "SHOW BAR", "settings.bar.position": "BAR POSITION",
             "settings.bar.thickness": "BAR THICKNESS", "settings.bar.stats": "SHOW CPU/RAM HUD",
             "settings.bar.tray": "SHOW SYSTEM TRAY", "settings.bar.title": "SHOW WINDOW TITLE",
-            "settings.bar.clock": "SHOW CLOCK", "settings.bar.note": "Position applies immediately; the bar reserves its edge.",
+                        "settings.bar.sections": "PLACEMENT", "settings.bar.sectionsHint": "Choose where each bar item lives: left, centre or right.", "settings.bar.sectionLeft": "LEFT", "settings.bar.sectionCenter": "CENTER", "settings.bar.sectionRight": "RIGHT",
+            "bar.item.launcher": "Launcher", "bar.item.workspaces": "Workspaces", "bar.item.title": "Window title", "bar.item.clock": "Clock", "bar.item.media": "Media", "bar.item.stats": "System", "bar.item.net": "Network", "bar.item.volume": "Volume", "bar.item.battery": "Battery", "bar.item.tray": "Tray", "bar.item.user": "User", "bar.item.basketLeft": "Left basket", "bar.item.basketRight": "Right basket", "bar.item.overview": "Overview", "bar.item.dashboard": "Dashboard", "bar.item.settings": "Settings", "bar.item.power": "Power",
+"settings.bar.note": "Position applies immediately; the bar reserves its edge.",
 
             "settings.theme.accent": "ACCENT", "settings.theme.gold": "HIGHLIGHT",
             "settings.theme.presets": "THEME PRESETS",
@@ -209,7 +211,9 @@ QtObject {
             "settings.bar.visible": "显示状态栏", "settings.bar.position": "状态栏位置",
             "settings.bar.thickness": "状态栏厚度", "settings.bar.stats": "显示 CPU/内存 HUD",
             "settings.bar.tray": "显示系统托盘", "settings.bar.title": "显示窗口标题",
-            "settings.bar.clock": "显示时钟", "settings.bar.note": "位置立即生效，状态栏会占用对应屏幕边缘。",
+            "settings.bar.clock": "显示时钟",             "settings.bar.sections": "组件位置", "settings.bar.sectionsHint": "为每个状态栏组件选择放在左边、中间或右边。", "settings.bar.sectionLeft": "左", "settings.bar.sectionCenter": "中", "settings.bar.sectionRight": "右",
+            "bar.item.launcher": "启动器", "bar.item.workspaces": "工作区", "bar.item.title": "窗口标题", "bar.item.clock": "时钟", "bar.item.media": "媒体", "bar.item.stats": "系统", "bar.item.net": "网络", "bar.item.volume": "音量", "bar.item.battery": "电量", "bar.item.tray": "托盘", "bar.item.user": "用户", "bar.item.basketLeft": "左侧篮", "bar.item.basketRight": "右侧篮", "bar.item.overview": "概览", "bar.item.dashboard": "仪表盘", "bar.item.settings": "设置", "bar.item.power": "电源",
+"settings.bar.note": "位置立即生效，状态栏会占用对应屏幕边缘。",
 
             "settings.theme.accent": "强调色", "settings.theme.gold": "高亮色",
             "settings.theme.presets": "主题预设",
@@ -331,7 +335,9 @@ QtObject {
             "settings.bar.visible": "顯示狀態列", "settings.bar.position": "狀態列位置",
             "settings.bar.thickness": "狀態列厚度", "settings.bar.stats": "顯示 CPU/記憶體 HUD",
             "settings.bar.tray": "顯示系統匣", "settings.bar.title": "顯示視窗標題",
-            "settings.bar.clock": "顯示時鐘", "settings.bar.note": "位置立即生效，狀態列會佔用對應螢幕邊緣。",
+            "settings.bar.clock": "顯示時鐘",             "settings.bar.sections": "組件位置", "settings.bar.sectionsHint": "為每個狀態列組件選擇放在左邊、中間或右邊。", "settings.bar.sectionLeft": "左", "settings.bar.sectionCenter": "中", "settings.bar.sectionRight": "右",
+            "bar.item.launcher": "啟動器", "bar.item.workspaces": "工作區", "bar.item.title": "視窗標題", "bar.item.clock": "時鐘", "bar.item.media": "媒體", "bar.item.stats": "系統", "bar.item.net": "網路", "bar.item.volume": "音量", "bar.item.battery": "電量", "bar.item.tray": "系統匣", "bar.item.user": "使用者", "bar.item.basketLeft": "左側籃", "bar.item.basketRight": "右側籃", "bar.item.overview": "概覽", "bar.item.dashboard": "儀表盤", "bar.item.settings": "設定", "bar.item.power": "電源",
+"settings.bar.note": "位置立即生效，狀態列會佔用對應螢幕邊緣。",
 
             "settings.theme.accent": "強調色", "settings.theme.gold": "高亮色",
             "settings.theme.presets": "主題預設",

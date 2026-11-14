@@ -28,7 +28,14 @@ QtObject {
                 showTray: true,
                 showTitle: true,
                 showClock: true,
-                thickness: 40
+                thickness: 40,
+                sections: {
+                    left: ["launcher", "workspaces", "title"],
+                    center: ["clock"],
+                    right: ["media", "stats", "net", "volume", "battery", "tray",
+                            "user", "basketLeft", "basketRight", "overview",
+                            "dashboard", "settings", "power"]
+                }
             },
             dock: {
                 position: "bottom",   // bottom | top | left | right

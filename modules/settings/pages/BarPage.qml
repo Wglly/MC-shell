@@ -10,6 +10,39 @@ Column {
     width: parent ? parent.width : 560
     spacing: 10
 
+    readonly property var allKeys: ["launcher", "workspaces", "title", "clock", "media", "stats",
+                                    "net", "volume", "battery", "tray", "user", "basketLeft",
+                                    "basketRight", "overview", "dashboard", "settings", "power"]
+
+    function sectionsCopy() {
+        var sec = Settings.get("bar.sections", null) || {};
+        return {
+            left: (sec.left || []).slice(),
+            center: (sec.center || []).slice(),
+            right: (sec.right || []).slice()
+        };
+    }
+
+    function sectionOf(key) {
+        var sec = page.sectionsCopy();
+        if (sec.left.indexOf(key) >= 0) return "left";
+        if (sec.center.indexOf(key) >= 0) return "center";
+        if (sec.right.indexOf(key) >= 0) return "right";
+        return "";
+    }
+
+    function moveTo(key, section) {
+        var sec = page.sectionsCopy();
+        ["left", "center", "right"].forEach(function (s) {
+            var i = sec[s].indexOf(key);
+            if (i >= 0)
+                sec[s].splice(i, 1);
+        });
+        if (section !== "")
+            sec[section].push(key);
+        Settings.set("bar.sections", sec);
+    }
+
     PixelText {
         text: I18n.t("settings.tab.bar")
         font.pixelSize: Theme.fontLarge
@@ -118,6 +151,52 @@ Column {
             label: Settings.get("bar.showClock", true) ? I18n.t("common.on") : I18n.t("common.off")
             checked: Settings.get("bar.showClock", true)
             onClicked: Settings.toggle("bar.showClock")
+        }
+    }
+
+
+    PixelText {
+        text: I18n.t("settings.bar.sections")
+        font.pixelSize: Theme.fontSmall
+        color: Theme.gold
+        styleColor: Theme.panelTextShadow
+    }
+
+    PixelText {
+        width: parent.width
+        text: I18n.t("settings.bar.sectionsHint")
+        font.pixelSize: 9
+        color: Theme.textHints
+        styleColor: Theme.panelTextShadow
+        wrapMode: Text.Wrap
+    }
+
+    Repeater {
+        model: page.allKeys
+
+        delegate: SettingRow {
+            id: rowItem
+            width: page.width
+            label: I18n.t("bar.item." + modelData)
+            property string keyName: modelData
+
+            Row {
+                anchors.right: parent.right
+                spacing: 4
+
+                Repeater {
+                    model: ["left", "center", "right"]
+
+                    delegate: McButton {
+                        implicitWidth: 62
+                        label: modelData === "left" ? I18n.t("settings.bar.sectionLeft")
+                            : (modelData === "center" ? I18n.t("settings.bar.sectionCenter")
+                            : I18n.t("settings.bar.sectionRight"))
+                        checked: page.sectionOf(rowItem.keyName) === modelData
+                        onClicked: page.moveTo(rowItem.keyName, modelData)
+                    }
+                }
+            }
         }
     }
 

@@ -174,9 +174,7 @@ ShellRoot {
     // A bar on every monitor.
     Variants {
         model: Quickshell.screens
-        delegate: Bar {
-            screen: modelData
-        }
+        delegate: Bar {}
     }
 
     // Wallpaper + desktop widgets + layered chrome (primary monitor).
