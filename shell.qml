@@ -245,6 +245,9 @@ ShellRoot {
         function overview(): void {
             ShellState.toggleOverlay("overview");
         }
+        function basket(side: string): void {
+            ShellState.toggleBasket(side);
+        }
         function dashboard(): void {
             ShellState.toggleOverlay("dashboard");
         }

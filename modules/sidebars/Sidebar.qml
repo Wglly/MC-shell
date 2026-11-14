@@ -22,7 +22,7 @@ PanelWindow {
 
     screen: targetScreen
     color: "transparent"
-    visible: enabled
+    visible: enabled && (side === "left" ? ShellState.leftBasket : ShellState.rightBasket)
     exclusiveZone: 0
     exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Top

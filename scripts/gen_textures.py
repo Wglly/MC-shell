@@ -517,6 +517,33 @@ def luna_tiles() -> None:
     save(task, "winxp_task.png")
 
 
+def basket_icons() -> None:
+    left = [
+        "XXXXXXXXX",
+        "X  X    X",
+        "X  X XX X",
+        "X  X    X",
+        "X  X XX X",
+        "X  X    X",
+        "X  X    X",
+        "XXXXXXXXX",
+        "         ",
+    ]
+    right = [
+        "XXXXXXXXX",
+        "X    X  X",
+        "X XX X  X",
+        "X    X  X",
+        "X XX X  X",
+        "X    X  X",
+        "X    X  X",
+        "XXXXXXXXX",
+        "         ",
+    ]
+    pixel_icon(left, {"X": (255, 204, 77, 255)}, "icon_basket_left.png")
+    pixel_icon(right, {"X": (255, 204, 77, 255)}, "icon_basket_right.png")
+
+
 def main() -> None:
     save(noisy_tile("#866043", 14, 1, speckle=6), "dirt.png")
     save(noisy_tile("#7e7e7e", 10, 2, speckle=4), "stone.png")
@@ -535,6 +562,7 @@ def main() -> None:
     weather_icons()
     overview_icon()
     themed_tiles()
+    basket_icons()
     dashboard_icon()
     user_icon()
     retro_tiles()

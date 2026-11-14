@@ -3,12 +3,12 @@ import qs.modules.common
 import qs.modules.common.widgets
 import qs.services
 
-// SidebarsPage — the left/right baskets and the widgets they carry.
+// SidebarsPage — which widgets each basket carries, plus width/visibility.
 Column {
     id: page
 
     width: parent ? parent.width : 560
-    spacing: 10
+    spacing: 8
 
     readonly property var allWidgets: ["stats", "calendar", "music", "weather", "clock", "media", "user",
                                        "perfmon", "wallpaper", "messages", "widgetmanager", "sliders", "toggles"]
@@ -40,11 +40,11 @@ Column {
 
         delegate: Column {
             width: page.width
-            spacing: 8
+            spacing: 6
             property string sideName: modelData
 
             PixelText {
-                text: I18n.t("settings.sidebars." + modelData)
+                text: I18n.t("settings.sidebars." + sideName)
                 font.pixelSize: Theme.fontSmall
                 color: Theme.gold
                 styleColor: Theme.panelTextShadow
@@ -71,14 +71,14 @@ Column {
                     spacing: 8
 
                     McSlider {
-                        width: 150
-                        value: (Settings.get("sidebars." + sideName + ".width", 220) - 160) / 160
-                        onMoved: v => Settings.set("sidebars." + sideName + ".width", Math.round(160 + v * 160))
+                        width: 140
+                        value: (Settings.get("sidebars." + sideName + ".width", 260) - 160) / 200
+                        onMoved: v => Settings.set("sidebars." + sideName + ".width", Math.round(160 + v * 200))
                     }
                     PixelText {
                         anchors.verticalCenter: parent.verticalCenter
-                        width: 44
-                        text: Settings.get("sidebars." + sideName + ".width", 220) + "px"
+                        width: 48
+                        text: Settings.get("sidebars." + sideName + ".width", 260) + "px"
                         font.pixelSize: Theme.fontSmall
                         color: Theme.textOnPanel
                         styleColor: Theme.panelTextShadow
@@ -86,27 +86,35 @@ Column {
                 }
             }
 
-            SettingRow {
+            PixelText {
+                text: I18n.t("settings.sidebars.widgets")
+                font.pixelSize: Theme.fontSmall
+                color: Theme.textOnPanel
+                styleColor: Theme.panelTextShadow
+            }
+
+            Grid {
                 width: page.width
-                label: I18n.t("settings.sidebars.widgets")
+                columns: 4
+                spacing: 3
 
-                Grid {
-                    columns: 3
-                    spacing: 3
-
-                    Repeater {
-                        model: page.allWidgets
-                        delegate: McButton {
-                            implicitWidth: 110
-                            label: I18n.t("widget." + modelData)
-                            checked: page.hasWidget(sideName, modelData)
-                            onClicked: page.toggleWidget(sideName, modelData)
-                        }
+                Repeater {
+                    model: page.allWidgets
+                    delegate: McButton {
+                        width: 128
+                        height: 26
+                        label: I18n.t("widget." + modelData)
+                        checked: page.hasWidget(sideName, modelData)
+                        onClicked: page.toggleWidget(sideName, modelData)
                     }
                 }
             }
 
-            Rectangle { width: page.width; height: 1; color: "#9a9a9a" }
+            Rectangle {
+                width: page.width
+                height: 1
+                color: Theme.bevelDark
+            }
         }
     }
 

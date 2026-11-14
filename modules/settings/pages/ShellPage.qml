@@ -193,7 +193,7 @@ Column {
                 onClicked: Settings.toggle("sidebars.left.enabled")
             }
             McSlider {
-                width: 150
+                width: 120
                 value: (Settings.get("sidebars.left.width", 260) - 160) / 200
                 onMoved: v => Settings.set("sidebars.left.width", Math.round(160 + v * 200))
             }
@@ -223,7 +223,7 @@ Column {
                 onClicked: Settings.toggle("sidebars.right.enabled")
             }
             McSlider {
-                width: 150
+                width: 120
                 value: (Settings.get("sidebars.right.width", 260) - 160) / 200
                 onMoved: v => Settings.set("sidebars.right.width", Math.round(160 + v * 200))
             }

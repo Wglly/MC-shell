@@ -11,6 +11,17 @@ QtObject {
     // active settings tab (see SettingsWindow.tabs)
     property int settingsTab: 0
 
+    // side baskets are opened on demand from the bar
+    property bool leftBasket: false
+    property bool rightBasket: false
+
+    function toggleBasket(side) {
+        if (side === "left")
+            ShellState.leftBasket = !ShellState.leftBasket;
+        else if (side === "right")
+            ShellState.rightBasket = !ShellState.rightBasket;
+    }
+
     // OSD: "" hides, "volume" / "brightness" shows briefly
     property string osdKind: ""
     property real osdValue: 0

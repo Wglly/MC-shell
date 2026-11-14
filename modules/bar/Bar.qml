@@ -101,6 +101,20 @@ PanelWindow {
             Slot {
                 width: 30
                 height: 30
+                icon: Qt.resolvedUrl("../../assets/textures/icon_basket_left.png")
+                active: ShellState.leftBasket
+                onClicked: ShellState.toggleBasket("left")
+            }
+            Slot {
+                width: 30
+                height: 30
+                icon: Qt.resolvedUrl("../../assets/textures/icon_basket_right.png")
+                active: ShellState.rightBasket
+                onClicked: ShellState.toggleBasket("right")
+            }
+            Slot {
+                width: 30
+                height: 30
                 icon: Qt.resolvedUrl("../../assets/textures/icon_overview.png")
                 onClicked: ShellState.toggleOverlay("overview")
             }
@@ -174,6 +188,22 @@ PanelWindow {
                 visible: Settings.get("bar.showTray", true)
             }
 
+            Slot {
+                width: 30
+                height: 30
+                x: Math.round((parent.width - width) / 2)
+                icon: Qt.resolvedUrl("../../assets/textures/icon_basket_left.png")
+                active: ShellState.leftBasket
+                onClicked: ShellState.toggleBasket("left")
+            }
+            Slot {
+                width: 30
+                height: 30
+                x: Math.round((parent.width - width) / 2)
+                icon: Qt.resolvedUrl("../../assets/textures/icon_basket_right.png")
+                active: ShellState.rightBasket
+                onClicked: ShellState.toggleBasket("right")
+            }
             Slot {
                 width: 30
                 height: 30

@@ -124,8 +124,10 @@ Enable/disable each one in Settings → Widgets; drag them straight on the deskt
 Positions are stored as screen ratios and can be reset from Settings.
 
 ### Side baskets
-Left and right edge panels ("baskets") hosting any combination of widget cards, with
-per-component toggles in Settings → Side baskets:
+Left and right edge panels ("baskets") hosting any combination of widget cards. They are
+**closed by default** and toggled from the two new buttons in the bar (or with
+`mc-shell ipc call shell basket left|right`); per-component toggles live in
+Settings → Side baskets:
 
 | Left (default) | Right (default) |
 |---|---|
@@ -229,6 +231,7 @@ XF86MonBrightnessDown { spawn "mc-shell" "ipc" "call" "shell" "brightnessDown"; 
 | `shell volumeUp` / `volumeDown` / `volumeMute` | audio + OSD |
 | `shell brightnessUp` / `brightnessDown` | brightness + OSD |
 | `shell overview` | toggle the desktop overview |
+| `shell basket <left\|right>` | open/close a side basket |
 | `shell dashboard` | toggle the widget dashboard |
 | `shell focus <id>` / `stepWorkspace <±1>` | workspace control |
 | `shell windows` | JSON window list (debug) |
