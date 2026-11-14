@@ -1,0 +1,6 @@
+singleton Compositor 1.0 Compositor.qml
+singleton Stats 1.0 Stats.qml
+singleton Notifs 1.0 Notifs.qml
+singleton Apps 1.0 Apps.qml
+singleton System 1.0 System.qml
+singleton Audio 1.0 Audio.qml
