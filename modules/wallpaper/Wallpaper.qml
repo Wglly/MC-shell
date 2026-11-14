@@ -15,13 +15,16 @@ PanelWindow {
 
     readonly property bool enabled: Settings.get("wallpaper.enabled", false) === true
     readonly property string imagePath: Settings.get("wallpaper.path", "")
+    // If the configured file disappeared (e.g. an old preset), fall back to the
+    // bundled loading wallpaper instead of showing a broken desktop.
+    property bool useFallback: false
     readonly property string mode: Settings.get("wallpaper.fillMode", "fill")
 
     screen: targetScreen
     visible: enabled
     color: Settings.get("wallpaper.color", "#101418")
     exclusionMode: ExclusionMode.Ignore
-    WlrLayershell.layer: WlrLayer.Background
+    WlrLayershell.layer: WlrLayer.Bottom
 
     anchors {
         top: true
@@ -32,9 +35,12 @@ PanelWindow {
 
     Image {
         anchors.fill: parent
-        visible: root.imagePath !== ""
-        source: root.imagePath !== "" ? (root.imagePath.indexOf("file://") === 0
-            ? root.imagePath : "file://" + root.imagePath) : ""
+        visible: root.imagePath !== "" || root.useFallback
+        source: root.useFallback ? Wallpapers.path("loading")
+            : (root.imagePath !== "" ? (root.imagePath.indexOf("file://") === 0
+                ? root.imagePath : "file://" + root.imagePath) : "")
+        onStatusChanged: if (status === Image.Error && !root.useFallback)
+            root.useFallback = true
         fillMode: root.mode === "fit" ? Image.PreserveAspectFit
             : root.mode === "tile" ? Image.Tile
             : Image.PreserveAspectCrop

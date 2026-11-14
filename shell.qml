@@ -309,6 +309,12 @@ ShellRoot {
         function preset(name: string): void {
             Settings.applyPreset(name);
         }
+        function wallpaper(id: string): void {
+            if (!Wallpapers.has(id))
+                return;
+            Settings.set("wallpaper.path", Wallpapers.path(id));
+            Settings.set("wallpaper.enabled", true);
+        }
         // mc-shell ipc call shell settingsTab 2
         function settingsTab(index: int): void {
             ShellState.settingsTab = index;

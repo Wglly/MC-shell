@@ -8,3 +8,4 @@ singleton Settings 1.0 Settings.qml
 singleton I18n 1.0 I18n.qml
 singleton Weather 1.0 Weather.qml
 singleton Visualizer 1.0 Visualizer.qml
+singleton Wallpapers 1.0 Wallpapers.qml

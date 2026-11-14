@@ -99,6 +99,23 @@ One tab per feature group, all changes apply live and are written to
 - **Side baskets** — left/right basket on-off, width, and which widgets they carry
 - **Overview** — enable, cards per row, desktops shown, window titles, backdrop darkness
 
+### Preset wallpapers
+
+One "loading screen" wallpaper ships with the shell (drawn by
+`scripts/gen_wallpapers.py` from our own textures and Monocraft font):
+
+![Wallpaper](docs/screenshots/22-wallpapers.png)
+
+**Bring your own art.** Official Minecraft promo art and community screenshots belong to
+Mojang/Microsoft, so this repository does not redistribute them. The wallpaper card can
+import them into your local cache instead: paste an image URL, or use the folder picker to
+point at a directory of wallpapers. Nothing leaves your machine except the download you
+request.
+
+```sh
+mc-shell ipc call shell wallpaper loading      # the bundled preset
+```
+
 ### Desktop widgets
 Draggable cards on the wallpaper layer: **clock**, **weather** (wttr.in, no API key),
 **music visualiser** (real spectrum from `cava`), **calendar**, **system stats**,
@@ -219,6 +236,7 @@ XF86MonBrightnessDown { spawn "mc-shell" "ipc" "call" "shell" "brightnessDown"; 
 | `shell workspaces` / `backend` | debug readouts |
 | `shell language <auto\|en\|zh_CN\|zh_TW>` | switch language |
 | `shell preset <classic\|cave\|snow\|desert\|village\|winxp\|win95>` | switch theme preset |
+| `shell wallpaper <plains\|sunset\|night\|cave\|snow\|desert\|village>` | apply a built-in wallpaper |
 | `shell set <dotted.key> <value>` | write any setting, e.g. `set bar.position left` |
 | `shell settingsTab <0-6>` | open a settings tab |
 
@@ -319,6 +337,7 @@ modules/notifications/          advancement toasts
 services/                       Settings, I18n, Compositor, Audio, Stats, Apps, System, Weather, Visualiser, Notifs
 assets/                         Monocraft font, generated textures, icon
 scripts/gen_textures.py         texture generator
+scripts/gen_wallpapers.py       built-in wallpaper generator
 ```
 
 ## Status

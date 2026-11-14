@@ -11,7 +11,7 @@ McPanel {
     id: root
 
     implicitWidth: 250
-    implicitHeight: 320
+    implicitHeight: 500
     background: Theme.cardBg
     texture: Theme.texturePath(Settings.get("theme.cardTexture", "oak_planks"))
     textureOpacity: 0.26
@@ -117,11 +117,7 @@ McPanel {
             spacing: 5
 
             Repeater {
-                model: [
-                    { name: "SUNSET", src: Qt.resolvedUrl("../../assets/wallpapers/sunset.png") },
-                    { name: "CAVE", src: Qt.resolvedUrl("../../assets/wallpapers/cave.png") },
-                    { name: "SNOW", src: Qt.resolvedUrl("../../assets/wallpapers/snow.png") }
-                ]
+                model: Wallpapers.list
 
                 delegate: Item {
                     width: 112
@@ -131,12 +127,12 @@ McPanel {
                         anchors.fill: parent
                         color: Theme.panelDark
                         border.width: 2
-                        border.color: root.current === modelData.src ? Theme.gold : Theme.outline
+                        border.color: root.current === Wallpapers.path(modelData.id) ? Theme.gold : Theme.outline
                     }
                     Image {
                         anchors.fill: parent
                         anchors.margins: 2
-                        source: modelData.src
+                        source: Wallpapers.path(modelData.id)
                         fillMode: Image.PreserveAspectCrop
                         smooth: false
                     }
@@ -144,30 +140,49 @@ McPanel {
                         anchors.bottom: parent.bottom
                         anchors.left: parent.left
                         anchors.margins: 3
-                        text: modelData.name
+                        text: modelData.label
                         font.pixelSize: 8
                         color: "#ffffff"
                     }
                     MouseArea {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: root.pick(modelData.src)
+                        onClicked: root.pick(Wallpapers.path(modelData.id))
                     }
                 }
+            }
+        }
+
+        Row {
+            width: parent.width
+            spacing: 4
+
+            McTextField {
+                width: parent.width - 54
+                height: 24
+                placeholder: I18n.t("widget.wallpaper.url")
+                onEdited: value => root.urlText = value
+            }
+            McButton {
+                width: 48
+                height: 24
+                label: "GET"
+                onClicked: root.fetchUrl()
             }
         }
 
         PixelText {
             width: parent.width
             elide: Text.ElideRight
-            text: I18n.t("widget.wallpaper.folder") + ": " + root.folder
+            text: "" + (root.fetchStatus !== "" ? root.fetchStatus
+                : (I18n.t("widget.wallpaper.folder") + ": " + root.folder))
             font.pixelSize: 8
-            color: Theme.cardTextDim
+            color: root.fetchStatus === I18n.t("widget.wallpaper.failed") ? Theme.red : Theme.cardTextDim
         }
 
         Flickable {
             width: parent.width
-            height: parent.height - 190
+            height: parent.height - 300
             clip: true
             contentHeight: folderGrid.height
             boundsBehavior: Flickable.StopAtBounds

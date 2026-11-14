@@ -1,87 +1,58 @@
 #!/usr/bin/env python3
-"""Generate the three built-in pixel-art wallpapers for the wallpaper picker.
+"""Generate the built-in "loading screen" wallpaper.
 
-Pure procedural art (no game assets), MIT licensed like the rest of the repo.
+Only one preset ships with the shell: a Minecraft-style loading screen drawn
+from our own textures and font (no game assets).  Anything else (official promo
+art, community screenshots, your own photos) is imported at runtime through the
+wallpaper card's URL field or folder picker, so this repository never
+redistributes copyrighted artwork.
 """
 from pathlib import Path
-from PIL import Image, ImageDraw
-import random
+from PIL import Image, ImageDraw, ImageFont
 
-OUT = Path(__file__).resolve().parent.parent / "assets" / "wallpapers"
+ROOT = Path(__file__).resolve().parent.parent
+OUT = ROOT / "assets" / "wallpapers"
 OUT.mkdir(parents=True, exist_ok=True)
-W, H = 480, 270
+
+W, H = 960, 540
 
 
-def gradient(top, bottom):
-    img = Image.new("RGB", (W, H))
-    d = ImageDraw.Draw(img)
-    for y in range(H):
-        t = y / (H - 1)
-        c = tuple(int(top[i] + (bottom[i] - top[i]) * t) for i in range(3))
-        d.line([(0, y), (W, y)], fill=c)
-    return img, d
+def center(d, text, font, y, fill):
+    w = d.textlength(text, font=font)
+    d.text(((W - w) // 2, y), text, font=font, fill=fill)
 
 
-def sunset():
-    img, d = gradient((255, 154, 64), (54, 30, 74))
-    rng = random.Random(11)
-    # pixel sun
-    cx, cy, r = 330, 150, 34
-    for y in range(cy - r, cy + r):
-        for x in range(cx - r, cx + r):
-            if (x - cx) ** 2 + (y - cy) ** 2 <= r * r:
-                shade = 255 - int(abs(y - cy) * 2)
-                d.point((x, y), fill=(255, max(120, shade), 60))
-    # hills
-    for i in range(3):
-        base = 190 + i * 24
-        pts = [(0, H)]
-        for x in range(0, W + 10, 10):
-            h = base + int(18 * ((x // 40 + i) % 2)) + rng.randint(-4, 4)
-            pts.append((x, h))
-        pts.append((W, H))
-        d.polygon(pts, fill=(30 + i * 12, 24 + i * 10, 40 + i * 8))
-    # stars
-    for _ in range(40):
-        d.point((rng.randrange(W), rng.randrange(0, 90)), fill=(255, 255, 230))
-    img.save(OUT / "sunset.png")
+def main():
+    dirt = Image.open(ROOT / "assets" / "textures" / "dirt.png").convert("RGB").resize((48, 48), Image.NEAREST)
+    bg = Image.new("RGB", (W, H))
+    for y in range(0, H, 48):
+        for x in range(0, W, 48):
+            bg.paste(dirt, (x, y))
+    bg = Image.blend(bg, Image.new("RGB", (W, H), (0, 0, 0)), 0.55)
+    d = ImageDraw.Draw(bg)
 
+    font_big = ImageFont.truetype(str(ROOT / "assets" / "fonts" / "Monocraft.ttf"), 78)
+    font_mid = ImageFont.truetype(str(ROOT / "assets" / "fonts" / "Monocraft.ttf"), 22)
+    font_small = ImageFont.truetype(str(ROOT / "assets" / "fonts" / "Monocraft.ttf"), 16)
 
-def cave():
-    img, d = gradient((26, 26, 30), (8, 8, 10))
-    rng = random.Random(12)
-    # stone blocks
-    for y in range(0, H, 24):
-        for x in range(0, W, 32):
-            c = 28 + rng.randint(-6, 8)
-            d.rectangle([x, y, x + 31, y + 23], outline=(c, c, c + 2), width=2)
-    # torches
-    for (tx, ty) in [(80, 140), (240, 90), (400, 170)]:
-        d.rectangle([tx, ty, tx + 4, ty + 22], fill=(120, 82, 44))
-        d.ellipse([tx - 8, ty - 16, tx + 12, ty + 2], fill=(255, 170, 50))
-        d.ellipse([tx - 4, ty - 12, tx + 8, ty - 2], fill=(255, 230, 130))
-    img.save(OUT / "cave.png")
+    # little grass block "logo"
+    d.rectangle([W // 2 - 34, 96, W // 2 + 34, 164], fill=(106, 168, 79))
+    for i in range(7):
+        d.rectangle([W // 2 - 34 + i * 10, 96, W // 2 - 30 + i * 10, 128], fill=(122, 188, 92))
+    d.rectangle([W // 2 - 34, 128, W // 2 + 34, 164], fill=(134, 96, 67))
 
+    center(d, "MC-shell", font_big, 200, (255, 255, 255))
+    center(d, "Building terrain...", font_mid, 300, (220, 220, 220))
 
-def snow():
-    img, d = gradient((196, 224, 245), (240, 248, 255))
-    rng = random.Random(13)
-    # mountains
-    for i, (base, col) in enumerate([(190, (170, 196, 220)), (215, (150, 178, 205))]):
-        pts = [(0, H)]
-        for x in range(0, W + 12, 12):
-            h = base - int(40 * abs(((x // 60 + i) % 2) - 0.5)) + rng.randint(-3, 3)
-            pts.append((x, h))
-        pts.append((W, H))
-        d.polygon(pts, fill=col)
-    # snow caps + flakes
-    for _ in range(120):
-        x, y = rng.randrange(W), rng.randrange(H)
-        d.point((x, y), fill=(255, 255, 255))
-    img.save(OUT / "snow.png")
+    bx0, bx1 = W // 2 - 260, W // 2 + 260
+    d.rectangle([bx0, 356, bx1, 380], outline=(255, 255, 255), width=3)
+    d.rectangle([bx0 + 4, 360, bx0 + 4 + int((bx1 - bx0 - 8) * 0.62), 376], fill=(126, 240, 58))
+    center(d, "62%", font_small, 392, (200, 200, 200))
+    center(d, "press any key to continue", font_small, 430, (170, 170, 170))
+
+    bg.save(OUT / "loading.png")
+    print("wrote assets/wallpapers/loading.png", bg.size)
 
 
 if __name__ == "__main__":
-    sunset(); cave(); snow()
-    for f in sorted(OUT.glob("*.png")):
-        print("wrote", f.relative_to(OUT.parent.parent), f.stat().st_size // 1024, "KB")
+    main()
