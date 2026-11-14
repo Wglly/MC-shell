@@ -11,20 +11,51 @@ McPanel {
     id: root
 
     implicitWidth: 250
-    implicitHeight: 500
+    implicitHeight: 176 + folderScroll.height
+    // keep the card from growing forever
+    readonly property int folderMaxHeight: 190
     background: Theme.cardBg
     texture: Theme.texturePath(Settings.get("theme.cardTexture", "oak_planks"))
     textureOpacity: 0.26
 
     readonly property string folder: {
         var configured = Settings.get("wallpaper.folder", "");
-        if (configured !== "")
-            return configured;
-        return (Quickshell.env("HOME") || "") + "/Pictures";
+        if (configured !== undefined && configured !== null && ("" + configured) !== "")
+            return "" + configured;
+        var home = Quickshell.env("HOME") || "";
+        return (home !== "" ? home : "/home") + "/Pictures";
     }
     readonly property string current: Settings.get("wallpaper.path", "")
 
     property var folderImages: []
+    property string urlText: ""
+    property string fetchStatus: ""
+    readonly property string cacheDir: (Quickshell.env("HOME") || "") + "/.cache/mc-shell/wallpapers"
+
+    function fetchUrl() {
+        if (root.urlText === "" || fetcher.running)
+            return;
+        var out = root.cacheDir + "/wall-" + Date.now() + ".png";
+        root.fetchStatus = I18n.t("widget.wallpaper.downloading");
+        fetcher.target = out;
+        fetcher.command = ["sh", "-c",
+            "mkdir -p \"$1\" && curl -fsSL --max-time 40 \"$2\" -o \"$3\"",
+            "sh", root.cacheDir, root.urlText, out];
+        fetcher.running = true;
+    }
+
+    Process {
+        id: fetcher
+        property string target: ""
+        onExited: {
+            if (exitCode === 0 && target !== "") {
+                root.fetchStatus = "";
+                root.pick("file://" + target);
+            } else {
+                root.fetchStatus = I18n.t("widget.wallpaper.failed");
+            }
+        }
+    }
     onFolderChanged: root.refresh()
 
     function pick(path) {
@@ -181,8 +212,9 @@ McPanel {
         }
 
         Flickable {
+            id: folderScroll
             width: parent.width
-            height: parent.height - 300
+            height: Math.min(root.folderMaxHeight, folderGrid.height)
             clip: true
             contentHeight: folderGrid.height
             boundsBehavior: Flickable.StopAtBounds
