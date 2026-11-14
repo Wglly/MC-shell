@@ -28,7 +28,7 @@ McPanel {
                 ? (Mpris.players.values[0].trackTitle || I18n.t("widget.visualizer"))
                 : I18n.t("widget.visualizer")
             font.pixelSize: 10
-            color: Theme.textDim
+            color: Theme.cardTextDim
         }
 
         Item {

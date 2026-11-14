@@ -34,12 +34,18 @@ QtObject {
     property color cardBg: "#1c1712"
     property color dockBg: "#6b4a24"
     property string panelTexture: "dirt"
+    property string dockTexture: "oak_planks"
+    property real barTextureOpacity: 0.85
+    property bool barTextureStretch: false
 
     property color text: "#f4f4f4"
     property color textShadow: "#3a3a3a"
     property color textDim: "#b9b9b9"
     property color textOnPanel: "#3f3f3f"
     property color textHints: "#6a6a6a"
+    property color cardText: "#f4f4f4"
+    property color cardTextDim: "#b9b9b9"
+    property color cardTitle: "#ffcc4d"
 
     // Writable so shell.qml can bind them to Settings.theme.* without the
     // common module having to import services (avoids a cyclic import).

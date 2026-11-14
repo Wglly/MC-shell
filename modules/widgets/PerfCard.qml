@@ -21,7 +21,7 @@ McPanel {
         PixelText {
             text: I18n.t("widget.perfmon")
             font.pixelSize: Theme.fontSmall
-            color: Theme.gold
+            color: Theme.cardTitle
         }
 
         // CPU meter
@@ -33,7 +33,7 @@ McPanel {
                 width: 40
                 text: "CPU"
                 font.pixelSize: 10
-                color: Theme.textDim
+                color: Theme.cardTextDim
             }
             Rectangle {
                 width: parent.width - 92
@@ -55,7 +55,7 @@ McPanel {
                 horizontalAlignment: Text.AlignRight
                 text: Math.round(Stats.cpu * 100) + "%"
                 font.pixelSize: 10
-                color: Theme.text
+                color: Theme.cardText
             }
         }
 
@@ -68,7 +68,7 @@ McPanel {
                 width: 40
                 text: "RAM"
                 font.pixelSize: 10
-                color: Theme.textDim
+                color: Theme.cardTextDim
             }
             Rectangle {
                 width: parent.width - 92
@@ -90,7 +90,7 @@ McPanel {
                 horizontalAlignment: Text.AlignRight
                 text: Math.round(Stats.mem * 100) + "%"
                 font.pixelSize: 10
-                color: Theme.text
+                color: Theme.cardText
             }
         }
 
@@ -103,17 +103,17 @@ McPanel {
         PixelText {
             text: "LOAD  " + Stats.load1.toFixed(2) + " / " + Stats.load5.toFixed(2)
             font.pixelSize: 9
-            color: Theme.textDim
+            color: Theme.cardTextDim
         }
         PixelText {
             text: "MEM   " + Stats.memUsed.toFixed(1) + " / " + Stats.memTotal.toFixed(1) + " GB"
             font.pixelSize: 9
-            color: Theme.textDim
+            color: Theme.cardTextDim
         }
         PixelText {
             text: I18n.t("control.up") + "  " + System.uptimeText()
             font.pixelSize: 9
-            color: Theme.textDim
+            color: Theme.cardTextDim
         }
     }
 }

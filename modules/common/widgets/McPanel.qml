@@ -10,6 +10,8 @@ Item {
     property color outlineColor: Theme.outline
     property string texture: ""
     property real textureOpacity: 0.55
+    // Tile keeps pixel textures crisp; Stretch is used for long gradient bars.
+    property int textureFillMode: Image.Tile
     property int bevel: 2
     // 0 = flat frame, 1 = classic inset GUI look
     property bool inset: false
@@ -37,7 +39,7 @@ Item {
         anchors.fill: parent
         anchors.margins: 1
         source: root.texture
-        fillMode: Image.Tile
+        fillMode: root.textureFillMode
         opacity: root.textureOpacity
         visible: root.texture !== ""
         smooth: false

@@ -50,12 +50,18 @@ QtObject {
                 barTexture: "deepslate",
                 panelTexture: "dirt",
                 cardTexture: "oak_planks",
+                dockTexture: "oak_planks",
+                barTextureOpacity: 0.85,
+                barTextureStretch: false,
                 barBg: "#17140f",
                 panel: "#c6c6c6",
                 cardBg: "#1c1712",
                 dockBg: "#6b4a24",
                 text: "#f4f4f4",
                 textDim: "#b9b9b9",
+                cardText: "#f4f4f4",
+                cardTextDim: "#b9b9b9",
+                cardTitle: "#ffcc4d",
                 textOnPanel: "#3f3f3f",
                 textShadow: "#3a3a3a",
                 textHints: "#6a6a6a",
@@ -117,65 +123,79 @@ QtObject {
         classic: {
             accent: "#5fbf4f", gold: "#ffcc4d",
             barTexture: "deepslate", panelTexture: "dirt", cardTexture: "oak_planks",
+            dockTexture: "oak_planks", barTextureOpacity: 0.85, barTextureStretch: false,
             barBg: "#17140f", panel: "#c6c6c6", cardBg: "#1c1712", dockBg: "#6b4a24",
             text: "#f4f4f4", textDim: "#b9b9b9", textOnPanel: "#3f3f3f",
             textShadow: "#3a3a3a", textHints: "#6a6a6a",
             outline: "#1a1a1a", bevelLight: "#ffffff", bevelDark: "#4a4a4a",
-            panelDark: "#8b8b8b", panelTextShadow: "#ffffff"
+            panelDark: "#8b8b8b", panelTextShadow: "#ffffff",
+            cardText: "#f4f4f4", cardTextDim: "#b9b9b9", cardTitle: "#ffcc4d"
         },
         cave: {
             accent: "#ff9b3d", gold: "#ffc44d",
             barTexture: "deepslate", panelTexture: "cobblestone", cardTexture: "cobblestone",
+            dockTexture: "oak_planks", barTextureOpacity: 0.85, barTextureStretch: false,
             barBg: "#080808", panel: "#333333", cardBg: "#101010", dockBg: "#3b2a1a",
             text: "#f0e6d2", textDim: "#9c9488", textOnPanel: "#f0e6d2",
             textShadow: "#000000", textHints: "#a89f90",
             outline: "#000000", bevelLight: "#6e6e6e", bevelDark: "#202020",
-            panelDark: "#262626", panelTextShadow: "#000000"
+            panelDark: "#262626", panelTextShadow: "#000000",
+            cardText: "#f0e6d2", cardTextDim: "#9c9488", cardTitle: "#ffc44d"
         },
         snow: {
             accent: "#3f8fd8", gold: "#e0a92a",
             barTexture: "snow", panelTexture: "ice", cardTexture: "snow",
+            dockTexture: "oak_planks", barTextureOpacity: 0.85, barTextureStretch: false,
             barBg: "#dfe9f2", panel: "#e8f1f7", cardBg: "#f4f9fc", dockBg: "#b9d4e6",
             text: "#1b2a3a", textDim: "#4f6272", textOnPanel: "#1b2a3a",
             textShadow: "#ffffff", textHints: "#5d7285",
             outline: "#7f97a8", bevelLight: "#ffffff", bevelDark: "#9fb6c6",
-            panelDark: "#c9d8e4", panelTextShadow: "#ffffff"
+            panelDark: "#c9d8e4", panelTextShadow: "#ffffff",
+            cardText: "#1b2a3a", cardTextDim: "#4f6272", cardTitle: "#1b2a3a"
         },
         desert: {
             accent: "#a8641a", gold: "#7a4c0e",
             barTexture: "sandstone", panelTexture: "sandstone", cardTexture: "dirt",
+            dockTexture: "oak_planks", barTextureOpacity: 0.85, barTextureStretch: false,
             barBg: "#d9c08c", panel: "#efdcb6", cardBg: "#f2e2c2", dockBg: "#8c6a3f",
             text: "#3a2a16", textDim: "#6b5334", textOnPanel: "#3a2a16",
             textShadow: "#fff4d8", textHints: "#7a6142",
             outline: "#8a6a3a", bevelLight: "#fff4d8", bevelDark: "#b08c54",
-            panelDark: "#d9c08c", panelTextShadow: "#fff4d8"
-        },
-        winxp: {
-            accent: "#1f5fbf", gold: "#ffd34d",
-            barTexture: "winxp", panelTexture: "winxp", cardTexture: "winxp",
-            barBg: "#2f6fd0", panel: "#ece9d8", cardBg: "#f7fbff", dockBg: "#3a6ea5",
-            text: "#ffffff", textDim: "#dbe8ff", textOnPanel: "#1a1a1a",
-            textShadow: "#0a246a", textHints: "#4a4a4a",
-            outline: "#0a246a", bevelLight: "#ffffff", bevelDark: "#7f9db9",
-            panelDark: "#d4d0c8", panelTextShadow: "#ffffff"
-        },
-        win95: {
-            accent: "#000080", gold: "#000080",
-            barTexture: "win95", panelTexture: "win95", cardTexture: "win95",
-            barBg: "#c0c0c0", panel: "#c0c0c0", cardBg: "#ffffff", dockBg: "#a0a0a0",
-            text: "#000000", textDim: "#303030", textOnPanel: "#000000",
-            textShadow: "#ffffff", textHints: "#000000",
-            outline: "#000000", bevelLight: "#ffffff", bevelDark: "#808080",
-            panelDark: "#a0a0a0", panelTextShadow: "#ffffff"
+            panelDark: "#d9c08c", panelTextShadow: "#fff4d8",
+            cardText: "#3a2a16", cardTextDim: "#6b5334", cardTitle: "#7a4c0e"
         },
         village: {
             accent: "#6b8f3a", gold: "#e8b84a",
             barTexture: "oak_planks", panelTexture: "oak_planks", cardTexture: "oak_planks",
+            dockTexture: "oak_planks", barTextureOpacity: 0.85, barTextureStretch: false,
             barBg: "#3b2a18", panel: "#d8c39a", cardBg: "#2a1d10", dockBg: "#6b4a24",
             text: "#f3e6cf", textDim: "#c4b294", textOnPanel: "#3a2a16",
             textShadow: "#2a1d10", textHints: "#7a6142",
             outline: "#241708", bevelLight: "#efe0c0", bevelDark: "#6b5232",
-            panelDark: "#b89a6a", panelTextShadow: "#efe0c0"
+            panelDark: "#b89a6a", panelTextShadow: "#efe0c0",
+            cardText: "#f3e6cf", cardTextDim: "#c4b294", cardTitle: "#e8b84a"
+        },
+        winxp: {
+            accent: "#316ac5", gold: "#ffd34d",
+            barTexture: "winxp_bar", panelTexture: "winxp_panel", cardTexture: "winxp_card",
+            dockTexture: "winxp_task", barTextureOpacity: 1.0, barTextureStretch: true,
+            barBg: "#245edb", panel: "#ece9d8", cardBg: "#ffffff", dockBg: "#245edb",
+            text: "#ffffff", textDim: "#dbe8ff", textOnPanel: "#000000",
+            textShadow: "#08316e", textHints: "#4a4a4a",
+            outline: "#0a246a", bevelLight: "#ffffff", bevelDark: "#7f9db9",
+            panelDark: "#d4d0c8", panelTextShadow: "#ffffff",
+            cardText: "#1a1a1a", cardTextDim: "#444444", cardTitle: "#0a246a"
+        },
+        win95: {
+            accent: "#000080", gold: "#000080",
+            barTexture: "win95", panelTexture: "win95", cardTexture: "win95",
+            dockTexture: "win95", barTextureOpacity: 1.0, barTextureStretch: false,
+            barBg: "#c0c0c0", panel: "#c0c0c0", cardBg: "#ffffff", dockBg: "#a0a0a0",
+            text: "#000000", textDim: "#303030", textOnPanel: "#000000",
+            textShadow: "#ffffff", textHints: "#000000",
+            outline: "#000000", bevelLight: "#ffffff", bevelDark: "#808080",
+            panelDark: "#a0a0a0", panelTextShadow: "#ffffff",
+            cardText: "#000000", cardTextDim: "#303030", cardTitle: "#000080"
         }
     })
 

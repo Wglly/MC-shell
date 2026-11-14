@@ -117,6 +117,36 @@ ShellRoot {
         property: "panelTexture"
         value: Settings.get("theme.panelTexture", "dirt")
     }
+    Binding {
+        target: Theme
+        property: "dockTexture"
+        value: Settings.get("theme.dockTexture", "oak_planks")
+    }
+    Binding {
+        target: Theme
+        property: "barTextureOpacity"
+        value: Settings.get("theme.barTextureOpacity", 0.85)
+    }
+    Binding {
+        target: Theme
+        property: "cardText"
+        value: Settings.get("theme.cardText", "#f4f4f4")
+    }
+    Binding {
+        target: Theme
+        property: "cardTitle"
+        value: Settings.get("theme.cardTitle", "#ffcc4d")
+    }
+    Binding {
+        target: Theme
+        property: "cardTextDim"
+        value: Settings.get("theme.cardTextDim", "#b9b9b9")
+    }
+    Binding {
+        target: Theme
+        property: "barTextureStretch"
+        value: Settings.get("theme.barTextureStretch", false)
+    }
 
     Binding {
         target: Theme

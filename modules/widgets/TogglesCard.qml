@@ -26,7 +26,7 @@ McPanel {
         PixelText {
             text: I18n.t("widget.toggles")
             font.pixelSize: Theme.fontSmall
-            color: Theme.gold
+            color: Theme.cardTitle
         }
 
         Grid {

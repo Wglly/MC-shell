@@ -23,19 +23,19 @@ McPanel {
         PixelText {
             text: Util.clockText(root.now)
             font.pixelSize: 40
-            color: Theme.gold
+            color: Theme.cardTitle
         }
         PixelText {
             text: Util.weekday(root.now).toUpperCase() + "  " + root.now.getDate() + " / " + (root.now.getMonth() + 1)
             font.pixelSize: Theme.fontSmall
-            color: Theme.text
+            color: Theme.cardText
         }
         PixelText {
             text: I18n.t("bar.dayFormat")
                 .replace("{d}", Util.dayNumber(root.now))
                 .replace("{t}", Util.clockText(root.now))
             font.pixelSize: 11
-            color: Theme.textDim
+            color: Theme.cardTextDim
         }
     }
 

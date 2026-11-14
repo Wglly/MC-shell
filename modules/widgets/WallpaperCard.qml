@@ -87,7 +87,7 @@ McPanel {
             PixelText {
                 text: I18n.t("widget.wallpaper")
                 font.pixelSize: Theme.fontSmall
-                color: Theme.gold
+                color: Theme.cardTitle
             }
             Item { width: parent.width - 190; height: 1 }
             McButton {
@@ -162,7 +162,7 @@ McPanel {
             elide: Text.ElideRight
             text: I18n.t("widget.wallpaper.folder") + ": " + root.folder
             font.pixelSize: 8
-            color: Theme.textDim
+            color: Theme.cardTextDim
         }
 
         Flickable {

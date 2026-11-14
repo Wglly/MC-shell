@@ -91,7 +91,7 @@ PanelWindow {
             width: parent.width
             height: 30
             background: Theme.dockBg
-            texture: Theme.texturePath("oak_planks")
+            texture: Theme.texturePath(Theme.dockTexture)
             textureOpacity: 0.9
 
             Slot {
@@ -109,7 +109,7 @@ PanelWindow {
             width: parent.width
             height: root.mediaH
             background: Theme.dockBg
-            texture: Theme.texturePath("oak_planks")
+            texture: Theme.texturePath(Theme.dockTexture)
             textureOpacity: 0.9
 
             Row {
@@ -183,7 +183,7 @@ PanelWindow {
             width: parent.width
             height: root.panelH
             background: Theme.dockBg
-            texture: Theme.texturePath("oak_planks")
+            texture: Theme.texturePath(Theme.dockTexture)
             textureOpacity: 0.95
             bevel: 3
 

@@ -75,7 +75,7 @@ Column {
             anchors.fill: parent
             anchors.margins: 10
             font.pixelSize: 10
-            color: Theme.text
+            color: Theme.textOnPanel
             wrapMode: Text.Wrap
             text: "mc-shell ipc call shell launcher\n"
                 + "mc-shell ipc call shell control\n"

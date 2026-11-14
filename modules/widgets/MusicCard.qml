@@ -26,14 +26,14 @@ McPanel {
             elide: Text.ElideRight
             text: root.player ? (root.player.trackTitle || "?") : I18n.t("control.nothingPlaying")
             font.pixelSize: Theme.fontSmall
-            color: Theme.gold
+            color: Theme.cardTitle
         }
         PixelText {
             width: parent.width
             elide: Text.ElideRight
             text: root.player ? (root.player.trackArtist || "") : ""
             font.pixelSize: 10
-            color: Theme.textDim
+            color: Theme.cardTextDim
         }
 
         Item { width: 1; height: 2 }

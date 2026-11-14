@@ -21,7 +21,7 @@ McPanel {
         PixelText {
             text: I18n.t("widget.sliders")
             font.pixelSize: Theme.fontSmall
-            color: Theme.gold
+            color: Theme.cardTitle
         }
 
         Row {
@@ -33,7 +33,7 @@ McPanel {
                 anchors.verticalCenter: parent.verticalCenter
                 text: "VOL"
                 font.pixelSize: 10
-                color: Theme.textDim
+                color: Theme.cardTextDim
             }
             McSlider {
                 width: parent.width - 88
@@ -58,7 +58,7 @@ McPanel {
                 anchors.verticalCenter: parent.verticalCenter
                 text: "BRI"
                 font.pixelSize: 10
-                color: Theme.textDim
+                color: Theme.cardTextDim
             }
             McSlider {
                 width: parent.width - 88
@@ -71,7 +71,7 @@ McPanel {
                 anchors.verticalCenter: parent.verticalCenter
                 text: Math.round(System.brightness * 100) + "%"
                 font.pixelSize: 9
-                color: Theme.textDim
+                color: Theme.cardTextDim
             }
         }
     }

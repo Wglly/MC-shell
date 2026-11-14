@@ -458,6 +458,65 @@ def retro_tiles() -> None:
     save(w95, "win95.png")
 
 
+def luna_tiles() -> None:
+    """Authentic-ish Windows XP Luna gradients (6-stop taskbar ramp)."""
+    stops = [(0.02, (47, 99, 201)), (0.08, (66, 133, 214)), (0.17, (36, 88, 196)),
+             (0.30, (34, 83, 194)), (0.89, (38, 96, 207)), (0.98, (23, 58, 150))]
+
+    def ramp(h):
+        img = Image.new("RGB", (16, h))
+        px = img.load()
+        for y in range(h):
+            t = y / (h - 1)
+            c = stops[-1][1]
+            for i in range(len(stops) - 1):
+                p0, c0 = stops[i]
+                p1, c1 = stops[i + 1]
+                if p0 <= t <= p1:
+                    k = (t - p0) / max(1e-6, p1 - p0)
+                    c = tuple(int(c0[j] + (c1[j] - c0[j]) * k) for j in range(3))
+                    break
+            for x in range(16):
+                px[x, y] = c
+        return img
+
+    save(ramp(64), "winxp_bar.png")
+    dock = ramp(64)
+    dpx = dock.load()
+    for y in range(64):
+        for x in range(16):
+            r, g, b = dpx[x, y]
+            dpx[x, y] = (max(0, r - 14), max(0, g - 14), max(0, b - 14))
+    save(dock, "winxp_dock.png")
+
+    panel = Image.new("RGB", (TILE, TILE))
+    px = panel.load()
+    rng = random.Random(41)
+    for y in range(TILE):
+        for x in range(TILE):
+            px[x, y] = shade("#ece9d8", rng.randint(-3, 3))
+    for x in range(TILE):
+        px[x, 0] = (255, 255, 255)
+        px[x, TILE - 1] = (172, 168, 153)
+    save(panel, "winxp_panel.png")
+
+    card = Image.new("RGB", (TILE, TILE))
+    px = card.load()
+    rng = random.Random(42)
+    for y in range(TILE):
+        for x in range(TILE):
+            px[x, y] = shade("#ffffff", -rng.randint(0, 6))
+    save(card, "winxp_card.png")
+
+    task = Image.new("RGB", (TILE, TILE))
+    px = task.load()
+    for y in range(TILE):
+        shade_y = (58, 128, 240) if y < 2 else ((49, 104, 213) if y < TILE - 2 else (25, 65, 165))
+        for x in range(TILE):
+            px[x, y] = shade_y
+    save(task, "winxp_task.png")
+
+
 def main() -> None:
     save(noisy_tile("#866043", 14, 1, speckle=6), "dirt.png")
     save(noisy_tile("#7e7e7e", 10, 2, speckle=4), "stone.png")
@@ -479,6 +538,7 @@ def main() -> None:
     dashboard_icon()
     user_icon()
     retro_tiles()
+    luna_tiles()
     icon = block_icon().resize((512, 512), Image.NEAREST)
     icon.save(ROOT / "assets" / "icon.png")
     print("wrote assets/icon.png (512x512)")

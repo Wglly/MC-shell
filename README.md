@@ -261,7 +261,7 @@ text + shadow colours, bevels) plus a block texture set:
 | `snow` | light icy bar, snow/ice panels, blue accent, dark text |
 | `desert` | sandstone bar, warm sand panels, dark amber accent |
 | `village` | oak-plank bar, warm wood panels, mossy green accent |
-| `winxp` | Luna-blue title-bar gradient, cream panels, navy accents |
+| `winxp` | six-stop Luna taskbar gradient (stretched to the bar height), cream `#ECE9D8` panels, white cards, navy titles and borders |
 | `win95` | flat grey bar with hard bevels, black text, navy highlights |
 
 Pick one in **Settings → Theme → theme presets**, or:
@@ -271,6 +271,12 @@ mc-shell ipc call shell preset snow     # or cave/desert/village/winxp/win95
 ```
 
 Manual accent / highlight / texture / scale controls stay available below the presets.
+
+The XP palette follows the Luna taskbar ramp used by Reborn XP
+(`#3168d5 → #4993e6 → #245dd7 → #2257d5 → #2663e0 → #1941a5`, slightly muted for
+the pixel UI), with XP's dialog cream for panels and navy for headings. The one thing
+that is intentionally *not* XP is the font: MC-shell always uses Monocraft, so the XP
+and 95 themes keep the pixel look.
 
 ## Shell control panel
 

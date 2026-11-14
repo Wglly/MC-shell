@@ -25,7 +25,7 @@ McPanel {
             PixelText {
                 text: I18n.t("widget.messages")
                 font.pixelSize: Theme.fontSmall
-                color: Theme.gold
+                color: Theme.cardTitle
             }
             Item { width: parent.width - 150; height: 1 }
             McButton {
@@ -53,7 +53,7 @@ McPanel {
             visible: Notifs.history.length === 0
             text: I18n.t("widget.messages.empty")
             font.pixelSize: 9
-            color: Theme.textDim
+            color: Theme.cardTextDim
         }
 
         Repeater {
@@ -75,7 +75,7 @@ McPanel {
                     elide: Text.ElideRight
                     text: modelData.summary
                     font.pixelSize: 10
-                    color: Theme.text
+                    color: Theme.cardText
                 }
             }
         }

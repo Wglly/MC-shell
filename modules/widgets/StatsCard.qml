@@ -50,7 +50,7 @@ McPanel {
             text: Stats.memUsed.toFixed(1) + " / " + Stats.memTotal.toFixed(1) + " GB   "
                   + "UP " + System.uptimeText()
             font.pixelSize: 10
-            color: Theme.textDim
+            color: Theme.cardTextDim
         }
     }
 }

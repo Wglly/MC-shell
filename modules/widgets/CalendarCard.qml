@@ -47,19 +47,19 @@ McPanel {
             PixelText {
                 text: (root.viewDate.getMonth() + 1) + " / " + root.viewDate.getFullYear()
                 font.pixelSize: Theme.fontSmall
-                color: Theme.gold
+                color: Theme.cardTitle
             }
             Item { width: parent.width - 110; height: 1 }
             PixelText {
                 text: "<"
                 font.pixelSize: Theme.fontSmall
-                color: Theme.text
+                color: Theme.cardText
                 MouseArea { anchors.fill: parent; anchors.margins: -4; onClicked: root.monthOffset-- }
             }
             PixelText {
                 text: ">"
                 font.pixelSize: Theme.fontSmall
-                color: Theme.text
+                color: Theme.cardText
                 MouseArea { anchors.fill: parent; anchors.margins: -4; onClicked: root.monthOffset++ }
             }
         }
@@ -73,7 +73,7 @@ McPanel {
                     horizontalAlignment: Text.AlignHCenter
                     text: modelData
                     font.pixelSize: 9
-                    color: Theme.textDim
+                    color: Theme.cardTextDim
                 }
             }
         }

@@ -23,7 +23,7 @@ McPanel {
         PixelText {
             text: I18n.t("widget.widgetmanager")
             font.pixelSize: Theme.fontSmall
-            color: Theme.gold
+            color: Theme.cardTitle
         }
         Rectangle {
             width: parent.width
@@ -45,7 +45,7 @@ McPanel {
                     elide: Text.ElideRight
                     text: I18n.t("widget." + modelData)
                     font.pixelSize: 10
-                    color: Theme.text
+                    color: Theme.cardText
                 }
                 McButton {
                     width: 56

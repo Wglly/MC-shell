@@ -41,7 +41,8 @@ PanelWindow {
         bevel: 2
         background: Theme.barBg
         texture: Theme.texturePath(Settings.get("theme.barTexture", "deepslate"))
-        textureOpacity: 0.85
+        textureOpacity: Theme.barTextureOpacity
+        textureFillMode: Theme.barTextureStretch ? Image.Stretch : Image.Tile
     }
 
     // ------------------------------------------------------------- horizontal
