@@ -9,22 +9,30 @@ import qs.modules.common.widgets
 import qs.modules.bar
 import qs.services
 
-// Bar — one PanelWindow per monitor, laid out like a Minecraft HUD row.
+// Bar — one PanelWindow per monitor; position, thickness and contents come
+// from Settings.  Horizontal (top/bottom) and vertical (left/right) layouts.
 PanelWindow {
     id: root
 
-    // Supplied by the Variants delegate in shell.qml.
     required property var modelData
     screen: modelData
 
+    readonly property string pos: Settings.get("bar.position", "top")
+    readonly property bool vertical: pos === "left" || pos === "right"
+    readonly property int thickness: Math.max(36, Settings.get("bar.thickness", 40))
+    readonly property bool barVisible: Settings.get("bar.visible", true)
+
     anchors {
-        top: true
-        left: true
-        right: true
+        left: root.vertical ? root.pos === "left" : true
+        right: root.vertical ? root.pos === "right" : true
+        top: root.vertical ? true : root.pos === "top"
+        bottom: root.vertical ? true : root.pos === "bottom"
     }
-    implicitHeight: Theme.barHeight
+    implicitWidth: root.vertical ? root.thickness : 0
+    implicitHeight: root.vertical ? 0 : root.thickness
     color: "transparent"
-    exclusiveZone: Theme.barHeight
+    visible: root.barVisible
+    exclusiveZone: root.barVisible ? root.thickness : 0
     exclusionMode: ExclusionMode.Normal
 
     // ------------------------------------------------------------- background
@@ -32,93 +40,147 @@ PanelWindow {
         anchors.fill: parent
         bevel: 2
         background: "#17140f"
-        texture: Qt.resolvedUrl("../../assets/textures/deepslate.png")
+        texture: Theme.texturePath(Settings.get("theme.barTexture", "deepslate"))
         textureOpacity: 0.85
     }
 
-    // ------------------------------------------------------------------- left
-    Row {
-        anchors.left: parent.left
-        anchors.leftMargin: 8
-        anchors.verticalCenter: parent.verticalCenter
-        spacing: 8
+    // ------------------------------------------------------------- horizontal
+    Item {
+        visible: !root.vertical
+        anchors.fill: parent
+        anchors.margins: 4
 
-        Slot {
-            width: 30
-            height: 30
-            icon: Qt.resolvedUrl("../../assets/textures/grass_block_top.png")
-            onClicked: ShellState.toggleOverlay("launcher")
-        }
-
-        Workspaces { }
-
-        PixelText {
-            id: title
+        Row {
+            id: leftRow
+            anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
-            width: Math.min(260, Math.max(0, root.width * 0.22))
-            elide: Text.ElideRight
-            text: Compositor.windowTitle !== "" ? Compositor.windowTitle
-                : (Compositor.windowAppId !== "" ? Compositor.windowAppId : "")
-            color: Theme.textDim
-            font.pixelSize: Theme.fontSmall
-            visible: root.width > 900
-        }
-    }
+            spacing: 8
 
-    // ----------------------------------------------------------------- center
-    Clock {
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-    }
-
-    // ------------------------------------------------------------------ right
-    Row {
-        anchors.right: parent.right
-        anchors.rightMargin: 8
-        anchors.verticalCenter: parent.verticalCenter
-        spacing: 6
-
-        StatsHud { visible: root.width > 1100 }
-
-        Chip {
-            label: "NET"
-            value: netValue
-            valueColor: netConnected ? Theme.grass : Theme.red
-            onClicked: ShellState.toggleOverlay("control")
-
-            readonly property var conn: {
-                var ds = Networking.devices.values;
-                for (var i = 0; i < ds.length; i++)
-                    if (ds[i].connected)
-                        return ds[i];
-                return null;
+            Slot {
+                width: 30
+                height: 30
+                icon: Qt.resolvedUrl("../../assets/textures/grass_block_top.png")
+                onClicked: ShellState.toggleOverlay("launcher")
             }
-            readonly property bool netConnected: conn !== null
-            readonly property string netValue: conn ? "ON" : "OFF"
+
+            Workspaces { anchors.verticalCenter: parent.verticalCenter }
+
+            WindowTitle {
+                anchors.verticalCenter: parent.verticalCenter
+                width: Math.min(240, Math.max(0, root.width * 0.2))
+                visible: Settings.get("bar.showTitle", true) && root.width > 980
+            }
         }
 
-        Chip {
-            label: "VOL"
-            value: Audio.label
-            valueColor: Audio.muted ? Theme.red : Theme.text
-            onClicked: ShellState.toggleOverlay("control")
-            onScrolled: delta => Audio.step(delta)
+        Clock {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            visible: Settings.get("bar.showClock", true)
         }
 
-        Chip {
-            label: "BAT"
-            visible: UPower.displayDevice && UPower.displayDevice.isPresent
-            value: UPower.displayDevice ? Math.round(UPower.displayDevice.percentage * 100) + "%" : "--"
-            valueColor: UPower.displayDevice && UPower.displayDevice.percentage < 0.2 ? Theme.red : Theme.text
-            onClicked: ShellState.toggleOverlay("control")
+        Row {
+            id: rightRow
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            spacing: 6
+
+            StatsHud {
+                anchors.verticalCenter: parent.verticalCenter
+                visible: Settings.get("bar.showStats", true) && root.width > 1150
+            }
+
+            NetChip { anchors.verticalCenter: parent.verticalCenter }
+            VolChip { anchors.verticalCenter: parent.verticalCenter }
+            BatChip { anchors.verticalCenter: parent.verticalCenter }
+            TrayRow {
+                anchors.verticalCenter: parent.verticalCenter
+                visible: Settings.get("bar.showTray", true)
+            }
+
+            Slot {
+                width: 30
+                height: 30
+                icon: Qt.resolvedUrl("../../assets/textures/icon_gear.png")
+                onClicked: ShellState.toggleOverlay("settings")
+            }
+            Slot {
+                width: 30
+                height: 30
+                icon: Qt.resolvedUrl("../../assets/textures/icon_power.png")
+                onClicked: ShellState.toggleOverlay("power")
+            }
+        }
+    }
+
+    // --------------------------------------------------------------- vertical
+    Item {
+        visible: root.vertical
+        anchors.fill: parent
+        anchors.margins: 4
+
+        Column {
+            id: topColumn
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 6
+
+            Slot {
+                width: 30
+                height: 30
+                x: Math.round((parent.width - width) / 2)
+                icon: Qt.resolvedUrl("../../assets/textures/grass_block_top.png")
+                onClicked: ShellState.toggleOverlay("launcher")
+            }
+
+            Workspaces {
+                vertical: true
+                x: Math.round((parent.width - width) / 2)
+            }
         }
 
-        TrayRow { }
+        Clock {
+            compact: true
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: Settings.get("bar.showClock", true)
+        }
 
-        Chip {
-            label: "PWR"
-            valueColor: Theme.gold
-            onClicked: ShellState.toggleOverlay("control")
+        Column {
+            id: bottomColumn
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 6
+
+            StatsHud {
+                vertical: true
+                x: Math.round((parent.width - width) / 2)
+                visible: Settings.get("bar.showStats", true)
+            }
+
+            NetChip { compact: true; x: Math.round((parent.width - width) / 2) }
+            VolChip { compact: true; x: Math.round((parent.width - width) / 2) }
+            BatChip { compact: true; x: Math.round((parent.width - width) / 2) }
+
+            TrayRow {
+                vertical: true
+                x: Math.round((parent.width - width) / 2)
+                visible: Settings.get("bar.showTray", true)
+            }
+
+            Slot {
+                width: 30
+                height: 30
+                x: Math.round((parent.width - width) / 2)
+                icon: Qt.resolvedUrl("../../assets/textures/icon_gear.png")
+                onClicked: ShellState.toggleOverlay("settings")
+            }
+            Slot {
+                width: 30
+                height: 30
+                x: Math.round((parent.width - width) / 2)
+                icon: Qt.resolvedUrl("../../assets/textures/icon_power.png")
+                onClicked: ShellState.toggleOverlay("power")
+            }
         }
     }
 }

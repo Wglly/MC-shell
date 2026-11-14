@@ -57,7 +57,7 @@ PanelWindow {
                 Layout.fillWidth: true
 
                 PixelText {
-                    text: "OPTIONS"
+                    text: I18n.t("control.title")
                     font.pixelSize: Theme.fontLarge
                     color: Theme.textOnPanel
                     styleColor: "#ffffff"
@@ -83,7 +83,7 @@ PanelWindow {
 
                 PixelText {
                     Layout.preferredWidth: 74
-                    text: "SOUND"
+                    text: I18n.t("control.sound")
                     font.pixelSize: Theme.fontSmall
                     color: Theme.textOnPanel
                     styleColor: "#ffffff"
@@ -118,7 +118,7 @@ PanelWindow {
 
                 PixelText {
                     Layout.preferredWidth: 74
-                    text: "BRIGHT"
+                    text: I18n.t("control.brightness")
                     font.pixelSize: Theme.fontSmall
                     color: Theme.textOnPanel
                     styleColor: "#ffffff"
@@ -147,14 +147,14 @@ PanelWindow {
 
                 McButton {
                     Layout.fillWidth: true
-                    label: "WIFI " + (Networking.wifiEnabled ? "ON" : "OFF")
+                    label: I18n.t("control.wifi") + " " + (Networking.wifiEnabled ? I18n.t("common.on") : I18n.t("common.off"))
                     checked: Networking.wifiEnabled
                     onClicked: Networking.wifiEnabled = !Networking.wifiEnabled
                 }
                 McButton {
                     Layout.fillWidth: true
                     visible: Bluetooth.defaultAdapter !== null
-                    label: "BT " + (Bluetooth.defaultAdapter && Bluetooth.defaultAdapter.enabled ? "ON" : "OFF")
+                    label: I18n.t("control.bluetooth") + " " + (Bluetooth.defaultAdapter && Bluetooth.defaultAdapter.enabled ? I18n.t("common.on") : I18n.t("common.off"))
                     checked: Bluetooth.defaultAdapter && Bluetooth.defaultAdapter.enabled
                     onClicked: {
                         if (Bluetooth.defaultAdapter)
@@ -163,7 +163,7 @@ PanelWindow {
                 }
                 McButton {
                     Layout.fillWidth: true
-                    label: "BAT " + (UPower.displayDevice && UPower.displayDevice.isPresent
+                    label: I18n.t("control.battery") + " " + (UPower.displayDevice && UPower.displayDevice.isPresent
                         ? Math.round(UPower.displayDevice.percentage * 100) + "%" : "--")
                     onClicked: { }
                 }
@@ -187,7 +187,7 @@ PanelWindow {
                     PixelText {
                         Layout.fillWidth: true
                         elide: Text.ElideRight
-                        text: root.player ? (root.player.trackTitle || "Unknown track") : "NOTHING PLAYING"
+                        text: root.player ? (root.player.trackTitle || "?") : I18n.t("control.nothingPlaying")
                         font.pixelSize: Theme.fontSmall
                         color: root.player ? Theme.gold : Theme.textDim
                     }
@@ -203,20 +203,20 @@ PanelWindow {
                         visible: root.player !== null
 
                         McButton {
-                            label: "PREV"
+                            label: I18n.t("control.prev")
                             implicitWidth: 60
                             implicitHeight: 26
                             enabledButton: root.player && root.player.canGoPrevious
                             onClicked: if (root.player) root.player.previous()
                         }
                         McButton {
-                            label: root.player && root.player.isPlaying ? "PAUSE" : "PLAY"
+                            label: root.player && root.player.isPlaying ? I18n.t("control.pause") : I18n.t("control.play")
                             implicitWidth: 66
                             implicitHeight: 26
                             onClicked: if (root.player) root.player.togglePlaying()
                         }
                         McButton {
-                            label: "NEXT"
+                            label: I18n.t("control.next")
                             implicitWidth: 60
                             implicitHeight: 26
                             enabledButton: root.player && root.player.canGoNext
@@ -232,8 +232,8 @@ PanelWindow {
                 font.pixelSize: Theme.fontSmall
                 color: Theme.textOnPanel
                 styleColor: "#ffffff"
-                text: "CPU " + Math.round(Stats.cpu * 100) + "%   RAM " + Stats.memUsed.toFixed(1) + "/"
-                      + Stats.memTotal.toFixed(1) + "G   UP " + System.uptimeText()
+                text: I18n.t("control.cpu") + " " + Math.round(Stats.cpu * 100) + "%   " + I18n.t("control.ram") + " " + Stats.memUsed.toFixed(1) + "/"
+                      + Stats.memTotal.toFixed(1) + "G   " + I18n.t("control.up") + " " + System.uptimeText()
             }
 
             // --------------------------------------------------------- power
@@ -241,10 +241,10 @@ PanelWindow {
                 Layout.fillWidth: true
                 spacing: 6
 
-                McButton { Layout.fillWidth: true; label: "LOCK"; onClicked: System.lockSession() }
-                McButton { Layout.fillWidth: true; label: "SLEEP"; onClicked: System.suspend() }
-                McButton { Layout.fillWidth: true; label: "REBOOT"; onClicked: System.reboot() }
-                McButton { Layout.fillWidth: true; label: "OFF"; accentColor: Theme.red; onClicked: System.powerOff() }
+                McButton { Layout.fillWidth: true; label: I18n.t("control.lock"); onClicked: System.lockSession() }
+                McButton { Layout.fillWidth: true; label: I18n.t("control.sleep"); onClicked: System.suspend() }
+                McButton { Layout.fillWidth: true; label: I18n.t("control.reboot"); onClicked: System.reboot() }
+                McButton { Layout.fillWidth: true; label: I18n.t("control.off"); accentColor: Theme.red; onClicked: System.powerOff() }
             }
         }
     }

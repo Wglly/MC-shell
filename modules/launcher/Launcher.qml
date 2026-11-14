@@ -89,14 +89,14 @@ PanelWindow {
                 spacing: 8
 
                 PixelText {
-                    text: "INVENTORY"
+                    text: I18n.t("launcher.title")
                     font.pixelSize: Theme.fontLarge
                     color: Theme.textOnPanel
                     styleColor: "#ffffff"
                 }
                 PixelText {
                     anchors.verticalCenter: parent.verticalCenter
-                    text: root.filtered.length + " ITEMS"
+                    text: root.filtered.length + " " + I18n.t("launcher.count")
                     font.pixelSize: Theme.fontSmall
                     color: "#6a6a6a"
                     styleColor: "#ffffff"
@@ -142,7 +142,7 @@ PanelWindow {
 
                     PixelText {
                         anchors.verticalCenter: parent.verticalCenter
-                        text: "Search items…"
+                        text: I18n.t("launcher.search")
                         color: "#7a7a7a"
                         font.pixelSize: Theme.fontNormal
                         visible: input.text.length === 0
@@ -238,7 +238,7 @@ PanelWindow {
                 font.pixelSize: 11
                 color: "#6a6a6a"
                 styleColor: "#ffffff"
-                text: "TYPE TO SEARCH   ·   ENTER = LAUNCH   ·   ESC = CLOSE"
+                text: I18n.t("launcher.hint")
             }
         }
     }

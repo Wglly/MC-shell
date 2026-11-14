@@ -32,8 +32,10 @@ QtObject {
     readonly property color textDim: "#b9b9b9"
     readonly property color textOnPanel: "#3f3f3f"
 
-    readonly property color grass: "#5fbf4f"
-    readonly property color gold: "#ffcc4d"
+    // Writable so shell.qml can bind them to Settings.theme.* without the
+    // common module having to import services (avoids a cyclic import).
+    property color grass: "#5fbf4f"
+    property color gold: "#ffcc4d"
     readonly property color red: "#e04a3f"
     readonly property color diamond: "#4fd6d6"
     readonly property color lapis: "#3f6fd0"
@@ -47,6 +49,9 @@ QtObject {
     readonly property int pad: 10
 
     // ------------------------------------------------------------- helpers
-    readonly property string texDirt: "../../assets/textures/dirt.png" // unused placeholder
-    function shadowOpacity() { return 0.85 }
+    // Texture names live in assets/textures/<name>.png
+    function texturePath(name) {
+        var n = ("" + (name || "deepslate")).replace(/[^a-z_]/g, "");
+        return Qt.resolvedUrl("../../assets/textures/" + n + ".png");
+    }
 }

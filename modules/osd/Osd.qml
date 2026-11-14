@@ -45,7 +45,7 @@ PanelWindow {
 
                     PixelText {
                         text: ShellState.osdLabel !== "" ? ShellState.osdLabel
-                            : (ShellState.osdKind === "volume" ? "VOLUME" : "BRIGHTNESS")
+                            : (ShellState.osdKind === "volume" ? I18n.t("osd.volume") : I18n.t("osd.brightness"))
                         font.pixelSize: Theme.fontSmall
                         color: Theme.text
                     }

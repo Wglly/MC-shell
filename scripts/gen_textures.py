@@ -223,6 +223,127 @@ def save(img: Image.Image, name: str, scale: int = 1) -> None:
     print(f"wrote assets/textures/{name} ({img.width}x{img.height})")
 
 
+def pixel_icon(rows, palette, name):
+    """Draw a tiny icon from ASCII rows with a colour palette."""
+    h = len(rows)
+    w = max(len(r) for r in rows)
+    img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    px = img.load()
+    for y, row in enumerate(rows):
+        for x, ch in enumerate(row):
+            if ch in palette:
+                px[x, y] = palette[ch]
+    save(img, name, scale=3)
+
+
+def gear_icon() -> None:
+    rows = [
+        "  XX XX  ",
+        " XXXXXXX ",
+        " XX   XX ",
+        "XXX   XXX",
+        "XX     XX",
+        "XXX   XXX",
+        " XX   XX ",
+        " XXXXXXX ",
+        "  XX XX  ",
+    ]
+    pixel_icon(rows, {"X": (184, 184, 184, 255)}, "icon_gear.png")
+
+
+def power_icon() -> None:
+    rows = [
+        "   XXX   ",
+        "   XXX   ",
+        "X  XXX  X",
+        "X  XXX  X",
+        "X       X",
+        " X     X ",
+        "  X   X  ",
+        "   XXX   ",
+        "         ",
+    ]
+    pixel_icon(rows, {"X": (224, 74, 63, 255)}, "icon_power.png")
+
+
+def book_icon() -> None:
+    rows = [
+        " XXXXXX  ",
+        " X    X  ",
+        " X XX X  ",
+        " X XX X  ",
+        " X XX X  ",
+        " X XX X  ",
+        " X    X  ",
+        " XXXXXX  ",
+        "         ",
+    ]
+    pixel_icon(rows, {"X": (196, 138, 74, 255)}, "icon_book.png")
+
+
+def weather_icons() -> None:
+    sun = [
+        "X   X   X",
+        " X  X  X ",
+        "  XXXXX  ",
+        " XXYYYXX ",
+        "X XYYYX X",
+        " XXYYYXX ",
+        "  XXXXX  ",
+        " X  X  X ",
+        "X   X   X",
+    ]
+    cloud = [
+        "         ",
+        "   XXX   ",
+        "  XXXXX  ",
+        " XXXXXXX ",
+        "XXXXXXXXX",
+        "XXXXXXXXX",
+        " XXXXXXX ",
+        "         ",
+        "         ",
+    ]
+    rain = [
+        "   XXX   ",
+        "  XXXXX  ",
+        " XXXXXXX ",
+        "XXXXXXXXX",
+        " XXXXXXX ",
+        "  B B B  ",
+        "   B B   ",
+        "  B B B  ",
+        "         ",
+    ]
+    snow = [
+        "   X X   ",
+        " X X X X ",
+        "  XXXXX  ",
+        "XXXXXXXXX",
+        "  XXXXX  ",
+        " X X X X ",
+        "   X X   ",
+        "         ",
+        "         ",
+    ]
+    storm = [
+        "   XXX   ",
+        "  XXXXX  ",
+        " XXXXXXX ",
+        "XXXXXXXXX",
+        "   YYY   ",
+        "  YYY    ",
+        " YYY     ",
+        " YY      ",
+        "         ",
+    ]
+    pixel_icon(sun, {"X": (255, 204, 77, 255), "Y": (255, 236, 140, 255)}, "icon_sun.png")
+    pixel_icon(cloud, {"X": (214, 214, 214, 255)}, "icon_cloud.png")
+    pixel_icon(rain, {"X": (214, 214, 214, 255), "B": (79, 168, 224, 255)}, "icon_rain.png")
+    pixel_icon(snow, {"X": (226, 240, 255, 255)}, "icon_snow.png")
+    pixel_icon(storm, {"X": (170, 170, 170, 255), "Y": (255, 220, 90, 255)}, "icon_storm.png")
+
+
 def main() -> None:
     save(noisy_tile("#866043", 14, 1, speckle=6), "dirt.png")
     save(noisy_tile("#7e7e7e", 10, 2, speckle=4), "stone.png")
@@ -235,6 +356,10 @@ def main() -> None:
     save(heart(False), "heart_empty.png", scale=2)
     save(drumstick(), "hunger.png", scale=2)
     save(slot(), "slot.png", scale=2)
+    gear_icon()
+    power_icon()
+    book_icon()
+    weather_icons()
     icon = block_icon().resize((512, 512), Image.NEAREST)
     icon.save(ROOT / "assets" / "icon.png")
     print("wrote assets/icon.png (512x512)")

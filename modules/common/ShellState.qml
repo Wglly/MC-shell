@@ -5,8 +5,11 @@ import QtQuick
 QtObject {
     id: state
 
-    // "none" | "launcher" | "control"
+    // "none" | "launcher" | "control" | "settings" | "power"
     property string overlay: "none"
+
+    // active settings tab (see SettingsWindow.tabs)
+    property int settingsTab: 0
 
     // OSD: "" hides, "volume" / "brightness" shows briefly
     property string osdKind: ""

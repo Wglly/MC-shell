@@ -9,11 +9,13 @@ Item {
     property string value: ""
     property color valueColor: Theme.text
     property bool interactive: true
+    // Vertical bars only have ~44px of width: drop the label, keep the value.
+    property bool compact: false
     signal clicked()
     signal scrolled(int delta)
 
-    implicitWidth: Math.max(54, textItem.implicitWidth + 14)
-    implicitHeight: 26
+    implicitWidth: root.compact ? 44 : Math.max(54, textItem.implicitWidth + 14)
+    implicitHeight: root.compact ? 24 : 26
     opacity: interactive ? 1.0 : 0.85
 
     McPanel {
@@ -27,10 +29,15 @@ Item {
     Text {
         id: textItem
         anchors.centerIn: parent
-        text: root.label + (root.value !== "" ? " " + root.value : "")
+        width: parent.width - 6
+        horizontalAlignment: Text.AlignHCenter
+        elide: Text.ElideRight
+        text: root.compact
+            ? (root.value !== "" ? root.value : root.label)
+            : (root.label + (root.value !== "" ? " " + root.value : ""))
         color: root.valueColor
         font.family: Theme.fontFamily
-        font.pixelSize: Theme.fontSmall
+        font.pixelSize: root.compact ? 10 : Theme.fontSmall
         renderType: Text.NativeRendering
         style: Text.Raised
         styleColor: "#1a1a1a"
