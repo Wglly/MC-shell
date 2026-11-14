@@ -44,11 +44,7 @@ def main():
     center(d, "MC-shell", font_big, 200, (255, 255, 255))
     center(d, "Building terrain...", font_mid, 300, (220, 220, 220))
 
-    bx0, bx1 = W // 2 - 260, W // 2 + 260
-    d.rectangle([bx0, 356, bx1, 380], outline=(255, 255, 255), width=3)
-    d.rectangle([bx0 + 4, 360, bx0 + 4 + int((bx1 - bx0 - 8) * 0.62), 376], fill=(126, 240, 58))
-    center(d, "62%", font_small, 392, (200, 200, 200))
-    center(d, "press any key to continue", font_small, 430, (170, 170, 170))
+    center(d, "press any key to continue", font_small, 372, (200, 200, 200))
 
     bg.save(OUT / "loading.png")
     print("wrote assets/wallpapers/loading.png", bg.size)
