@@ -35,16 +35,13 @@ def main():
     font_mid = ImageFont.truetype(str(ROOT / "assets" / "fonts" / "Monocraft.ttf"), 22)
     font_small = ImageFont.truetype(str(ROOT / "assets" / "fonts" / "Monocraft.ttf"), 16)
 
-    # little grass block "logo"
-    d.rectangle([W // 2 - 34, 96, W // 2 + 34, 164], fill=(106, 168, 79))
-    for i in range(7):
-        d.rectangle([W // 2 - 34 + i * 10, 96, W // 2 - 30 + i * 10, 128], fill=(122, 188, 92))
-    d.rectangle([W // 2 - 34, 128, W // 2 + 34, 164], fill=(134, 96, 67))
+    # little grass block "logo" + title, nothing else
+    d.rectangle([W // 2 - 40, 176, W // 2 + 40, 256], fill=(106, 168, 79))
+    for i in range(8):
+        d.rectangle([W // 2 - 40 + i * 10, 176, W // 2 - 36 + i * 10, 214], fill=(122, 188, 92))
+    d.rectangle([W // 2 - 40, 214, W // 2 + 40, 256], fill=(134, 96, 67))
 
-    center(d, "MC-shell", font_big, 200, (255, 255, 255))
-    center(d, "Building terrain...", font_mid, 300, (220, 220, 220))
-
-    center(d, "press any key to continue", font_small, 372, (200, 200, 200))
+    center(d, "MC-shell", font_big, 292, (255, 255, 255))
 
     bg.save(OUT / "loading.png")
     print("wrote assets/wallpapers/loading.png", bg.size)
