@@ -119,7 +119,8 @@ QtObject {
             "settings.sidebars.note": "Baskets dock to the screen edges and host widgets.",
 
             "widget.clock": "CLOCK", "widget.weather": "WEATHER", "widget.visualizer": "MUSIC",
-            "widget.calendar": "CALENDAR", "widget.stats": "SYSTEM", "widget.music": "NOW PLAYING",
+            "widget.calendar": "CALENDAR",
+            "calendar.today": "TODAY", "calendar.weekdays": "SU MO TU WE TH FR SA", "widget.stats": "SYSTEM", "widget.music": "NOW PLAYING",
             "widget.weather.city": "CITY", "widget.weather.cityHint": "empty = auto",
             "widget.visualizer.bars": "BARS",
 
@@ -237,7 +238,8 @@ QtObject {
             "settings.sidebars.note": "侧边篮贴靠屏幕左右边缘，用来承载组件。",
 
             "widget.clock": "时钟", "widget.weather": "天气", "widget.visualizer": "音乐",
-            "widget.calendar": "日历", "widget.stats": "系统", "widget.music": "正在播放",
+            "widget.calendar": "日历",
+            "calendar.today": "今天", "calendar.weekdays": "日 一 二 三 四 五 六", "widget.stats": "系统", "widget.music": "正在播放",
             "widget.weather.city": "城市", "widget.weather.cityHint": "留空 = 自动",
             "widget.visualizer.bars": "柱数",
 
@@ -355,7 +357,8 @@ QtObject {
             "settings.sidebars.note": "側邊籃貼靠螢幕左右邊緣，用來承載元件。",
 
             "widget.clock": "時鐘", "widget.weather": "天氣", "widget.visualizer": "音樂",
-            "widget.calendar": "日曆", "widget.stats": "系統", "widget.music": "正在播放",
+            "widget.calendar": "日曆",
+            "calendar.today": "今天", "calendar.weekdays": "日 一 二 三 四 五 六", "widget.stats": "系統", "widget.music": "正在播放",
             "widget.weather.city": "城市", "widget.weather.cityHint": "留空 = 自動",
             "widget.visualizer.bars": "柱數",
 

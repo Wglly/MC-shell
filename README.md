@@ -51,6 +51,10 @@ Windows 95 — each one a full palette + block-texture set, switchable from Sett
 ## What's inside
 
 ### Bar (4 edges)
+
+The bar now also carries a **mini media chip** (cover, title/artist, play-pause) — click it for
+the full player (art, album, progress, prev/play/next). Clicking the **clock** drops down a
+month calendar with today highlighted (`shell barPopup calendar|media` works over IPC too).
 Hotbar workspaces, window title, `DAY n · HH:MM` clock, CPU hearts, RAM drumsticks,
 NET / VOL / BAT chips, tray icons, settings and power buttons. The bar can sit on the
 **top, bottom, left or right** edge and swaps between a horizontal row and a vertical

@@ -190,6 +190,10 @@ ShellRoot {
         targetScreen: shell.primaryScreen
     }
 
+    BarPopup {
+        targetScreen: shell.primaryScreen
+    }
+
     DockSpacer {
         targetScreen: shell.primaryScreen
     }
@@ -252,6 +256,9 @@ ShellRoot {
         }
         function overview(): void {
             ShellState.toggleOverlay("overview");
+        }
+        function barPopup(kind: string): void {
+            ShellState.toggleBarPopup(kind);
         }
         function basket(side: string): void {
             ShellState.toggleBasket(side);

@@ -528,6 +528,21 @@ def launcher_icon() -> None:
     pixel_icon(rows, {"X": (255, 226, 138, 255)}, "icon_launcher.png")
 
 
+def music_icon() -> None:
+    rows = [
+        ".........",
+        "....XXXX.",
+        "....X..X.",
+        "....X..X.",
+        "....X..X.",
+        "..XXXX.X.",
+        ".XXXXX X.",
+        ".XXXX....",
+        ".........",
+    ]
+    pixel_icon(rows, {"X": (255, 226, 138, 255)}, "icon_music.png")
+
+
 def basket_icons() -> None:
     left = [
         "XXXXXXXXX",
@@ -575,6 +590,7 @@ def main() -> None:
     themed_tiles()
     basket_icons()
     launcher_icon()
+    music_icon()
     dashboard_icon()
     user_icon()
     retro_tiles()

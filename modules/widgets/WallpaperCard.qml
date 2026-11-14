@@ -38,6 +38,8 @@ McPanel {
             return;
         if (path.indexOf("file://") === 0)
             path = path.substring(7);
+        if (path.charAt(0) !== "/")
+            path = (Quickshell.env("HOME") || "") + "/" + path;
         Settings.set("wallpaper.folder", path);
         root.statusText = "";
         root.refresh();

@@ -77,6 +77,7 @@ PanelWindow {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             visible: Settings.get("bar.showClock", true)
+            onClicked: ShellState.toggleBarPopup("calendar")
         }
 
         Row {
@@ -84,6 +85,10 @@ PanelWindow {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             spacing: 6
+
+            MediaBar {
+                anchors.verticalCenter: parent.verticalCenter
+            }
 
             StatsHud {
                 anchors.verticalCenter: parent.verticalCenter
@@ -164,6 +169,7 @@ PanelWindow {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             visible: Settings.get("bar.showClock", true)
+            onClicked: ShellState.toggleBarPopup("calendar")
         }
 
         Column {
@@ -188,6 +194,14 @@ PanelWindow {
                 visible: Settings.get("bar.showTray", true)
             }
 
+            Slot {
+                width: 30
+                height: 30
+                x: Math.round((parent.width - width) / 2)
+                icon: Qt.resolvedUrl("../../assets/textures/icon_music.png")
+                active: ShellState.barPopup === "media"
+                onClicked: ShellState.toggleBarPopup("media")
+            }
             Slot {
                 width: 30
                 height: 30

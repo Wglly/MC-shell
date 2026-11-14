@@ -12,6 +12,17 @@ QtObject {
     property int settingsTab: 0
 
     // side baskets are opened on demand from the bar
+    // bar dropdown: "" | "calendar" | "media"
+    property string barPopup: ""
+
+    function toggleBarPopup(kind) {
+        ShellState.barPopup = (ShellState.barPopup === kind) ? "" : kind;
+    }
+
+    function closeBarPopup() {
+        ShellState.barPopup = "";
+    }
+
     // space the dock needs on its edge (driven by Dock.qml)
     property int dockReserve: 0
 

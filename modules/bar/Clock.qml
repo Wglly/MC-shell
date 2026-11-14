@@ -7,6 +7,7 @@ import qs.services
 Item {
     id: root
 
+    signal clicked()
     property bool compact: false
     property date now: new Date()
     implicitWidth: label.implicitWidth
@@ -22,6 +23,12 @@ Item {
                 .replace("{t}", Util.clockText(root.now))
         font.pixelSize: root.compact ? 11 : Theme.fontNormal
         color: Theme.gold
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        onClicked: root.clicked()
     }
 
     Timer {
