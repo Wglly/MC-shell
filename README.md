@@ -52,6 +52,9 @@ Windows 95 — each one a full palette + block-texture set, switchable from Sett
 
 ### Bar (4 edges)
 
+The bar also shows the **user avatar** (left of settings) — click it for a profile popup with
+host, uptime and session, anchored right under the avatar.
+
 The bar now also carries a **mini media chip** (cover, title/artist, play-pause) — click it for
 the full player (art, album, progress, prev/play/next). Clicking the **clock** drops down a
 month calendar with today highlighted (`shell barPopup calendar|media` works over IPC too).

@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import Quickshell.Io
 import Quickshell.Services.Mpris
 import qs.modules.common
 import qs.modules.common.widgets
@@ -15,6 +16,18 @@ PanelWindow {
     readonly property string mode: ShellState.barPopup
     readonly property bool opened: mode !== ""
     readonly property var player: Mpris.players.values.length > 0 ? Mpris.players.values[0] : null
+
+    readonly property string userName: Quickshell.env("USER") || "player"
+    readonly property string avatarPath: "file://" + (Quickshell.env("HOME") || "") + "/.face"
+    property bool hasAvatar: false
+    property string hostName: ""
+
+    Process {
+        command: ["hostname"]
+        stdout: StdioCollector {
+            onStreamFinished: menuHost.text = text.trim()
+        }
+    }
 
     // calendar state
     property int viewYear: new Date().getFullYear()
@@ -56,9 +69,13 @@ PanelWindow {
     }
 
     McPanel {
-        width: root.mode === "calendar" ? 360 : 400
-        height: root.mode === "calendar" ? 330 : 244
-        anchors.horizontalCenter: parent.horizontalCenter
+        width: root.mode === "calendar" ? 360 : (root.mode === "media" ? 400 : 320)
+        height: root.mode === "calendar" ? 330 : (root.mode === "media" ? 244 : 216)
+        x: root.mode === "user"
+            ? (ShellState.barPopupX >= 0
+                ? Math.round(Math.max(8, Math.min(parent.width - width - 8, ShellState.barPopupX - width / 2)))
+                : parent.width - width - 96)
+            : Math.round((parent.width - width) / 2)
         anchors.top: parent.top
         anchors.topMargin: Theme.barHeight + 6
         background: Theme.panel
@@ -154,6 +171,89 @@ PanelWindow {
                         }
                     }
                 }
+            }
+        }
+
+        // ----------------------------------------------------------------- user
+        Column {
+            visible: root.mode === "user"
+            anchors.fill: parent
+            anchors.margins: 12
+            spacing: 8
+
+            Row {
+                width: parent.width
+                spacing: 10
+
+                Item {
+                    width: 64
+                    height: 64
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: Theme.panelDark
+                        border.width: 2
+                        border.color: Theme.outline
+                    }
+
+                    Image {
+                        anchors.fill: parent
+                        anchors.margins: 2
+                        source: root.avatarPath
+                        fillMode: Image.PreserveAspectCrop
+                        smooth: false
+                        visible: root.hasAvatar
+                        onStatusChanged: root.hasAvatar = (status === Image.Ready)
+                    }
+                }
+
+                Column {
+                    width: parent.width - 74
+                    spacing: 3
+
+                    PixelText {
+                        width: parent.width
+                        elide: Text.ElideRight
+                        text: root.userName
+                        font.pixelSize: Theme.fontLarge
+                        color: Theme.textOnPanel
+                        styleColor: Theme.panelTextShadow
+                    }
+                    PixelText {
+                        id: menuHost
+                        width: parent.width
+                        elide: Text.ElideRight
+                        font.pixelSize: 10
+                        color: Theme.textOnPanel
+                        styleColor: Theme.panelTextShadow
+                    }
+                }
+            }
+
+            Rectangle { width: parent.width; height: 1; color: Theme.bevelDark }
+
+            PixelText {
+                width: parent.width
+                text: I18n.t("user.uptime") + "  "
+                    + Math.floor(Stats.uptime / 3600) + "h "
+                    + Math.floor((Stats.uptime % 3600) / 60) + "m"
+                font.pixelSize: 10
+                color: Theme.textOnPanel
+                styleColor: Theme.panelTextShadow
+            }
+            PixelText {
+                width: parent.width
+                text: I18n.t("user.session") + "  " + Compositor.backend + " · MC-shell"
+                font.pixelSize: 10
+                color: Theme.textOnPanel
+                styleColor: Theme.panelTextShadow
+            }
+
+            McButton {
+                width: 90
+                height: 26
+                label: I18n.t("common.close")
+                onClicked: ShellState.closeBarPopup()
             }
         }
 

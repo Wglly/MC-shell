@@ -12,8 +12,10 @@ QtObject {
     property int settingsTab: 0
 
     // side baskets are opened on demand from the bar
-    // bar dropdown: "" | "calendar" | "media"
+    // bar dropdown: "" | "calendar" | "media" | "user"
     property string barPopup: ""
+    // screen x of the anchor icon (-1 = centre)
+    property real barPopupX: -1
 
     function toggleBarPopup(kind) {
         ShellState.barPopup = (ShellState.barPopup === kind) ? "" : kind;

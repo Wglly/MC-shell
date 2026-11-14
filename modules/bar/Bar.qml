@@ -123,6 +123,9 @@ PanelWindow {
                 icon: Qt.resolvedUrl("../../assets/textures/icon_overview.png")
                 onClicked: ShellState.toggleOverlay("overview")
             }
+            UserChip {
+                anchors.verticalCenter: parent.verticalCenter
+            }
             Slot {
                 width: 30
                 height: 30
@@ -224,6 +227,9 @@ PanelWindow {
                 x: Math.round((parent.width - width) / 2)
                 icon: Qt.resolvedUrl("../../assets/textures/icon_overview.png")
                 onClicked: ShellState.toggleOverlay("overview")
+            }
+            UserChip {
+                x: Math.round((parent.width - width) / 2)
             }
             Slot {
                 width: 30
