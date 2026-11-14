@@ -22,11 +22,20 @@ QtObject {
     property real diskUsed: 0        // GiB
     property real diskTotal: 0       // GiB
     property real diskRatio: 0
+    property var disks: []           // [{ mount, used, total, ratio }]
+    property var nets: []            // [{ name, rx, tx }]
+    property var prevIfaces: ({})
     property real netRx: 0           // bytes / second
     property real netTx: 0
     property var prevRx: -1
     property var prevTx: -1
     property var prevNetTime: -1
+
+    function diskText(used, total) {
+        if (total < 1)
+            return Math.round(used * 1024) + "/" + Math.round(total * 1024) + "M";
+        return used.toFixed(0) + "/" + total.toFixed(0) + "G";
+    }
 
     function rateText(bps) {
         if (bps < 1024)
@@ -113,28 +122,68 @@ QtObject {
             }
         }
 
+        // --- partitions (df)
+        if (parts.length > 7) {
+            var dlines = (parts[7] || "").trim().split("\n");
+            var dlist = [];
+            var dseen = {};
+            for (var di = 0; di < dlines.length; di++) {
+                var dc = dlines[di].trim().split(/\s+/);
+                if (dc.length < 4)
+                    continue;
+                var src = dc[0].split("[")[0];
+                if (src.indexOf("/dev/") !== 0)
+                    continue;   // only real block devices
+                if (dseen[src])
+                    continue;   // one row per device (skip bind mounts)
+                if (dc[1].indexOf("/run") === 0 || dc[1].indexOf("/etc/") === 0
+                    || dc[1].indexOf("/var/lib/docker") === 0 || dc[1].indexOf("/snap") === 0)
+                    continue;
+                dseen[src] = true;
+                var dtotal = parseFloat(dc[2]) || 0;
+                var dused = parseFloat(dc[3]) || 0;
+                if (dtotal <= 0)
+                    continue;
+                dlist.push({ mount: dc[1], used: dused / 1073741824,
+                             total: dtotal / 1073741824, ratio: dused / dtotal });
+            }
+            root.disks = dlist;
+        }
+
         // --- network (/proc/net/dev)
         if (parts.length > 6) {
-            var rx = 0, tx = 0;
             var lines = (parts[6] || "").split("\n");
+            var now = Date.now();
+            var dt = root.prevNetTime > 0 ? Math.max(0.001, (now - root.prevNetTime) / 1000) : 0;
+            var rxTotal = 0, txTotal = 0;
+            var nlist = [];
+            var prev = {};
             for (var n = 0; n < lines.length; n++) {
                 var mm = lines[n].match(/^\s*([^:]+):\s*(.*)$/);
                 if (!mm || mm[1].trim() === "lo")
                     continue;
                 var fld = mm[2].trim().split(/\s+/);
-                if (fld.length >= 9) {
-                    rx += parseInt(fld[0], 10) || 0;
-                    tx += parseInt(fld[8], 10) || 0;
-                }
+                if (fld.length < 9)
+                    continue;
+                var name = mm[1].trim();
+                var rx = parseInt(fld[0], 10) || 0;
+                var tx = parseInt(fld[8], 10) || 0;
+                var last = root.prevIfaces[name] || null;
+                var rxRate = (last && dt > 0) ? Math.max(0, (rx - last.rx) / dt) : 0;
+                var txRate = (last && dt > 0) ? Math.max(0, (tx - last.tx) / dt) : 0;
+                prev[name] = { rx: rx, tx: tx };
+                nlist.push({ name: name, rx: rxRate, tx: txRate });
+                rxTotal += rx;
+                txTotal += tx;
             }
-            var now = Date.now();
-            if (root.prevNetTime > 0 && now > root.prevNetTime) {
-                var dt = (now - root.prevNetTime) / 1000;
-                root.netRx = Math.max(0, (rx - root.prevRx) / dt);
-                root.netTx = Math.max(0, (tx - root.prevTx) / dt);
+            root.nets = nlist;
+            root.prevIfaces = prev;
+            if (dt > 0 && root.prevNetTime > 0) {
+                root.netRx = Math.max(0, (rxTotal - root.prevRx) / dt);
+                root.netTx = Math.max(0, (txTotal - root.prevTx) / dt);
             }
-            root.prevRx = rx;
-            root.prevTx = tx;
+            root.prevRx = rxTotal;
+            root.prevTx = txTotal;
             root.prevNetTime = now;
         }
 
@@ -153,7 +202,7 @@ QtObject {
     }
 
     property Process sampler: Process {
-        command: ["sh", "-c", "cat /proc/stat; echo @@; cat /proc/meminfo; echo @@; cat /proc/uptime; echo @@; cat /proc/loadavg; echo @@; ps -eo comm,%cpu,%mem --no-headers --sort=-%cpu | head -5; echo @@; df -B1 / | tail -1; echo @@; cat /proc/net/dev"]
+        command: ["sh", "-c", "cat /proc/stat; echo @@; cat /proc/meminfo; echo @@; cat /proc/uptime; echo @@; cat /proc/loadavg; echo @@; ps -eo comm,%cpu,%mem --no-headers --sort=-%cpu | head -5; echo @@; df -B1 / | tail -1; echo @@; cat /proc/net/dev; echo @@; df -B1 --output=source,target,size,used -x tmpfs -x devtmpfs -x overlay -x efivarfs 2>/dev/null | tail -n +2"]
         stdout: StdioCollector {
             onStreamFinished: root.parse(text)
         }

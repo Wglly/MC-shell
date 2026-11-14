@@ -70,7 +70,8 @@ PanelWindow {
 
     McPanel {
         width: root.mode === "stats" ? 400 : (root.mode === "calendar" ? 360 : (root.mode === "media" ? 400 : 320))
-        height: root.mode === "stats" ? 400 : (root.mode === "calendar" ? 330 : (root.mode === "media" ? 244 : 268))
+        height: root.mode === "stats"
+            ? Math.min(parent.height - Theme.barHeight - 24, statsCol.implicitHeight + 24) : (root.mode === "calendar" ? 330 : (root.mode === "media" ? 244 : 268))
         x: (root.mode === "user" || root.mode === "stats")
             ? (ShellState.barPopupX >= 0
                 ? Math.round(Math.max(8, Math.min(parent.width - width - 8, ShellState.barPopupX - width / 2)))
@@ -267,6 +268,7 @@ PanelWindow {
 
         // ---------------------------------------------------------------- stats
         Column {
+            id: statsCol
             visible: root.mode === "stats"
             anchors.fill: parent
             anchors.margins: 12
@@ -386,48 +388,72 @@ PanelWindow {
                 }
             }
 
-            // disk
-            Row {
-                width: parent.width
-                spacing: 8
-                PixelText {
-                    width: 54
-                    text: "DISK"
-                    font.pixelSize: 10
-                    color: Theme.textOnPanel
-                    styleColor: Theme.panelTextShadow
-                }
-                Rectangle {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width - 130
-                    height: 12
-                    color: Theme.panelDark
-                    border.width: 1
-                    border.color: Theme.outline
-                    Rectangle {
-                        height: parent.height - 2
-                        y: 1; x: 1
-                        width: Math.max(0, (parent.width - 2) * Stats.diskRatio)
-                        color: Stats.diskRatio > 0.85 ? Theme.red : Theme.gold
+            // per-partition disk usage
+            Repeater {
+                model: Stats.disks
+
+                delegate: Row {
+                    width: parent.width
+                    spacing: 8
+
+                    PixelText {
+                        width: 74
+                        elide: Text.ElideRight
+                        text: modelData.mount
+                        font.pixelSize: 9
+                        color: Theme.textOnPanel
+                        styleColor: Theme.panelTextShadow
                     }
-                }
-                PixelText {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: 60
-                    text: Stats.diskUsed.toFixed(0) + "/" + Stats.diskTotal.toFixed(0) + "G"
-                    font.pixelSize: 10
-                    color: Theme.textOnPanel
-                    styleColor: Theme.panelTextShadow
+                    Rectangle {
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: parent.width - 150
+                        height: 10
+                        color: Theme.panelDark
+                        border.width: 1
+                        border.color: Theme.outline
+                        Rectangle {
+                            height: parent.height - 2
+                            y: 1; x: 1
+                            width: Math.max(0, (parent.width - 2) * modelData.ratio)
+                            color: modelData.ratio > 0.85 ? Theme.red : Theme.gold
+                        }
+                    }
+                    PixelText {
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: 62
+                        horizontalAlignment: Text.AlignRight
+                        text: Stats.diskText(modelData.used, modelData.total)
+                        font.pixelSize: 9
+                        color: Theme.textOnPanel
+                        styleColor: Theme.panelTextShadow
+                    }
                 }
             }
 
-            // network rate
-            PixelText {
-                width: parent.width
-                text: "NET   ↓ " + Stats.rateText(Stats.netRx) + "   ↑ " + Stats.rateText(Stats.netTx)
-                font.pixelSize: 10
-                color: Theme.textOnPanel
-                styleColor: Theme.panelTextShadow
+            // per-interface network rate
+            Repeater {
+                model: Stats.nets
+
+                delegate: Row {
+                    width: parent.width
+                    spacing: 6
+
+                    PixelText {
+                        width: 74
+                        elide: Text.ElideRight
+                        text: modelData.name
+                        font.pixelSize: 9
+                        color: Theme.textOnPanel
+                        styleColor: Theme.panelTextShadow
+                    }
+                    PixelText {
+                        width: parent.width - 80
+                        text: "↓ " + Stats.rateText(modelData.rx) + "    ↑ " + Stats.rateText(modelData.tx)
+                        font.pixelSize: 9
+                        color: Theme.textOnPanel
+                        styleColor: Theme.panelTextShadow
+                    }
+                }
             }
 
             PixelText {
