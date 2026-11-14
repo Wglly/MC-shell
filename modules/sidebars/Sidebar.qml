@@ -26,6 +26,9 @@ PanelWindow {
     exclusiveZone: 0
     exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Top
+    // Keyboard focus is needed for the wallpaper card's URL field (typing/paste).
+    WlrLayershell.keyboardFocus: (ShellState.leftBasket || ShellState.rightBasket)
+        ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
     anchors.left: side === "left"
     anchors.right: side === "right"

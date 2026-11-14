@@ -45,6 +45,18 @@ McPanel {
     }
 
     Process {
+        id: paster
+        command: ["wl-paste", "--no-newline"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                var t = ("" + text).trim();
+                if (t !== "")
+                    root.urlText = t;
+            }
+        }
+    }
+
+    Process {
         id: fetcher
         property string target: ""
         onExited: {
@@ -189,13 +201,19 @@ McPanel {
             spacing: 4
 
             McTextField {
-                width: parent.width - 54
+                width: parent.width - 110
                 height: 24
                 placeholder: I18n.t("widget.wallpaper.url")
                 onEdited: value => root.urlText = value
             }
             McButton {
-                width: 48
+                width: 50
+                height: 24
+                label: I18n.t("widget.wallpaper.paste")
+                onClicked: paster.running = true
+            }
+            McButton {
+                width: 46
                 height: 24
                 label: "GET"
                 onClicked: root.fetchUrl()
