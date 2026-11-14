@@ -62,7 +62,9 @@ slots are drawn too, because an inventory without empty slots isn't an inventory
 
 Besides pinned apps the dock lists **everything running on the current workspace** (green
 dot = running window). Left click focuses the window or launches the app, **right click
-pins / unpins** it. With **auto-avoid** (default) the dock tucks itself into its 4px strip
+pins / unpins** it. The collapsed strip's hit area is adjustable (Settings → Dock →
+**edge sensor**, 6–48px, default 12px) and collapsing waits ~260ms so a stray pixel does
+not make the dock flicker. With **auto-avoid** (default) the dock tucks itself into its 4px strip
 while the workspace has windows, comes back by itself on an empty desktop, and expands when
 the pointer touches the strip. An invisible spacer on the Background layer reserves the
 dock's edge, so **open windows slide up out of the way** whenever the dock is shown and

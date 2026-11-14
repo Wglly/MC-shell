@@ -87,6 +87,30 @@ Column {
 
     SettingRow {
         width: parent.width
+        label: I18n.t("settings.dock.hoverZone")
+
+        Row {
+            anchors.right: parent.right
+            spacing: 8
+
+            McSlider {
+                width: 150
+                value: (Settings.get("dock.hoverZone", 12) - 6) / 42
+                onMoved: v => Settings.set("dock.hoverZone", Math.round(6 + v * 42))
+            }
+            PixelText {
+                anchors.verticalCenter: parent.verticalCenter
+                width: 48
+                text: Settings.get("dock.hoverZone", 12) + "px"
+                font.pixelSize: Theme.fontSmall
+                color: Theme.textOnPanel
+                styleColor: Theme.panelTextShadow
+            }
+        }
+    }
+
+    SettingRow {
+        width: parent.width
         label: I18n.t("settings.dock.iconSize")
 
         Row {

@@ -103,6 +103,7 @@ QtObject {
             "settings.dock.pinned": "PINNED APPS", "settings.dock.pinnedHint": "One desktop-file id per line",
             "settings.dock.columns": "GRID COLUMNS", "settings.dock.rows": "GRID ROWS",
             "settings.dock.avoid": "AUTO-AVOID WINDOWS",
+            "settings.dock.hoverZone": "EDGE SENSOR",
 
             "settings.widgets.title": "DESKTOP WIDGETS",
             "settings.widgets.hint": "Drag widgets on the desktop to move them.",
@@ -213,6 +214,7 @@ QtObject {
             "settings.dock.pinned": "固定应用", "settings.dock.pinnedHint": "每行一个 desktop 文件名",
             "settings.dock.columns": "网格列数", "settings.dock.rows": "网格行数",
             "settings.dock.avoid": "自动避让窗口",
+            "settings.dock.hoverZone": "边缘感应区",
 
             "settings.widgets.title": "桌面组件",
             "settings.widgets.hint": "在桌面上拖动组件即可移动位置。",
@@ -323,6 +325,7 @@ QtObject {
             "settings.dock.pinned": "固定應用程式", "settings.dock.pinnedHint": "每行一個 desktop 檔名",
             "settings.dock.columns": "網格列數", "settings.dock.rows": "網格行數",
             "settings.dock.avoid": "自動避讓視窗",
+            "settings.dock.hoverZone": "邊緣感應區",
 
             "settings.widgets.title": "桌面元件",
             "settings.widgets.hint": "在桌面上拖曳元件即可移動位置。",

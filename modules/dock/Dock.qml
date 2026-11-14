@@ -38,6 +38,15 @@ PanelWindow {
     property bool hovered: false
     property bool expanded: root.hovered || (!root.autoHide && !root.shouldAvoid)
 
+    // Leaving the dock waits a moment before collapsing, so an accidental 1px
+    // exit does not make the dock flicker.
+    Timer {
+        id: hideTimer
+        interval: 260
+        repeat: false
+        onTriggered: root.hovered = false
+    }
+
     screen: targetScreen
     color: "transparent"
     visible: enabled
@@ -48,6 +57,7 @@ PanelWindow {
         return v === true || v === "true" || v === 1;
     }
     readonly property bool avoidWindows: root.boolSetting("dock.avoidWindows", true)
+    readonly property int hoverZone: Math.max(6, Math.min(48, Settings.get("dock.hoverZone", 12)))
     readonly property bool shouldAvoid: root.avoidWindows && Compositor.activeWindowCount > 0
     exclusionMode: ExclusionMode.Ignore
     // Tell the transparent spacer window how much room the dock needs; the spacer
@@ -65,8 +75,9 @@ PanelWindow {
     anchors.top: root.vertical ? true : root.pos === "top"
     anchors.bottom: root.vertical ? false : root.pos === "bottom"
 
-    implicitWidth: root.vertical ? (expanded ? panelW : 4) : panelW
-    implicitHeight: root.vertical ? root.fullH : (expanded ? root.fullH : 4)
+    implicitWidth: root.vertical ? (expanded ? panelW : root.hoverZone) : panelW
+    implicitHeight: root.vertical ? (expanded ? root.fullH : root.hoverZone)
+                                  : (expanded ? root.fullH : root.hoverZone)
 
     readonly property real scrW: root.screen ? root.screen.width : 1920
     readonly property real scrH: root.screen ? root.screen.height : 1080
@@ -91,8 +102,24 @@ PanelWindow {
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
-        onEntered: root.hovered = true
-        onExited: root.hovered = false
+        onEntered: {
+            hideTimer.stop();
+            root.hovered = true;
+        }
+        onExited: if (root.autoHide || root.shouldAvoid) hideTimer.restart()
+    }
+
+    // small handle so the collapsed strip is discoverable
+    Rectangle {
+        visible: !root.expanded
+        width: root.vertical ? 3 : 46
+        height: root.vertical ? 46 : 3
+        anchors.horizontalCenter: root.vertical ? undefined : parent.horizontalCenter
+        anchors.verticalCenter: root.vertical ? parent.verticalCenter : undefined
+        x: root.vertical ? (root.pos === "left" ? 2 : parent.width - 5) : 0
+        y: root.vertical ? 0 : (root.pos === "top" ? 2 : parent.height - 5)
+        color: Theme.outline
+        opacity: 0.65
     }
 
     // --------------------------------------------------------------- contents
