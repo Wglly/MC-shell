@@ -20,7 +20,7 @@ McPanel {
 
         PixelText {
             text: I18n.t("widget.sliders")
-            font.pixelSize: Theme.fontSmall
+            font.pixelSize: Theme.fs(Theme.fontSmall)
             color: Theme.cardTitle
         }
 

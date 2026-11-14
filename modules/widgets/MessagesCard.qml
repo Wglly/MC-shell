@@ -24,7 +24,7 @@ McPanel {
 
             PixelText {
                 text: I18n.t("widget.messages")
-                font.pixelSize: Theme.fontSmall
+                font.pixelSize: Theme.fs(Theme.fontSmall)
                 color: Theme.cardTitle
             }
             Item { width: parent.width - 150; height: 1 }

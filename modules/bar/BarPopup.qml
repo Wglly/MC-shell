@@ -57,7 +57,7 @@ PanelWindow {
 
     McPanel {
         width: root.mode === "calendar" ? 360 : 400
-        height: root.mode === "calendar" ? 330 : 190
+        height: root.mode === "calendar" ? 330 : 244
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: Theme.barHeight + 6
@@ -223,6 +223,31 @@ PanelWindow {
                     width: Math.max(0, (parent.width - 2) * (root.player && root.player.length > 0
                         ? Math.min(1, root.player.position / root.player.length) : 0))
                     color: Theme.grass
+                }
+            }
+
+            // time-synced lyrics (lrclib)
+            Column {
+                width: parent.width
+                spacing: 2
+
+                PixelText {
+                    width: parent.width
+                    elide: Text.ElideRight
+                    text: Lyrics.loading ? I18n.t("music.lyrics.loading")
+                        : (Lyrics.current !== "" ? Lyrics.current : I18n.t("music.lyrics.none"))
+                    font.pixelSize: Theme.fontNormal
+                    color: Lyrics.current !== "" ? Theme.gold : Theme.textHints
+                    styleColor: Theme.panelTextShadow
+                }
+                PixelText {
+                    width: parent.width
+                    elide: Text.ElideRight
+                    visible: Lyrics.next !== ""
+                    text: Lyrics.next
+                    font.pixelSize: Theme.fontSmall
+                    color: Theme.textOnPanel
+                    styleColor: Theme.panelTextShadow
                 }
             }
 

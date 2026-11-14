@@ -4,8 +4,8 @@ import qs.modules.widgets
 // Desktop media player card.
 DesktopWidget {
     widgetKey: "media"
-    implicitWidth: 300
-    implicitHeight: 210
+    baseWidth: 300
+    baseHeight: 210
 
     MusicCard {
         anchors.fill: parent

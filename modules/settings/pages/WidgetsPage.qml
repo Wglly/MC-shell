@@ -23,6 +23,54 @@ Column {
         Settings.set("widgets." + key + ".y", d[1]);
     }
 
+    SettingRow {
+        width: page.width
+        label: I18n.t("settings.widgets.scale")
+
+        Row {
+            anchors.right: parent.right
+            spacing: 8
+
+            McSlider {
+                width: 150
+                value: (Settings.get("widgets.scale", 1.0) - 0.6) / 1.2
+                onMoved: v => Settings.set("widgets.scale", Math.round((0.6 + v * 1.2) * 100) / 100)
+            }
+            PixelText {
+                anchors.verticalCenter: parent.verticalCenter
+                width: 52
+                text: Math.round(Settings.get("widgets.scale", 1.0) * 100) + "%"
+                font.pixelSize: Theme.fontSmall
+                color: Theme.textOnPanel
+                styleColor: Theme.panelTextShadow
+            }
+        }
+    }
+
+    SettingRow {
+        width: page.width
+        label: I18n.t("settings.widgets.fontScale")
+
+        Row {
+            anchors.right: parent.right
+            spacing: 8
+
+            McSlider {
+                width: 150
+                value: (Settings.get("widgets.fontScale", 1.0) - 0.7) / 0.8
+                onMoved: v => Settings.set("widgets.fontScale", Math.round((0.7 + v * 0.8) * 100) / 100)
+            }
+            PixelText {
+                anchors.verticalCenter: parent.verticalCenter
+                width: 52
+                text: Math.round(Settings.get("widgets.fontScale", 1.0) * 100) + "%"
+                font.pixelSize: Theme.fontSmall
+                color: Theme.textOnPanel
+                styleColor: Theme.panelTextShadow
+            }
+        }
+    }
+
     PixelText {
         text: I18n.t("settings.widgets.title")
         font.pixelSize: Theme.fontLarge

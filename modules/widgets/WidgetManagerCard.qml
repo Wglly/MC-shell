@@ -22,7 +22,7 @@ McPanel {
 
         PixelText {
             text: I18n.t("widget.widgetmanager")
-            font.pixelSize: Theme.fontSmall
+            font.pixelSize: Theme.fs(Theme.fontSmall)
             color: Theme.cardTitle
         }
         Rectangle {

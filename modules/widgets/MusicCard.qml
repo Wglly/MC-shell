@@ -25,7 +25,7 @@ McPanel {
             width: parent.width
             elide: Text.ElideRight
             text: root.player ? (root.player.trackTitle || "?") : I18n.t("control.nothingPlaying")
-            font.pixelSize: Theme.fontSmall
+            font.pixelSize: Theme.fs(Theme.fontSmall)
             color: Theme.cardTitle
         }
         PixelText {

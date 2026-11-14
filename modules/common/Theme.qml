@@ -43,6 +43,13 @@ QtObject {
     property color textDim: "#b9b9b9"
     property color textOnPanel: "#3f3f3f"
     property color textHints: "#6a6a6a"
+    property real widgetFontScale: 1.0
+
+    // Scale a font size for the desktop widgets.
+    function fs(px) {
+        return Math.max(7, Math.round(px * Theme.widgetFontScale));
+    }
+
     property color cardText: "#f4f4f4"
     property color cardTextDim: "#b9b9b9"
     property color cardTitle: "#ffcc4d"

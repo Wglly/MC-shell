@@ -14,6 +14,12 @@ PanelWindow {
     required property string widgetKey
     required property var targetScreen
 
+    // subclasses declare their natural size; the settings scale multiplies it
+    property real baseWidth: 260
+    property real baseHeight: 140
+    readonly property real widgetScale: Math.max(0.6, Math.min(1.8,
+        Settings.get("widgets.scale", 1.0)))
+
     screen: targetScreen
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
@@ -23,8 +29,17 @@ PanelWindow {
     anchors.top: true
     anchors.left: true
 
-    implicitWidth: 260
-    implicitHeight: 140
+    implicitWidth: Math.round(baseWidth * widgetScale)
+    implicitHeight: Math.round(baseHeight * widgetScale)
+
+    default property alias widgetContent: contentItem.data
+
+    Item {
+        id: contentItem
+        width: base.baseWidth
+        height: base.baseHeight
+        transform: Scale { origin.x: 0; origin.y: 0; xScale: base.widgetScale; yScale: base.widgetScale }
+    }
 
     property real dragDx: 0
     property real dragDy: 0

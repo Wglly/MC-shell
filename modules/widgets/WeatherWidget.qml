@@ -4,8 +4,8 @@ import qs.modules.widgets
 // Desktop weather card.
 DesktopWidget {
     widgetKey: "weather"
-    implicitWidth: 250
-    implicitHeight: 150
+    baseWidth: 250
+    baseHeight: 150
 
     WeatherCard {
         anchors.fill: parent

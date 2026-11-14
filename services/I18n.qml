@@ -112,6 +112,7 @@ QtObject {
             "dock.toast.unpinned": "Removed from dock",
 
             "settings.widgets.title": "DESKTOP WIDGETS",
+            "settings.widgets.scale": "WIDGET SIZE", "settings.widgets.fontScale": "WIDGET FONTS",
             "settings.widgets.hint": "Drag widgets on the desktop to move them.",
             "settings.sidebars.left": "LEFT BASKET", "settings.sidebars.right": "RIGHT BASKET",
             "settings.sidebars.enabled": "SHOW", "settings.sidebars.width": "WIDTH",
@@ -232,6 +233,7 @@ QtObject {
             "dock.toast.unpinned": "已从 Dock 移除",
 
             "settings.widgets.title": "桌面组件",
+            "settings.widgets.scale": "组件大小", "settings.widgets.fontScale": "组件字体",
             "settings.widgets.hint": "在桌面上拖动组件即可移动位置。",
             "settings.sidebars.left": "左侧边篮", "settings.sidebars.right": "右侧边篮",
             "settings.sidebars.enabled": "显示", "settings.sidebars.width": "宽度",

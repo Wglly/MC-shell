@@ -120,7 +120,11 @@ One tab per feature group, all changes apply live and are written to
 ### Desktop widgets
 
 Music cards fetch **time-synced lyrics from [lrclib.net](https://lrclib.net)** in the
-background and show the current line (plus the next one) as the track plays.
+background and show the current line (plus the next one) as the track plays — the same
+lyrics appear in the bar's detailed media popup.
+
+Settings → Desktop widgets now has two global sliders: **widget size** (60–180%) and
+**widget fonts** (70–150%), applied to every desktop card.
 Draggable cards on the wallpaper layer: **clock**, **weather** (wttr.in, no API key),
 **music visualiser** (real spectrum from `cava`), **calendar**, **system stats**,
 **media player** and the **player card** (avatar from `~/.face`, name, host, uptime).

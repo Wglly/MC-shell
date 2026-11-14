@@ -72,7 +72,7 @@ McPanel {
 
                 PixelText {
                     text: root.userName
-                    font.pixelSize: Theme.fontLarge
+                    font.pixelSize: Theme.fs(Theme.fontLarge)
                     color: Theme.cardTitle
                 }
                 PixelText {

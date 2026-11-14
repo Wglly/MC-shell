@@ -126,7 +126,7 @@ McPanel {
 
             PixelText {
                 text: I18n.t("widget.wallpaper")
-                font.pixelSize: Theme.fontSmall
+                font.pixelSize: Theme.fs(Theme.fontSmall)
                 color: Theme.cardTitle
             }
             Item { width: parent.width - 190; height: 1 }

@@ -129,6 +129,11 @@ ShellRoot {
     }
     Binding {
         target: Theme
+        property: "widgetFontScale"
+        value: Settings.get("widgets.fontScale", 1.0)
+    }
+    Binding {
+        target: Theme
         property: "cardText"
         value: Settings.get("theme.cardText", "#f4f4f4")
     }

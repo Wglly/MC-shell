@@ -20,7 +20,7 @@ McPanel {
 
         PixelText {
             text: I18n.t("widget.perfmon")
-            font.pixelSize: Theme.fontSmall
+            font.pixelSize: Theme.fs(Theme.fontSmall)
             color: Theme.cardTitle
         }
 

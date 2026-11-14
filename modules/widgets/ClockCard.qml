@@ -27,7 +27,7 @@ McPanel {
         }
         PixelText {
             text: Util.weekday(root.now).toUpperCase() + "  " + root.now.getDate() + " / " + (root.now.getMonth() + 1)
-            font.pixelSize: Theme.fontSmall
+            font.pixelSize: Theme.fs(Theme.fontSmall)
             color: Theme.cardText
         }
         PixelText {
