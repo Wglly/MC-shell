@@ -10,11 +10,12 @@ Column {
     width: parent ? parent.width : 560
     spacing: 8
 
-    readonly property var widgetKeys: ["clock", "weather", "visualizer", "calendar", "stats"]
+    readonly property var widgetKeys: ["clock", "weather", "visualizer", "calendar", "stats", "media", "user"]
 
     function resetPosition(key) {
         var defaults = { clock: [0.06, 0.10], weather: [0.06, 0.32], visualizer: [0.06, 0.54],
-                         calendar: [0.06, 0.76], stats: [0.76, 0.10] };
+                         calendar: [0.06, 0.76], stats: [0.76, 0.10],
+                         media: [0.06, 0.66], user: [0.76, 0.30] };
         var d = defaults[key];
         if (!d)
             return;
@@ -26,14 +27,14 @@ Column {
         text: I18n.t("settings.widgets.title")
         font.pixelSize: Theme.fontLarge
         color: Theme.textOnPanel
-        styleColor: "#ffffff"
+        styleColor: Theme.panelTextShadow
     }
 
     PixelText {
         text: I18n.t("settings.widgets.hint")
         font.pixelSize: 9
-        color: "#6a6a6a"
-        styleColor: "#ffffff"
+        color: Theme.textHints
+        styleColor: Theme.panelTextShadow
     }
 
     Repeater {
@@ -101,7 +102,7 @@ Column {
                 text: Settings.get("widgets.visualizer.bars", 32)
                 font.pixelSize: Theme.fontSmall
                 color: Theme.textOnPanel
-                styleColor: "#ffffff"
+                styleColor: Theme.panelTextShadow
             }
         }
     }

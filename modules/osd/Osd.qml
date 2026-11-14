@@ -30,7 +30,7 @@ PanelWindow {
             anchors.bottomMargin: 26
             width: 280
             height: 54
-            background: "#101010"
+            background: Theme.cardBg
             texture: Qt.resolvedUrl("../../assets/textures/deepslate.png")
             textureOpacity: 0.6
 

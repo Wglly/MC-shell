@@ -18,19 +18,28 @@ QtObject {
     readonly property int fontTitle: 22
 
     // ------------------------------------------------------------- palette
-    readonly property color outline: "#1a1a1a"
-    readonly property color bevelLight: "#ffffff"
-    readonly property color bevelDark: "#4a4a4a"
+    // All of these are driven by the active theme preset (see Settings.presets
+    // and the Bindings in shell.qml), so a theme switch is instant.
+    property color outline: "#1a1a1a"
+    property color bevelLight: "#ffffff"
+    property color bevelDark: "#4a4a4a"
 
-    readonly property color panel: "#c6c6c6"        // classic GUI gray
-    readonly property color panelDark: "#8b8b8b"
-    readonly property color slot: "#8b8b8b"
-    readonly property color slotDark: "#373737"
+    property color panel: "#c6c6c6"        // classic GUI gray
+    property color panelDark: "#8b8b8b"
+    property color panelTextShadow: "#ffffff"
+    property color slot: "#8b8b8b"
+    property color slotDark: "#373737"
 
-    readonly property color text: "#f4f4f4"
-    readonly property color textShadow: "#3a3a3a"
-    readonly property color textDim: "#b9b9b9"
-    readonly property color textOnPanel: "#3f3f3f"
+    property color barBg: "#17140f"
+    property color cardBg: "#1c1712"
+    property color dockBg: "#6b4a24"
+    property string panelTexture: "dirt"
+
+    property color text: "#f4f4f4"
+    property color textShadow: "#3a3a3a"
+    property color textDim: "#b9b9b9"
+    property color textOnPanel: "#3f3f3f"
+    property color textHints: "#6a6a6a"
 
     // Writable so shell.qml can bind them to Settings.theme.* without the
     // common module having to import services (avoids a cyclic import).

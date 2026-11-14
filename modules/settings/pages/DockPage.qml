@@ -14,7 +14,7 @@ Column {
         text: I18n.t("settings.tab.dock")
         font.pixelSize: Theme.fontLarge
         color: Theme.textOnPanel
-        styleColor: "#ffffff"
+        styleColor: Theme.panelTextShadow
     }
 
     SettingRow {
@@ -63,6 +63,18 @@ Column {
 
     SettingRow {
         width: parent.width
+        label: I18n.t("settings.dock.media")
+
+        McButton {
+            anchors.right: parent.right
+            label: Settings.get("dock.showMedia", true) ? I18n.t("common.on") : I18n.t("common.off")
+            checked: Settings.get("dock.showMedia", true)
+            onClicked: Settings.toggle("dock.showMedia")
+        }
+    }
+
+    SettingRow {
+        width: parent.width
         label: I18n.t("settings.dock.iconSize")
 
         Row {
@@ -80,7 +92,7 @@ Column {
                 text: Settings.get("dock.iconSize", 42) + "px"
                 font.pixelSize: Theme.fontSmall
                 color: Theme.textOnPanel
-                styleColor: "#ffffff"
+                styleColor: Theme.panelTextShadow
             }
         }
     }
@@ -104,7 +116,7 @@ Column {
                 text: Settings.get("dock.columns", 9)
                 font.pixelSize: Theme.fontSmall
                 color: Theme.textOnPanel
-                styleColor: "#ffffff"
+                styleColor: Theme.panelTextShadow
             }
         }
     }
@@ -128,7 +140,7 @@ Column {
                 text: Settings.get("dock.rows", 3)
                 font.pixelSize: Theme.fontSmall
                 color: Theme.textOnPanel
-                styleColor: "#ffffff"
+                styleColor: Theme.panelTextShadow
             }
         }
     }
@@ -159,7 +171,7 @@ Column {
     McPanel {
         width: parent.width
         height: 96
-        background: "#6b4a24"
+        background: Theme.dockBg
         texture: Theme.texturePath("oak_planks")
         textureOpacity: 0.95
 

@@ -35,6 +35,7 @@ QtObject {
                 visible: true,
                 autoHide: false,
                 iconSize: 42,
+                showMedia: true,      // mini player + dashboard button row
                 columns: 9,           // free grid: 1..12
                 rows: 3,              // free grid: 1..6
                 pinned: ["firefox.desktop", "org.gnome.Nautilus.desktop", "kitty.desktop",
@@ -42,11 +43,25 @@ QtObject {
                          "libreoffice-writer.desktop", "steam.desktop"]
             },
             theme: {
+                preset: "classic",     // classic | cave | snow | desert | village
                 accent: "#5fbf4f",
                 gold: "#ffcc4d",
                 texture: "deepslate", // deepslate | stone | dirt | cobblestone | oak_planks | bedrock
                 barTexture: "deepslate",
                 panelTexture: "dirt",
+                cardTexture: "oak_planks",
+                barBg: "#17140f",
+                panel: "#c6c6c6",
+                cardBg: "#1c1712",
+                dockBg: "#6b4a24",
+                text: "#f4f4f4",
+                textDim: "#b9b9b9",
+                textOnPanel: "#3f3f3f",
+                textShadow: "#3a3a3a",
+                textHints: "#6a6a6a",
+                outline: "#1a1a1a",
+                bevelLight: "#ffffff",
+                bevelDark: "#4a4a4a",
                 scale: 1.0
             },
             wallpaper: {
@@ -60,7 +75,12 @@ QtObject {
                 weather: { enabled: true, x: 0.06, y: 0.32, city: "" },
                 visualizer: { enabled: true, x: 0.06, y: 0.54, bars: 32 },
                 calendar: { enabled: false, x: 0.06, y: 0.76 },
-                stats: { enabled: false, x: 0.76, y: 0.10 }
+                stats: { enabled: false, x: 0.76, y: 0.10 },
+                media: { enabled: false, x: 0.06, y: 0.66 },
+                user: { enabled: true, x: 0.76, y: 0.30 }
+            },
+            dashboard: {
+                enabled: true
             },
             sidebars: {
                 left: { enabled: true, width: 260, widgets: ["stats", "calendar"] },
@@ -86,6 +106,67 @@ QtObject {
         if (typeof v === "function")
             return v.call(cfg) || "";
         return v || "";
+    }
+
+
+    // ------------------------------------------------------------ theme presets
+    // Every preset writes the flat theme.* tokens, so switching is instant and
+    // components only ever read Theme.*.
+    readonly property var presets: ({
+        classic: {
+            accent: "#5fbf4f", gold: "#ffcc4d",
+            barTexture: "deepslate", panelTexture: "dirt", cardTexture: "oak_planks",
+            barBg: "#17140f", panel: "#c6c6c6", cardBg: "#1c1712", dockBg: "#6b4a24",
+            text: "#f4f4f4", textDim: "#b9b9b9", textOnPanel: "#3f3f3f",
+            textShadow: "#3a3a3a", textHints: "#6a6a6a",
+            outline: "#1a1a1a", bevelLight: "#ffffff", bevelDark: "#4a4a4a",
+            panelDark: "#8b8b8b", panelTextShadow: "#ffffff"
+        },
+        cave: {
+            accent: "#ff9b3d", gold: "#ffc44d",
+            barTexture: "deepslate", panelTexture: "cobblestone", cardTexture: "cobblestone",
+            barBg: "#080808", panel: "#333333", cardBg: "#101010", dockBg: "#3b2a1a",
+            text: "#f0e6d2", textDim: "#9c9488", textOnPanel: "#f0e6d2",
+            textShadow: "#000000", textHints: "#a89f90",
+            outline: "#000000", bevelLight: "#6e6e6e", bevelDark: "#202020",
+            panelDark: "#262626", panelTextShadow: "#000000"
+        },
+        snow: {
+            accent: "#3f8fd8", gold: "#e0a92a",
+            barTexture: "snow", panelTexture: "ice", cardTexture: "snow",
+            barBg: "#dfe9f2", panel: "#e8f1f7", cardBg: "#f4f9fc", dockBg: "#b9d4e6",
+            text: "#1b2a3a", textDim: "#4f6272", textOnPanel: "#1b2a3a",
+            textShadow: "#ffffff", textHints: "#5d7285",
+            outline: "#7f97a8", bevelLight: "#ffffff", bevelDark: "#9fb6c6",
+            panelDark: "#c9d8e4", panelTextShadow: "#ffffff"
+        },
+        desert: {
+            accent: "#a8641a", gold: "#7a4c0e",
+            barTexture: "sandstone", panelTexture: "sandstone", cardTexture: "dirt",
+            barBg: "#d9c08c", panel: "#efdcb6", cardBg: "#f2e2c2", dockBg: "#8c6a3f",
+            text: "#3a2a16", textDim: "#6b5334", textOnPanel: "#3a2a16",
+            textShadow: "#fff4d8", textHints: "#7a6142",
+            outline: "#8a6a3a", bevelLight: "#fff4d8", bevelDark: "#b08c54",
+            panelDark: "#d9c08c", panelTextShadow: "#fff4d8"
+        },
+        village: {
+            accent: "#6b8f3a", gold: "#e8b84a",
+            barTexture: "oak_planks", panelTexture: "oak_planks", cardTexture: "oak_planks",
+            barBg: "#3b2a18", panel: "#d8c39a", cardBg: "#2a1d10", dockBg: "#6b4a24",
+            text: "#f3e6cf", textDim: "#c4b294", textOnPanel: "#3a2a16",
+            textShadow: "#2a1d10", textHints: "#7a6142",
+            outline: "#241708", bevelLight: "#efe0c0", bevelDark: "#6b5232",
+            panelDark: "#b89a6a", panelTextShadow: "#efe0c0"
+        }
+    })
+
+    function applyPreset(name) {
+        var preset = root.presets[name];
+        if (!preset)
+            return;
+        root.set("theme.preset", name);
+        for (var key in preset)
+            root.set("theme." + key, preset[key]);
     }
 
     function merge(base, incoming) {

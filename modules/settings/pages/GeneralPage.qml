@@ -14,7 +14,7 @@ Column {
         text: I18n.t("settings.general.language")
         font.pixelSize: Theme.fontLarge
         color: Theme.textOnPanel
-        styleColor: "#ffffff"
+        styleColor: Theme.panelTextShadow
     }
 
     Row {
@@ -44,8 +44,8 @@ Column {
     PixelText {
         text: I18n.t("settings.general.languageHint")
         font.pixelSize: 9
-        color: "#6a6a6a"
-        styleColor: "#ffffff"
+        color: Theme.textHints
+        styleColor: Theme.panelTextShadow
     }
 
     Rectangle { width: parent.width; height: 2; color: "#8a8a8a" }
@@ -54,28 +54,28 @@ Column {
         text: I18n.t("settings.general.shortcuts")
         font.pixelSize: Theme.fontLarge
         color: Theme.textOnPanel
-        styleColor: "#ffffff"
+        styleColor: Theme.panelTextShadow
     }
 
     PixelText {
         text: I18n.t("settings.general.hint")
         font.pixelSize: 10
-        color: "#4a4a4a"
-        styleColor: "#ffffff"
+        color: Theme.textOnPanel
+        styleColor: Theme.panelTextShadow
     }
 
     McPanel {
         width: parent.width
         height: 132
-        background: "#1d1d1d"
-        texture: Qt.resolvedUrl("../../../assets/textures/deepslate.png")
-        textureOpacity: 0.5
+        background: Theme.cardBg
+        texture: Theme.texturePath(Settings.get("theme.cardTexture", "oak_planks"))
+        textureOpacity: 0.2
 
         PixelText {
             anchors.fill: parent
             anchors.margins: 10
             font.pixelSize: 10
-            color: Theme.textDim
+            color: Theme.text
             wrapMode: Text.Wrap
             text: "mc-shell ipc call shell launcher\n"
                 + "mc-shell ipc call shell control\n"

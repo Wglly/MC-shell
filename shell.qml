@@ -14,6 +14,7 @@ import qs.modules.sidebars
 import qs.modules.widgets
 import qs.modules.settings
 import qs.modules.overview
+import qs.modules.dashboard
 import qs.modules.power
 import qs.modules.wallpaper
 import qs.services
@@ -41,6 +42,82 @@ ShellRoot {
         property: "grass"
         value: Settings.get("theme.accent", "#5fbf4f")
     }
+    Binding {
+        target: Theme
+        property: "outline"
+        value: Settings.get("theme.outline", "#1a1a1a")
+    }
+    Binding {
+        target: Theme
+        property: "bevelLight"
+        value: Settings.get("theme.bevelLight", "#ffffff")
+    }
+    Binding {
+        target: Theme
+        property: "bevelDark"
+        value: Settings.get("theme.bevelDark", "#4a4a4a")
+    }
+    Binding {
+        target: Theme
+        property: "panel"
+        value: Settings.get("theme.panel", "#c6c6c6")
+    }
+    Binding {
+        target: Theme
+        property: "barBg"
+        value: Settings.get("theme.barBg", "#17140f")
+    }
+    Binding {
+        target: Theme
+        property: "cardBg"
+        value: Settings.get("theme.cardBg", "#1c1712")
+    }
+    Binding {
+        target: Theme
+        property: "dockBg"
+        value: Settings.get("theme.dockBg", "#6b4a24")
+    }
+    Binding {
+        target: Theme
+        property: "text"
+        value: Settings.get("theme.text", "#f4f4f4")
+    }
+    Binding {
+        target: Theme
+        property: "textDim"
+        value: Settings.get("theme.textDim", "#b9b9b9")
+    }
+    Binding {
+        target: Theme
+        property: "textOnPanel"
+        value: Settings.get("theme.textOnPanel", "#3f3f3f")
+    }
+    Binding {
+        target: Theme
+        property: "textShadow"
+        value: Settings.get("theme.textShadow", "#3a3a3a")
+    }
+    Binding {
+        target: Theme
+        property: "textHints"
+        value: Settings.get("theme.textHints", "#6a6a6a")
+    }
+    Binding {
+        target: Theme
+        property: "panelDark"
+        value: Settings.get("theme.panelDark", "#8b8b8b")
+    }
+    Binding {
+        target: Theme
+        property: "panelTextShadow"
+        value: Settings.get("theme.panelTextShadow", "#ffffff")
+    }
+    Binding {
+        target: Theme
+        property: "panelTexture"
+        value: Settings.get("theme.panelTexture", "dirt")
+    }
+
     Binding {
         target: Theme
         property: "gold"
@@ -76,6 +153,8 @@ ShellRoot {
     VisualizerWidget { targetScreen: shell.primaryScreen }
     CalendarWidget { targetScreen: shell.primaryScreen }
     StatsWidget { targetScreen: shell.primaryScreen }
+    MediaWidget { targetScreen: shell.primaryScreen }
+    UserWidget { targetScreen: shell.primaryScreen }
 
     Dock {
         targetScreen: shell.primaryScreen
@@ -101,6 +180,8 @@ ShellRoot {
     SettingsWindow { }
 
     Overview { }
+
+    Dashboard { }
 
     PowerMenu { }
 
@@ -133,6 +214,9 @@ ShellRoot {
         }
         function overview(): void {
             ShellState.toggleOverlay("overview");
+        }
+        function dashboard(): void {
+            ShellState.toggleOverlay("dashboard");
         }
         function close(): void {
             ShellState.closeOverlay();
@@ -191,6 +275,9 @@ ShellRoot {
         }
         function language(code: string): void {
             Settings.set("language", code);
+        }
+        function preset(name: string): void {
+            Settings.applyPreset(name);
         }
         // mc-shell ipc call shell settingsTab 2
         function settingsTab(index: int): void {

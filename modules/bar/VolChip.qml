@@ -9,7 +9,7 @@ Chip {
 
     label: I18n.t("bar.volume")
     value: Audio.label
-    valueColor: Audio.muted ? Theme.red : Theme.text
+    valueColor: Audio.muted ? Theme.red : Theme.textOnPanel
     onClicked: ShellState.toggleOverlay("control")
     onScrolled: delta => Audio.step(delta)
 }

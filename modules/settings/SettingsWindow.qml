@@ -26,6 +26,7 @@ PanelWindow {
 
     readonly property var tabs: [
         { key: "general", page: "pages/GeneralPage.qml" },
+        { key: "shell", page: "pages/ShellPage.qml" },
         { key: "wallpaper", page: "pages/WallpaperPage.qml" },
         { key: "bar", page: "pages/BarPage.qml" },
         { key: "theme", page: "pages/ThemePage.qml" },
@@ -66,14 +67,14 @@ PanelWindow {
                     text: I18n.t("settings.title")
                     font.pixelSize: Theme.fontTitle
                     color: Theme.textOnPanel
-                    styleColor: "#ffffff"
+                    styleColor: Theme.panelTextShadow
                 }
                 Item { Layout.fillWidth: true }
                 PixelText {
                     text: I18n.languageLabel
                     font.pixelSize: 10
-                    color: "#6a6a6a"
-                    styleColor: "#ffffff"
+                    color: Theme.textHints
+                    styleColor: Theme.panelTextShadow
                 }
                 McButton {
                     implicitWidth: 38

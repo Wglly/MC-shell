@@ -21,7 +21,7 @@ Item {
         text: root.label
         font.pixelSize: Theme.fontSmall
         color: Theme.textOnPanel
-        styleColor: "#ffffff"
+        styleColor: Theme.panelTextShadow
         width: Math.max(120, root.width * 0.42)
         elide: Text.ElideRight
     }
@@ -34,8 +34,8 @@ Item {
         width: Math.max(120, root.width * 0.42)
         text: root.hint
         font.pixelSize: 9
-        color: "#6a6a6a"
-        styleColor: "#ffffff"
+        color: Theme.textHints
+        styleColor: Theme.panelTextShadow
         elide: Text.ElideRight
     }
 

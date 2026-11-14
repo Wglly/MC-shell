@@ -359,6 +359,74 @@ def overview_icon() -> None:
     pixel_icon(rows, {"X": (255, 204, 77, 255)}, "icon_overview.png")
 
 
+def themed_tiles() -> None:
+    """Snow / ice / sandstone / mossy stone for the extra themes."""
+    save(noisy_tile("#e6edf5", 7, 21, speckle=3), "snow.png")
+    ice = Image.new("RGB", (TILE, TILE))
+    px = ice.load()
+    rng = random.Random(22)
+    for y in range(TILE):
+        for x in range(TILE):
+            px[x, y] = shade("#a9d7ea", rng.randint(-8, 8))
+    for y in (3, 4, 10, 11):
+        for x in range(TILE):
+            px[x, y] = shade("#cfeaf5", 6)
+    save(ice, "ice.png")
+
+    sand = Image.new("RGB", (TILE, TILE))
+    px = sand.load()
+    rng = random.Random(23)
+    for y in range(TILE):
+        band = 6 if (y // 4) % 2 == 0 else 0
+        for x in range(TILE):
+            px[x, y] = shade("#d8c08a", band + rng.randint(-6, 6))
+    for y in (3, 7, 11, 15):
+        for x in range(TILE):
+            px[x, y] = shade("#b89a63", 0)
+    save(sand, "sandstone.png")
+
+    mossy = noisy_tile("#6f7a6a", 9, 24, speckle=8)
+    px = mossy.load()
+    rng = random.Random(25)
+    for _ in range(26):
+        x, y = rng.randrange(TILE), rng.randrange(TILE)
+        for dy in range(rng.randint(1, 3)):
+            for dx in range(rng.randint(1, 3)):
+                if x + dx < TILE and y + dy < TILE:
+                    px[x + dx, y + dy] = shade("#5d8a3f", rng.randint(-10, 14))
+    save(mossy, "mossy_stone.png")
+
+
+def dashboard_icon() -> None:
+    rows = [
+        "XXXXXXXXX",
+        "X X X X X",
+        "XXXXXXXXX",
+        "X X X X X",
+        "XXXXXXXXX",
+        "         ",
+        "X X X X X",
+        "         ",
+        "         ",
+    ]
+    pixel_icon(rows, {"X": (120, 200, 255, 255)}, "icon_dashboard.png")
+
+
+def user_icon() -> None:
+    rows = [
+        "  XXXXX  ",
+        " X     X ",
+        "X  XXX  X",
+        "X  XXX  X",
+        "X       X",
+        " X     X ",
+        "  XXXXX  ",
+        " X     X ",
+        "XXX   XXX",
+    ]
+    pixel_icon(rows, {"X": (250, 214, 160, 255)}, "icon_user.png")
+
+
 def main() -> None:
     save(noisy_tile("#866043", 14, 1, speckle=6), "dirt.png")
     save(noisy_tile("#7e7e7e", 10, 2, speckle=4), "stone.png")
@@ -376,6 +444,9 @@ def main() -> None:
     book_icon()
     weather_icons()
     overview_icon()
+    themed_tiles()
+    dashboard_icon()
+    user_icon()
     icon = block_icon().resize((512, 512), Image.NEAREST)
     icon.save(ROOT / "assets" / "icon.png")
     print("wrote assets/icon.png (512x512)")

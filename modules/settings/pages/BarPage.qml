@@ -14,7 +14,7 @@ Column {
         text: I18n.t("settings.tab.bar")
         font.pixelSize: Theme.fontLarge
         color: Theme.textOnPanel
-        styleColor: "#ffffff"
+        styleColor: Theme.panelTextShadow
     }
 
     SettingRow {
@@ -68,7 +68,7 @@ Column {
                 text: Settings.get("bar.thickness", 40) + "px"
                 font.pixelSize: Theme.fontSmall
                 color: Theme.textOnPanel
-                styleColor: "#ffffff"
+                styleColor: Theme.panelTextShadow
             }
         }
     }
@@ -125,8 +125,8 @@ Column {
         width: parent.width
         text: I18n.t("settings.bar.note")
         font.pixelSize: 9
-        color: "#5a5a5a"
-        styleColor: "#ffffff"
+        color: Theme.textHints
+        styleColor: Theme.panelTextShadow
         wrapMode: Text.Wrap
     }
 }

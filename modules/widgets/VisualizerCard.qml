@@ -10,7 +10,7 @@ McPanel {
 
     implicitWidth: 300
     implicitHeight: 120
-    background: "#0d1408"
+    background: Theme.cardBg
     texture: Theme.texturePath("deepslate")
     textureOpacity: 0.45
 

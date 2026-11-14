@@ -43,7 +43,7 @@ PanelWindow {
         anchors.centerIn: parent
         width: Math.min(600, parent.width - 80)
         height: content.implicitHeight + 50
-        background: "#c6c6c6"
+        background: Theme.panel
         texture: Qt.resolvedUrl("../../assets/textures/oak_planks.png")
         textureOpacity: 0.25
 
@@ -60,7 +60,7 @@ PanelWindow {
                     text: I18n.t("control.title")
                     font.pixelSize: Theme.fontLarge
                     color: Theme.textOnPanel
-                    styleColor: "#ffffff"
+                    styleColor: Theme.panelTextShadow
                 }
                 Item { Layout.fillWidth: true }
                 McButton {
@@ -86,7 +86,7 @@ PanelWindow {
                     text: I18n.t("control.sound")
                     font.pixelSize: Theme.fontSmall
                     color: Theme.textOnPanel
-                    styleColor: "#ffffff"
+                    styleColor: Theme.panelTextShadow
                 }
                 McSlider {
                     Layout.fillWidth: true
@@ -106,7 +106,7 @@ PanelWindow {
                     text: Audio.label
                     font.pixelSize: Theme.fontSmall
                     color: Theme.textOnPanel
-                    styleColor: "#ffffff"
+                    styleColor: Theme.panelTextShadow
                 }
             }
 
@@ -121,7 +121,7 @@ PanelWindow {
                     text: I18n.t("control.brightness")
                     font.pixelSize: Theme.fontSmall
                     color: Theme.textOnPanel
-                    styleColor: "#ffffff"
+                    styleColor: Theme.panelTextShadow
                 }
                 McSlider {
                     Layout.fillWidth: true
@@ -136,7 +136,7 @@ PanelWindow {
                     text: Math.round(System.brightness * 100) + "%"
                     font.pixelSize: Theme.fontSmall
                     color: Theme.textOnPanel
-                    styleColor: "#ffffff"
+                    styleColor: Theme.panelTextShadow
                 }
             }
 
@@ -175,7 +175,7 @@ PanelWindow {
                 implicitHeight: 92
                 bevel: 2
                 inset: true
-                background: "#1d1d1d"
+                background: Theme.cardBg
                 texture: Qt.resolvedUrl("../../assets/textures/deepslate.png")
                 textureOpacity: 0.5
 
@@ -231,7 +231,7 @@ PanelWindow {
                 Layout.fillWidth: true
                 font.pixelSize: Theme.fontSmall
                 color: Theme.textOnPanel
-                styleColor: "#ffffff"
+                styleColor: Theme.panelTextShadow
                 text: I18n.t("control.cpu") + " " + Math.round(Stats.cpu * 100) + "%   " + I18n.t("control.ram") + " " + Stats.memUsed.toFixed(1) + "/"
                       + Stats.memTotal.toFixed(1) + "G   " + I18n.t("control.up") + " " + System.uptimeText()
             }

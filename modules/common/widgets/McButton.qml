@@ -31,7 +31,7 @@ Item {
         anchors.centerIn: parent
         text: root.label
         color: root.checked ? Theme.gold : root.accentColor
-        styleColor: "#ffffff"
+        styleColor: Theme.panelTextShadow
         font.pixelSize: Theme.fontSmall
     }
 

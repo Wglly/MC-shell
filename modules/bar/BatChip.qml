@@ -11,6 +11,6 @@ Chip {
     label: I18n.t("bar.battery")
     visible: UPower.displayDevice && UPower.displayDevice.isPresent
     value: UPower.displayDevice ? Math.round(UPower.displayDevice.percentage * 100) + "%" : "--"
-    valueColor: UPower.displayDevice && UPower.displayDevice.percentage < 0.2 ? Theme.red : Theme.text
+    valueColor: UPower.displayDevice && UPower.displayDevice.percentage < 0.2 ? Theme.red : Theme.textOnPanel
     onClicked: ShellState.toggleOverlay("control")
 }

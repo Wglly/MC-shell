@@ -11,12 +11,79 @@ Column {
     spacing: 10
 
     readonly property var textures: ["deepslate", "stone", "dirt", "cobblestone", "oak_planks", "bedrock"]
+    readonly property string activePreset: Settings.get("theme.preset", "classic")
+
+    function p(key, name, fallback) {
+        var presets = Settings.presets;
+        var chosen = presets[name] || presets.classic;
+        return chosen[key] !== undefined ? chosen[key] : fallback;
+    }
+    function presetBg(name) { return p("cardBg", name, "#1c1712"); }
+    function presetTexture(name) { return p("panelTexture", name, "dirt"); }
+    function presetAccent(name) { return p("accent", name, "#5fbf4f"); }
+    function presetText(name) { return p("text", name, "#f4f4f4"); }
 
     PixelText {
         text: I18n.t("settings.tab.theme")
         font.pixelSize: Theme.fontLarge
         color: Theme.textOnPanel
-        styleColor: "#ffffff"
+        styleColor: Theme.panelTextShadow
+    }
+
+    PixelText {
+        text: I18n.t("settings.theme.presets")
+        font.pixelSize: Theme.fontSmall
+        color: Theme.textHints
+        styleColor: Theme.panelTextShadow
+    }
+
+    Row {
+        width: parent.width
+        spacing: 6
+
+        Repeater {
+            model: ["classic", "cave", "snow", "desert", "village"]
+
+            delegate: Item {
+                width: 106
+                height: 84
+
+                McPanel {
+                    anchors.fill: parent
+                    bevel: 2
+                    background: page.presetBg(modelData)
+                    texture: Theme.texturePath(page.presetTexture(modelData))
+                    textureOpacity: 0.55
+                    outlineColor: root.activePreset === modelData ? Theme.gold : Theme.outline
+                }
+
+                Column {
+                    anchors.centerIn: parent
+                    spacing: 3
+
+                    Rectangle {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: 22
+                        height: 22
+                        color: page.presetAccent(modelData)
+                        border.width: 2
+                        border.color: "#000000"
+                    }
+                    PixelText {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: I18n.t("theme." + modelData)
+                        font.pixelSize: 9
+                        color: page.presetText(modelData)
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: Settings.applyPreset(modelData)
+                }
+            }
+        }
     }
 
     SettingRow {
@@ -124,7 +191,7 @@ Column {
                 text: Settings.get("theme.scale", 1.0).toFixed(2) + "x"
                 font.pixelSize: Theme.fontSmall
                 color: Theme.textOnPanel
-                styleColor: "#ffffff"
+                styleColor: Theme.panelTextShadow
             }
         }
     }
@@ -157,8 +224,8 @@ Column {
         width: parent.width
         text: I18n.t("settings.theme.note")
         font.pixelSize: 9
-        color: "#5a5a5a"
-        styleColor: "#ffffff"
+        color: Theme.textHints
+        styleColor: Theme.panelTextShadow
         wrapMode: Text.Wrap
     }
 }

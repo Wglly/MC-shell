@@ -10,7 +10,7 @@ McPanel {
 
     implicitWidth: 260
     implicitHeight: 170
-    background: "#150f1e"
+    background: Theme.cardBg
     texture: Theme.texturePath("bedrock")
     textureOpacity: 0.35
 

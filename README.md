@@ -7,6 +7,11 @@ blocks, hotbar slots and stone GUI panels.
 
 **English · 简体中文 · 繁體中文** — the whole UI is translated and switches live.
 
+**Five built-in themes** — classic, cave, snow mountain, desert and village — each one a
+full palette + block-texture set, switchable from Settings → Theme:
+
+![Themes](docs/screenshots/16-themes.png)
+
 ![Bar](docs/screenshots/1-bar.png)
 
 ## Screenshots
@@ -49,7 +54,17 @@ A wooden inventory basket of app slots whose **rows and columns are free** (1–
 move the dock to **any of the four edges**, or let it auto-hide behind a 4px strip. Empty
 slots are drawn too, because an inventory without empty slots isn't an inventory.
 
+The dock also carries a **mini media player** (title/artist + prev/play/next) and a
+**dashboard button**; both can be switched off in Settings → Dock.
+
 ![Dock grid settings](docs/screenshots/14-settings-dock-grid.png)
+
+### Dashboard
+A macOS-dashboard style wall of widgets opened from the dock button or
+`mc-shell ipc call shell dashboard`: clock, weather, media, visualiser, calendar and the
+player card, all on one screen.
+
+![Dashboard](docs/screenshots/17-dashboard.png)
 
 ### Desktop overview
 A full-screen grid of desktops with every window as a draggable card. Drop a card on
@@ -69,9 +84,10 @@ One tab per feature group, all changes apply live and are written to
 `~/.config/mc-shell/config.json`:
 
 - **General** — language (auto / English / 简体中文 / 繁體中文), shortcut cheat sheet, reset
+- **Shell** — live bar height/edge, dock edge/icon size/grid, left/right basket widths
 - **Wallpaper** — enable MC-shell's own background layer, image path, fallback colour, fill mode
 - **Bar** — visibility, edge, thickness, which HUD parts to show
-- **Theme** — accent + highlight colours, bar/panel block texture, UI scale, texture preview
+- **Theme** — five presets, plus accent + highlight colours, block textures, UI scale
 - **Dock** — visibility, edge, auto-hide, icon size, **grid rows/columns**, pinned apps
 - **Widgets** — enable each desktop card, reset its position, weather city, visualiser bar count
 - **Side baskets** — left/right basket on-off, width, and which widgets they carry
@@ -79,7 +95,9 @@ One tab per feature group, all changes apply live and are written to
 
 ### Desktop widgets
 Draggable cards on the wallpaper layer: **clock**, **weather** (wttr.in, no API key),
-**music visualiser** (real spectrum from `cava`), **calendar**, **system stats**.
+**music visualiser** (real spectrum from `cava`), **calendar**, **system stats**,
+**media player** and the **player card** (avatar from `~/.face`, name, host, uptime).
+Enable/disable each one in Settings → Widgets; drag them straight on the desktop.
 Positions are stored as screen ratios and can be reset from Settings.
 
 ### Side baskets
@@ -177,11 +195,13 @@ XF86MonBrightnessDown { spawn "mc-shell" "ipc" "call" "shell" "brightnessDown"; 
 | `shell volumeUp` / `volumeDown` / `volumeMute` | audio + OSD |
 | `shell brightnessUp` / `brightnessDown` | brightness + OSD |
 | `shell overview` | toggle the desktop overview |
+| `shell dashboard` | toggle the widget dashboard |
 | `shell focus <id>` / `stepWorkspace <±1>` | workspace control |
 | `shell windows` | JSON window list (debug) |
 | `shell moveWindow <windowId> <desktopId>` | move a window to a desktop |
 | `shell workspaces` / `backend` | debug readouts |
 | `shell language <auto\|en\|zh_CN\|zh_TW>` | switch language |
+| `shell preset <classic\|cave\|snow\|desert\|village>` | switch theme preset |
 | `shell set <dotted.key> <value>` | write any setting, e.g. `set bar.position left` |
 | `shell settingsTab <0-6>` | open a settings tab |
 
@@ -196,7 +216,8 @@ Settings are edited in the GUI and stored as JSON:
   "dock":  { "position": "bottom", "iconSize": 42, "columns": 9, "rows": 3,
              "autoHide": false, "pinned": ["firefox.desktop"] },
   "overview": { "enabled": true, "columns": 3, "desktops": 6, "showTitles": true },
-  "theme": { "accent": "#5fbf4f", "gold": "#ffcc4d", "barTexture": "deepslate", "panelTexture": "dirt" },
+  "theme": { "preset": "classic", "accent": "#5fbf4f", "gold": "#ffcc4d",
+             "barTexture": "deepslate", "panelTexture": "dirt", "cardTexture": "oak_planks" },
   "wallpaper": { "enabled": false, "path": "", "color": "#101418", "fillMode": "fill" },
   "widgets": { "clock": { "enabled": true, "x": 0.06, "y": 0.10 } },
   "sidebars": { "left": { "enabled": true, "width": 260, "widgets": ["stats", "calendar"] } }
@@ -217,7 +238,35 @@ services/Compositor.qml   one API for both compositors
 
 No extra QML plugin is required for niri.
 
-## Theming
+## Themes
+
+Five presets ship with the shell, each one a complete palette (bar/card/panel colours,
+text + shadow colours, bevels) plus a block texture set:
+
+| Preset | Look |
+|---|---|
+| `classic` | dark slate bar, dirt panels, green accent |
+| `cave` | near-black bar, cobblestone panels, torch-orange accent |
+| `snow` | light icy bar, snow/ice panels, blue accent, dark text |
+| `desert` | sandstone bar, warm sand panels, dark amber accent |
+| `village` | oak-plank bar, warm wood panels, mossy green accent |
+
+Pick one in **Settings → Theme → theme presets**, or:
+
+```sh
+mc-shell ipc call shell preset snow
+```
+
+Manual accent / highlight / texture / scale controls stay available below the presets.
+
+## Shell control panel
+
+**Settings → Shell** is the one-stop geometry panel (iNiR-style): bar edge + height,
+dock edge + icon size + grid, and left/right basket width — all live.
+
+![Shell control](docs/screenshots/18-settings-shell-control.png)
+
+## Theming internals
 
 - `modules/common/Theme.qml` — colours, sizes, font, texture lookup.
 - `assets/textures/` — generated by `python3 scripts/gen_textures.py` (Pillow).
@@ -237,6 +286,7 @@ modules/settings/               settings window + 7 pages
 modules/widgets/                clock, weather, visualiser, calendar, stats cards + desktop hosts
 modules/sidebars/               left/right baskets
 modules/overview/               desktop overview + window drag
+modules/dashboard/              widget dashboard wall
 modules/wallpaper/              background layer
 modules/power/                  title-screen power menu
 modules/osd/                    XP-bar OSD

@@ -9,7 +9,7 @@ McPanel {
 
     implicitWidth: 260
     implicitHeight: 250
-    background: "#20180f"
+    background: Theme.cardBg
     texture: Theme.texturePath("oak_planks")
     textureOpacity: 0.30
 

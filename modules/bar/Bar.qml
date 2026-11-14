@@ -39,7 +39,7 @@ PanelWindow {
     McPanel {
         anchors.fill: parent
         bevel: 2
-        background: "#17140f"
+        background: Theme.barBg
         texture: Theme.texturePath(Settings.get("theme.barTexture", "deepslate"))
         textureOpacity: 0.85
     }

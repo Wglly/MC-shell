@@ -73,7 +73,7 @@ PanelWindow {
         anchors.centerIn: parent
         width: Math.min(760, parent.width - 80)
         height: Math.min(560, parent.height - 120)
-        background: "#c6c6c6"
+        background: Theme.panel
         texture: Qt.resolvedUrl("../../assets/textures/dirt.png")
         textureOpacity: 0.20
         bevel: 2
@@ -92,14 +92,14 @@ PanelWindow {
                     text: I18n.t("launcher.title")
                     font.pixelSize: Theme.fontLarge
                     color: Theme.textOnPanel
-                    styleColor: "#ffffff"
+                    styleColor: Theme.panelTextShadow
                 }
                 PixelText {
                     anchors.verticalCenter: parent.verticalCenter
                     text: root.filtered.length + " " + I18n.t("launcher.count")
                     font.pixelSize: Theme.fontSmall
-                    color: "#6a6a6a"
-                    styleColor: "#ffffff"
+                    color: Theme.textHints
+                    styleColor: Theme.panelTextShadow
                 }
             }
 
@@ -221,8 +221,8 @@ PanelWindow {
                             horizontalAlignment: Text.AlignHCenter
                             elide: Text.ElideRight
                             font.pixelSize: 11
-                            color: index === root.selected ? Theme.textOnPanel : "#4a4a4a"
-                            styleColor: "#ffffff"
+                            color: index === root.selected ? Theme.textOnPanel : Theme.textOnPanel
+                            styleColor: Theme.panelTextShadow
                             text: modelData.name
                         }
                     }
@@ -236,8 +236,8 @@ PanelWindow {
                 width: parent.width
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: 11
-                color: "#6a6a6a"
-                styleColor: "#ffffff"
+                color: Theme.textHints
+                styleColor: Theme.panelTextShadow
                 text: I18n.t("launcher.hint")
             }
         }

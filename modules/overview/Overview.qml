@@ -174,7 +174,7 @@ PanelWindow {
 
                         McPanel {
                             anchors.fill: parent
-                            background: card.isCurrent ? "#27301b" : "#1a1a1a"
+                            background: card.isCurrent ? "#27301b" : Theme.cardBg
                             texture: Theme.texturePath(card.isCurrent ? "grass_block_top" : "deepslate")
                             textureOpacity: card.isCurrent ? 0.18 : 0.5
                         }
@@ -219,7 +219,7 @@ PanelWindow {
                                 delegate: McPanel {
                                     width: parent.width
                                     height: 30
-                                    background: "#2c2c2c"
+                                    background: Theme.panelDark
                                     texture: Theme.texturePath("stone")
                                     textureOpacity: 0.35
 

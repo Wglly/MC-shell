@@ -14,7 +14,7 @@ Column {
         text: I18n.t("settings.tab.overview")
         font.pixelSize: Theme.fontLarge
         color: Theme.textOnPanel
-        styleColor: "#ffffff"
+        styleColor: Theme.panelTextShadow
     }
 
     SettingRow {
@@ -48,7 +48,7 @@ Column {
                 text: Settings.get("overview.columns", 3)
                 font.pixelSize: Theme.fontSmall
                 color: Theme.textOnPanel
-                styleColor: "#ffffff"
+                styleColor: Theme.panelTextShadow
             }
         }
     }
@@ -72,7 +72,7 @@ Column {
                 text: Settings.get("overview.desktops", 6)
                 font.pixelSize: Theme.fontSmall
                 color: Theme.textOnPanel
-                styleColor: "#ffffff"
+                styleColor: Theme.panelTextShadow
             }
         }
     }
@@ -109,7 +109,7 @@ Column {
                 text: Math.round(Settings.get("overview.backdrop", 0.72) * 100) + "%"
                 font.pixelSize: Theme.fontSmall
                 color: Theme.textOnPanel
-                styleColor: "#ffffff"
+                styleColor: Theme.panelTextShadow
             }
         }
     }
@@ -118,8 +118,8 @@ Column {
         width: parent.width
         text: I18n.t("settings.overview.note")
         font.pixelSize: 9
-        color: "#5a5a5a"
-        styleColor: "#ffffff"
+        color: Theme.textHints
+        styleColor: Theme.panelTextShadow
         wrapMode: Text.Wrap
     }
 }

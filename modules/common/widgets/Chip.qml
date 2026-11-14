@@ -7,7 +7,7 @@ Item {
 
     property string label: ""
     property string value: ""
-    property color valueColor: Theme.text
+    property color valueColor: Theme.textOnPanel
     property bool interactive: true
     // Vertical bars only have ~44px of width: drop the label, keep the value.
     property bool compact: false
@@ -21,9 +21,9 @@ Item {
     McPanel {
         anchors.fill: parent
         bevel: 2
-        background: area.containsMouse && root.interactive ? "#34302b" : "#26221e"
-        texture: Qt.resolvedUrl("../../../assets/textures/stone.png")
-        textureOpacity: 0.18
+        background: area.containsMouse && root.interactive ? Theme.panelDark : Theme.panel
+        texture: Theme.texturePath(Theme.panelTexture)
+        textureOpacity: 0.16
     }
 
     Text {
@@ -40,7 +40,7 @@ Item {
         font.pixelSize: root.compact ? 10 : Theme.fontSmall
         renderType: Text.NativeRendering
         style: Text.Raised
-        styleColor: "#1a1a1a"
+        styleColor: Theme.textShadow
     }
 
     MouseArea {

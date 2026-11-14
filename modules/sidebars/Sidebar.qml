@@ -58,7 +58,7 @@ PanelWindow {
 
     McPanel {
         anchors.fill: parent
-        background: "#1b1610"
+        background: Theme.cardBg
         texture: Theme.texturePath(Settings.get("theme.panelTexture", "dirt"))
         textureOpacity: 0.55
 
@@ -84,6 +84,8 @@ PanelWindow {
                             : modelData === "music" ? musicCard
                             : modelData === "weather" ? weatherCard
                             : modelData === "clock" ? clockCard
+                            : modelData === "media" ? musicCard
+                            : modelData === "user" ? userCard
                             : null
 
                         onLoaded: if (item) item.width = width
@@ -98,4 +100,5 @@ PanelWindow {
     Component { id: musicCard; MusicCard { } }
     Component { id: weatherCard; WeatherCard { } }
     Component { id: clockCard; ClockCard { } }
+    Component { id: userCard; UserCard { } }
 }

@@ -14,7 +14,7 @@ Column {
         text: I18n.t("settings.tab.wallpaper")
         font.pixelSize: Theme.fontLarge
         color: Theme.textOnPanel
-        styleColor: "#ffffff"
+        styleColor: Theme.panelTextShadow
     }
 
     SettingRow {
@@ -79,8 +79,8 @@ Column {
         width: parent.width
         text: I18n.t("settings.wallpaper.note")
         font.pixelSize: 9
-        color: "#5a5a5a"
-        styleColor: "#ffffff"
+        color: Theme.textHints
+        styleColor: Theme.panelTextShadow
         wrapMode: Text.Wrap
     }
 }
