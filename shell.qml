@@ -190,6 +190,10 @@ ShellRoot {
         targetScreen: shell.primaryScreen
     }
 
+    DockSpacer {
+        targetScreen: shell.primaryScreen
+    }
+
     Sidebar {
         side: "left"
         targetScreen: shell.primaryScreen

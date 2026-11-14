@@ -50,6 +50,13 @@ PanelWindow {
     readonly property bool avoidWindows: root.boolSetting("dock.avoidWindows", true)
     readonly property bool shouldAvoid: root.avoidWindows && Compositor.activeWindowCount > 0
     exclusionMode: ExclusionMode.Ignore
+    // Tell the transparent spacer window how much room the dock needs; the spacer
+    // reserves it on the Background layer so windows are pushed out of the way.
+    Binding {
+        target: ShellState
+        property: "dockReserve"
+        value: root.expanded && root.enabled ? (root.vertical ? root.fullH : root.fullH + 8) : 0
+    }
     WlrLayershell.layer: WlrLayer.Top
 
     // PanelWindow only offers edge anchors, so centring is done with margins.

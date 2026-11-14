@@ -64,7 +64,9 @@ Besides pinned apps the dock lists **everything running on the current workspace
 dot = running window). Left click focuses the window or launches the app, **right click
 pins / unpins** it. With **auto-avoid** (default) the dock tucks itself into its 4px strip
 while the workspace has windows, comes back by itself on an empty desktop, and expands when
-the pointer touches the strip — so it never covers a window.
+the pointer touches the strip. An invisible spacer on the Background layer reserves the
+dock's edge, so **open windows slide up out of the way** whenever the dock is shown and
+slide back down when it hides — the dock never covers a window.
 
 ![Dock](docs/screenshots/23-dock-running.png)
 

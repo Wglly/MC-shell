@@ -12,6 +12,8 @@ QtObject {
     property int settingsTab: 0
 
     // side baskets are opened on demand from the bar
+    // space the dock needs on its edge (driven by Dock.qml)
+    property int dockReserve: 0
     property bool leftBasket: false
     property bool rightBasket: false
 
