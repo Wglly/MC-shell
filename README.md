@@ -1,5 +1,11 @@
 # MC-shell
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-97ca00?style=flat-square)](LICENSE)
+[![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793d1?style=flat-square&logo=archlinux&logoColor=white)](https://archlinux.org)
+[![Wayland](https://img.shields.io/badge/Wayland-compatible-4ade80?style=flat-square)](https://wayland.freedesktop.org)
+[![Compositors](https://img.shields.io/badge/desktop-Niri_%7C_Hyprland-8957e5?style=flat-square)](#how-compositor-support-works)
+[![Quickshell](https://img.shields.io/badge/Quickshell-0.3.2-4f7cff?style=flat-square)](https://quickshell.org)
+
 A **Minecraft-styled desktop shell** for [Quickshell](https://quickshell.org), made for
 **Hyprland** and **niri**. Status bar, player-inventory dock, launcher, control centre,
 settings screen, desktop widgets, side baskets, power menu and toasts — all rendered like
