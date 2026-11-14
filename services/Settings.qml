@@ -101,6 +101,10 @@ QtObject {
                 media: { enabled: false, x: 0.06, y: 0.66, scale: 1.0 },
                 user: { enabled: true, x: 0.76, y: 0.30, scale: 1.0 }
             },
+            capture: {
+                screenshot: true,
+                record: true
+            },
             dashboard: {
                 enabled: true
             },

@@ -260,6 +260,12 @@ ShellRoot {
         function overview(): void {
             ShellState.toggleOverlay("overview");
         }
+        function screenshot(): void {
+            Capture.screenshot();
+        }
+        function record(): void {
+            Capture.toggleRecording();
+        }
         function keepAwake(): void {
             ShellState.keepAwake = !ShellState.keepAwake;
         }

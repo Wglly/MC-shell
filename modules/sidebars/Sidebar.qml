@@ -98,6 +98,7 @@ PanelWindow {
                             : modelData === "widgetmanager" ? widgetManagerCard
                             : modelData === "sliders" ? slidersCard
                             : modelData === "toggles" ? togglesCard
+                            : modelData === "capture" ? captureCard
                             : null
 
                         onLoaded: if (item) item.width = width
@@ -119,4 +120,5 @@ PanelWindow {
     Component { id: widgetManagerCard; WidgetManagerCard { } }
     Component { id: slidersCard; SlidersCard { } }
     Component { id: togglesCard; TogglesCard { } }
+    Component { id: captureCard; CaptureCard { } }
 }

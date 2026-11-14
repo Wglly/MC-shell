@@ -239,6 +239,35 @@ Column {
     }
 
     PixelText {
+        text: I18n.t("settings.shell.capture")
+        font.pixelSize: Theme.fontSmall
+        color: Theme.gold
+        styleColor: Theme.panelTextShadow
+    }
+
+    SettingRow {
+        width: parent.width
+        label: I18n.t("capture.shot")
+        McButton {
+            anchors.right: parent.right
+            label: Settings.get("capture.screenshot", true) ? I18n.t("common.on") : I18n.t("common.off")
+            checked: Settings.get("capture.screenshot", true)
+            onClicked: Settings.toggle("capture.screenshot")
+        }
+    }
+
+    SettingRow {
+        width: parent.width
+        label: I18n.t("capture.record")
+        McButton {
+            anchors.right: parent.right
+            label: Settings.get("capture.record", true) ? I18n.t("common.on") : I18n.t("common.off")
+            checked: Settings.get("capture.record", true)
+            onClicked: Settings.toggle("capture.record")
+        }
+    }
+
+    PixelText {
         width: parent.width
         text: I18n.t("settings.shell.note")
         font.pixelSize: 9

@@ -11,7 +11,7 @@ Column {
     spacing: 8
 
     readonly property var allWidgets: ["stats", "calendar", "music", "weather", "clock", "media", "user",
-                                       "perfmon", "wallpaper", "messages", "widgetmanager", "sliders", "toggles"]
+                                       "perfmon", "wallpaper", "messages", "widgetmanager", "sliders", "toggles", "capture"]
 
     function hasWidget(side, name) {
         var list = Settings.get("sidebars." + side + ".widgets", []);

@@ -126,6 +126,10 @@ One tab per feature group, all changes apply live and are written to
 
 ### Desktop widgets
 
+A **capture card** in the side basket takes region/full screenshots with `grim` + `slurp`
+(saved to `~/Pictures/Screenshots`) and records the screen with `wf-recorder`
+(`~/Videos/Recordings`); both buttons can be switched on/off in Settings → Shell control.
+
 The user card (and its bar popup) has a **KEEP AWAKE** toggle that holds a Wayland idle
 inhibitor from the bar surface, so the session stays awake while it is on. `mc-shell ipc call
 shell keepAwake` toggles the same state.

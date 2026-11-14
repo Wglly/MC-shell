@@ -10,3 +10,4 @@ singleton Weather 1.0 Weather.qml
 singleton Visualizer 1.0 Visualizer.qml
 singleton Wallpapers 1.0 Wallpapers.qml
 singleton Lyrics 1.0 Lyrics.qml
+singleton Capture 1.0 Capture.qml
