@@ -12,6 +12,8 @@ QtObject {
     property real memUsed: 0        // GiB
     property real memTotal: 0       // GiB
     property real uptime: 0         // seconds
+    property real load1: 0
+    property real load5: 0
     property bool ready: false
 
     property var prevTotal: -1
@@ -56,11 +58,20 @@ QtObject {
         if (up)
             root.uptime = parseFloat(up[1]);
 
+        // --- /proc/loadavg
+        if (parts.length > 3) {
+            var la = (parts[3] || "").trim().split(/\s+/);
+            if (la.length >= 2) {
+                root.load1 = parseFloat(la[0]) || 0;
+                root.load5 = parseFloat(la[1]) || 0;
+            }
+        }
+
         root.ready = true;
     }
 
     property Process sampler: Process {
-        command: ["sh", "-c", "cat /proc/stat; echo @@; cat /proc/meminfo; echo @@; cat /proc/uptime"]
+        command: ["sh", "-c", "cat /proc/stat; echo @@; cat /proc/meminfo; echo @@; cat /proc/uptime; echo @@; cat /proc/loadavg"]
         stdout: StdioCollector {
             onStreamFinished: root.parse(text)
         }

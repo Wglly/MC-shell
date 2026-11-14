@@ -19,7 +19,7 @@ QtObject {
 
     function defaults() {
         return {
-            version: 2,
+            version: 3,
             language: "auto",
             bar: {
                 position: "top",      // top | bottom | left | right
@@ -67,6 +67,7 @@ QtObject {
             wallpaper: {
                 enabled: false,
                 path: "",
+                folder: "",
                 color: "#101418",
                 fillMode: "fill"      // fill | fit | tile
             },
@@ -83,8 +84,8 @@ QtObject {
                 enabled: true
             },
             sidebars: {
-                left: { enabled: true, width: 260, widgets: ["stats", "calendar"] },
-                right: { enabled: true, width: 260, widgets: ["music", "weather"] }
+                left: { enabled: true, width: 260, widgets: ["perfmon", "wallpaper"] },
+                right: { enabled: true, width: 260, widgets: ["user", "toggles", "sliders", "messages", "widgetmanager"] }
             },
             overview: {
                 enabled: true,
@@ -169,6 +170,16 @@ QtObject {
             root.set("theme." + key, preset[key]);
     }
 
+    // Bring older config files forward when the basket layout changes.
+    function migrate(parsed) {
+        var v = parsed && parsed.version ? parsed.version : 0;
+        if (v < 3) {
+            root.set("sidebars.left.widgets", ["perfmon", "wallpaper"]);
+            root.set("sidebars.right.widgets", ["user", "toggles", "sliders", "messages", "widgetmanager"]);
+            root.set("version", 3);
+        }
+    }
+
     function merge(base, incoming) {
         if (incoming === null || incoming === undefined || typeof incoming !== "object")
             return base;
@@ -242,6 +253,7 @@ QtObject {
             }
             root.data = parsed ? root.merge(root.defaults(), parsed) : root.defaults();
             root.loaded = true;
+            root.migrate(parsed);
         }
         onLoadFailed: {
             // First run: keep the defaults and write them out.

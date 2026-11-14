@@ -30,9 +30,12 @@ PanelWindow {
     anchors.left: side === "left"
     anchors.right: side === "right"
     anchors.top: true
-    anchors.bottom: true
 
     implicitWidth: panelWidth
+    // Make sure the basket is a full-height column even when the cards inside
+    // are shorter than the screen (and scrollable when they are taller).
+    implicitHeight: Math.max(300, (screen ? screen.height : 1080)
+        - (root.barPos === "top" ? root.barThickness : 0) - 12)
 
     // Avoid the bar and the dock when they share an edge with this basket.
     readonly property bool dockVisible: Settings.get("dock.visible", true) === true
@@ -45,7 +48,7 @@ PanelWindow {
     readonly property int dockHorizSize: dockCols * (dockIcon + 3) + 14
 
     margins.top: (barPos === "top" ? barThickness : 0) + 6
-    margins.bottom: (barPos === "bottom" ? barThickness : 0) + 6
+    margins.bottom: 0
         + (dockVisible && dockPos === "bottom" ? dockHorizSize + 4 : 0)
     margins.left: side === "left"
         ? (barPos === "left" ? barThickness : 0) + 4
@@ -86,6 +89,12 @@ PanelWindow {
                             : modelData === "clock" ? clockCard
                             : modelData === "media" ? musicCard
                             : modelData === "user" ? userCard
+                            : modelData === "perfmon" ? perfCard
+                            : modelData === "wallpaper" ? wallpaperCard
+                            : modelData === "messages" ? messagesCard
+                            : modelData === "widgetmanager" ? widgetManagerCard
+                            : modelData === "sliders" ? slidersCard
+                            : modelData === "toggles" ? togglesCard
                             : null
 
                         onLoaded: if (item) item.width = width
@@ -101,4 +110,10 @@ PanelWindow {
     Component { id: weatherCard; WeatherCard { } }
     Component { id: clockCard; ClockCard { } }
     Component { id: userCard; UserCard { } }
+    Component { id: perfCard; PerfCard { } }
+    Component { id: wallpaperCard; WallpaperCard { } }
+    Component { id: messagesCard; MessagesCard { } }
+    Component { id: widgetManagerCard; WidgetManagerCard { } }
+    Component { id: slidersCard; SlidersCard { } }
+    Component { id: togglesCard; TogglesCard { } }
 }

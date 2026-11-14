@@ -3,11 +3,13 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Notifications
 
-// Notifs.qml — notification toasts, styled as Minecraft chat/advancement boxes.
+// Notifs.qml — notification toasts + history, for the messages card.
 QtObject {
     id: root
 
     property var items: []
+    property var history: []       // kept for the messages widget (max 40)
+    property bool dnd: false
     property int nextKey: 1
 
     property NotificationServer server: NotificationServer {
@@ -21,44 +23,61 @@ QtObject {
     function push(notif) {
         var entry = {
             key: root.nextKey++,
-            node: notif,
+            at: Date.now(),
             app: notif.appName || "System",
             summary: notif.summary || "",
             body: notif.body || "",
-            icon: notif.appIcon || ""
+            icon: notif.appIcon || "",
+            node: notif
         };
+
+        var hist = root.history.slice();
+        hist.unshift(entry);
+        root.history = hist.slice(0, 40);
+
+        if (root.dnd)
+            return;
+
         var list = root.items.slice();
         list.push(entry);
         root.items = list;
-        // Minecraft chat lines linger, but not forever.
-        expireTimer.interval = 6000;
-        expireTimer.notifKey = entry.key;
-        expireTimer.restart();
     }
 
     function dismiss(key) {
         var list = [];
         for (var i = 0; i < root.items.length; i++) {
-            var it = root.items[i];
-            if (it.key === key) {
-                try { it.node.dismiss(); } catch (e) { /* already gone */ }
+            if (root.items[i].key === key) {
+                try { root.items[i].node.dismiss(); } catch (e) { /* already gone */ }
             } else {
-                list.push(it);
+                list.push(root.items[i]);
             }
         }
         root.items = list;
     }
 
     function clearAll() {
-        for (var i = 0; i < root.items.length; i++) {
-            try { root.items[i].node.dismiss(); } catch (e) { }
-        }
         root.items = [];
     }
 
-    property Timer expireTimer: Timer {
-        property int notifKey: -1
-        interval: 6000
-        onTriggered: if (notifKey >= 0) root.dismiss(notifKey)
+    function clearHistory() {
+        root.history = [];
+    }
+
+    property Timer pruner: Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        onTriggered: {
+            if (root.items.length === 0)
+                return;
+            var now = Date.now();
+            var keep = [];
+            for (var i = 0; i < root.items.length; i++) {
+                if (now - root.items[i].at < 7000)
+                    keep.push(root.items[i]);
+            }
+            if (keep.length !== root.items.length)
+                root.items = keep;
+        }
     }
 }

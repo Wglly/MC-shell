@@ -10,7 +10,8 @@ Column {
     width: parent ? parent.width : 560
     spacing: 10
 
-    readonly property var allWidgets: ["stats", "calendar", "music", "weather", "clock", "media", "user"]
+    readonly property var allWidgets: ["stats", "calendar", "music", "weather", "clock", "media", "user",
+                                       "perfmon", "wallpaper", "messages", "widgetmanager", "sliders", "toggles"]
 
     function hasWidget(side, name) {
         var list = Settings.get("sidebars." + side + ".widgets", []);
@@ -89,14 +90,14 @@ Column {
                 width: page.width
                 label: I18n.t("settings.sidebars.widgets")
 
-                Row {
-                    anchors.right: parent.right
+                Grid {
+                    columns: 3
                     spacing: 3
 
                     Repeater {
                         model: page.allWidgets
                         delegate: McButton {
-                            implicitWidth: 82
+                            implicitWidth: 110
                             label: I18n.t("widget." + modelData)
                             checked: page.hasWidget(sideName, modelData)
                             onClicked: page.toggleWidget(sideName, modelData)

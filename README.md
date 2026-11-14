@@ -101,8 +101,19 @@ Enable/disable each one in Settings → Widgets; drag them straight on the deskt
 Positions are stored as screen ratios and can be reset from Settings.
 
 ### Side baskets
-Left and right edge panels ("baskets") that host any combination of system, calendar,
-now-playing, weather and clock cards.
+Left and right edge panels ("baskets") hosting any combination of widget cards, with
+per-component toggles in Settings → Side baskets:
+
+| Left (default) | Right (default) |
+|---|---|
+| **Performance monitor** (CPU/RAM bars, load, uptime) **Wallpaper picker** (three built-in pixel scenes + every image in your pictures folder) | **Player card** **Toggle grid** (Wi-Fi / BT / mic / DND) **Volume + brightness sliders** **Messages** (history, DND, clear) **Widget manager** (add/remove desktop widgets) |
+
+| Left basket | Right basket |
+|---|---|
+| ![Left basket](docs/screenshots/20-left-basket.png) | ![Right basket](docs/screenshots/21-right-basket.png) |
+
+All cards are also selectable per side in Settings → Side baskets, and the baskets can be
+resized/disabled in Settings → Shell.
 
 ### Power menu
 A Minecraft title screen: grass-block logo, `MC-SHELL`, and world-action buttons —
@@ -284,7 +295,7 @@ modules/launcher/               inventory launcher
 modules/control/                options / control centre
 modules/settings/               settings window + 7 pages
 modules/widgets/                clock, weather, visualiser, calendar, stats cards + desktop hosts
-modules/sidebars/               left/right baskets
+modules/sidebars/               left/right baskets (per-side card lists)
 modules/overview/               desktop overview + window drag
 modules/dashboard/              widget dashboard wall
 modules/wallpaper/              background layer
