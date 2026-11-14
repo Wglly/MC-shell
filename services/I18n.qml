@@ -121,6 +121,7 @@ QtObject {
             "widget.clock": "CLOCK", "widget.weather": "WEATHER", "widget.visualizer": "MUSIC",
             "widget.calendar": "CALENDAR",
             "calendar.today": "TODAY", "calendar.weekdays": "SU MO TU WE TH FR SA", "widget.stats": "SYSTEM", "widget.music": "NOW PLAYING",
+            "music.lyrics.none": "NO LYRICS", "music.lyrics.loading": "LOADING LYRICS…",
             "widget.weather.city": "CITY", "widget.weather.cityHint": "empty = auto",
             "widget.visualizer.bars": "BARS",
 
@@ -240,6 +241,7 @@ QtObject {
             "widget.clock": "时钟", "widget.weather": "天气", "widget.visualizer": "音乐",
             "widget.calendar": "日历",
             "calendar.today": "今天", "calendar.weekdays": "日 一 二 三 四 五 六", "widget.stats": "系统", "widget.music": "正在播放",
+            "music.lyrics.none": "暫無歌詞", "music.lyrics.loading": "歌词加载中…",
             "widget.weather.city": "城市", "widget.weather.cityHint": "留空 = 自动",
             "widget.visualizer.bars": "柱数",
 
@@ -359,6 +361,7 @@ QtObject {
             "widget.clock": "時鐘", "widget.weather": "天氣", "widget.visualizer": "音樂",
             "widget.calendar": "日曆",
             "calendar.today": "今天", "calendar.weekdays": "日 一 二 三 四 五 六", "widget.stats": "系統", "widget.music": "正在播放",
+            "music.lyrics.none": "暫無歌詞", "music.lyrics.loading": "歌词加载中…",
             "widget.weather.city": "城市", "widget.weather.cityHint": "留空 = 自動",
             "widget.visualizer.bars": "柱數",
 

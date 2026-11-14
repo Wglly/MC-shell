@@ -5,7 +5,7 @@ import qs.modules.widgets
 DesktopWidget {
     widgetKey: "media"
     implicitWidth: 300
-    implicitHeight: 180
+    implicitHeight: 210
 
     MusicCard {
         anchors.fill: parent

@@ -9,7 +9,7 @@ McPanel {
     id: root
 
     implicitWidth: 260
-    implicitHeight: 170
+    implicitHeight: 210
     background: Theme.cardBg
     texture: Theme.texturePath("bedrock")
     textureOpacity: 0.35
@@ -37,6 +37,35 @@ McPanel {
         }
 
         Item { width: 1; height: 2 }
+
+        // lyrics (time-synced when lrclib has them)
+        Item {
+            width: parent.width
+            height: 36
+
+            Column {
+                anchors.fill: parent
+                spacing: 2
+
+                PixelText {
+                    width: parent.width
+                    elide: Text.ElideRight
+                    text: Lyrics.loading ? I18n.t("music.lyrics.loading")
+                        : (Lyrics.current !== "" ? Lyrics.current
+                        : I18n.t("music.lyrics.none"))
+                    font.pixelSize: 10
+                    color: Lyrics.current !== "" ? Theme.gold : Theme.cardTextDim
+                }
+                PixelText {
+                    width: parent.width
+                    elide: Text.ElideRight
+                    visible: Lyrics.next !== ""
+                    text: Lyrics.next
+                    font.pixelSize: 9
+                    color: Theme.cardTextDim
+                }
+            }
+        }
 
         Row {
             spacing: 6

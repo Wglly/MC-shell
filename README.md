@@ -118,6 +118,9 @@ One tab per feature group, all changes apply live and are written to
 - **Overview** — enable, cards per row, desktops shown, window titles, backdrop darkness
 
 ### Desktop widgets
+
+Music cards fetch **time-synced lyrics from [lrclib.net](https://lrclib.net)** in the
+background and show the current line (plus the next one) as the track plays.
 Draggable cards on the wallpaper layer: **clock**, **weather** (wttr.in, no API key),
 **music visualiser** (real spectrum from `cava`), **calendar**, **system stats**,
 **media player** and the **player card** (avatar from `~/.face`, name, host, uptime).
