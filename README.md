@@ -7,8 +7,8 @@ blocks, hotbar slots and stone GUI panels.
 
 **English · 简体中文 · 繁體中文** — the whole UI is translated and switches live.
 
-**Five built-in themes** — classic, cave, snow mountain, desert and village — each one a
-full palette + block-texture set, switchable from Settings → Theme:
+**Seven built-in themes** — classic, cave, snow mountain, desert, village, Windows XP and
+Windows 95 — each one a full palette + block-texture set, switchable from Settings → Theme:
 
 ![Themes](docs/screenshots/16-themes.png)
 
@@ -106,7 +106,7 @@ per-component toggles in Settings → Side baskets:
 
 | Left (default) | Right (default) |
 |---|---|
-| **Performance monitor** (CPU/RAM bars, load, uptime) **Wallpaper picker** (three built-in pixel scenes + every image in your pictures folder) | **Player card** **Toggle grid** (Wi-Fi / BT / mic / DND) **Volume + brightness sliders** **Messages** (history, DND, clear) **Widget manager** (add/remove desktop widgets) |
+| **Performance monitor** (CPU/RAM bars, load, uptime) · **Wallpaper picker** (three built-in pixel scenes, a folder picker to import any local directory, reload) · **Widget manager** (add/remove desktop widgets) | **Player card** · **Toggle grid** (Wi-Fi / BT / mic / DND) · **Volume + brightness sliders** · **Messages** (history, DND, clear) |
 
 | Left basket | Right basket |
 |---|---|
@@ -212,7 +212,7 @@ XF86MonBrightnessDown { spawn "mc-shell" "ipc" "call" "shell" "brightnessDown"; 
 | `shell moveWindow <windowId> <desktopId>` | move a window to a desktop |
 | `shell workspaces` / `backend` | debug readouts |
 | `shell language <auto\|en\|zh_CN\|zh_TW>` | switch language |
-| `shell preset <classic\|cave\|snow\|desert\|village>` | switch theme preset |
+| `shell preset <classic\|cave\|snow\|desert\|village\|winxp\|win95>` | switch theme preset |
 | `shell set <dotted.key> <value>` | write any setting, e.g. `set bar.position left` |
 | `shell settingsTab <0-6>` | open a settings tab |
 
@@ -261,11 +261,13 @@ text + shadow colours, bevels) plus a block texture set:
 | `snow` | light icy bar, snow/ice panels, blue accent, dark text |
 | `desert` | sandstone bar, warm sand panels, dark amber accent |
 | `village` | oak-plank bar, warm wood panels, mossy green accent |
+| `winxp` | Luna-blue title-bar gradient, cream panels, navy accents |
+| `win95` | flat grey bar with hard bevels, black text, navy highlights |
 
 Pick one in **Settings → Theme → theme presets**, or:
 
 ```sh
-mc-shell ipc call shell preset snow
+mc-shell ipc call shell preset snow     # or cave/desert/village/winxp/win95
 ```
 
 Manual accent / highlight / texture / scale controls stay available below the presets.

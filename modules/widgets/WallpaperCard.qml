@@ -65,9 +65,21 @@ McPanel {
                 font.pixelSize: Theme.fontSmall
                 color: Theme.gold
             }
-            Item { width: parent.width - 110; height: 1 }
+            Item { width: parent.width - 190; height: 1 }
             McButton {
-                width: 64
+                width: 52
+                height: 24
+                label: I18n.t("widget.wallpaper.pick")
+                onClicked: if (!picker.running) picker.running = true
+            }
+            McButton {
+                width: 46
+                height: 24
+                label: I18n.t("widget.wallpaper.refresh")
+                onClicked: root.refresh()
+            }
+            McButton {
+                width: 52
                 height: 24
                 label: I18n.t("widget.wallpaper.off")
                 accentColor: Theme.red

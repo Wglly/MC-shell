@@ -19,7 +19,7 @@ QtObject {
 
     function defaults() {
         return {
-            version: 3,
+            version: 4,
             language: "auto",
             bar: {
                 position: "top",      // top | bottom | left | right
@@ -84,8 +84,8 @@ QtObject {
                 enabled: true
             },
             sidebars: {
-                left: { enabled: true, width: 260, widgets: ["perfmon", "wallpaper"] },
-                right: { enabled: true, width: 260, widgets: ["user", "toggles", "sliders", "messages", "widgetmanager"] }
+                left: { enabled: true, width: 260, widgets: ["perfmon", "wallpaper", "widgetmanager"] },
+                right: { enabled: true, width: 260, widgets: ["user", "toggles", "sliders", "messages"] }
             },
             overview: {
                 enabled: true,
@@ -150,6 +150,24 @@ QtObject {
             outline: "#8a6a3a", bevelLight: "#fff4d8", bevelDark: "#b08c54",
             panelDark: "#d9c08c", panelTextShadow: "#fff4d8"
         },
+        winxp: {
+            accent: "#1f5fbf", gold: "#ffd34d",
+            barTexture: "winxp", panelTexture: "winxp", cardTexture: "winxp",
+            barBg: "#2f6fd0", panel: "#ece9d8", cardBg: "#f7fbff", dockBg: "#3a6ea5",
+            text: "#ffffff", textDim: "#dbe8ff", textOnPanel: "#1a1a1a",
+            textShadow: "#0a246a", textHints: "#4a4a4a",
+            outline: "#0a246a", bevelLight: "#ffffff", bevelDark: "#7f9db9",
+            panelDark: "#d4d0c8", panelTextShadow: "#ffffff"
+        },
+        win95: {
+            accent: "#000080", gold: "#000080",
+            barTexture: "win95", panelTexture: "win95", cardTexture: "win95",
+            barBg: "#c0c0c0", panel: "#c0c0c0", cardBg: "#ffffff", dockBg: "#a0a0a0",
+            text: "#000000", textDim: "#303030", textOnPanel: "#000000",
+            textShadow: "#ffffff", textHints: "#000000",
+            outline: "#000000", bevelLight: "#ffffff", bevelDark: "#808080",
+            panelDark: "#a0a0a0", panelTextShadow: "#ffffff"
+        },
         village: {
             accent: "#6b8f3a", gold: "#e8b84a",
             barTexture: "oak_planks", panelTexture: "oak_planks", cardTexture: "oak_planks",
@@ -177,6 +195,19 @@ QtObject {
             root.set("sidebars.left.widgets", ["perfmon", "wallpaper"]);
             root.set("sidebars.right.widgets", ["user", "toggles", "sliders", "messages", "widgetmanager"]);
             root.set("version", 3);
+        }
+        if (v < 4) {
+            // widget manager lives in the left basket now
+            var left = root.get("sidebars.left.widgets", []).slice();
+            var right = root.get("sidebars.right.widgets", []).slice();
+            var rIdx = right.indexOf("widgetmanager");
+            if (rIdx >= 0)
+                right.splice(rIdx, 1);
+            if (left.indexOf("widgetmanager") < 0)
+                left.push("widgetmanager");
+            root.set("sidebars.left.widgets", left);
+            root.set("sidebars.right.widgets", right);
+            root.set("version", 4);
         }
     }
 

@@ -37,12 +37,12 @@ Column {
         styleColor: Theme.panelTextShadow
     }
 
-    Row {
+    Flow {
         width: parent.width
         spacing: 6
 
         Repeater {
-            model: ["classic", "cave", "snow", "desert", "village"]
+            model: ["classic", "cave", "snow", "desert", "village", "winxp", "win95"]
 
             delegate: Item {
                 width: 106
@@ -59,6 +59,7 @@ Column {
 
                 Column {
                     anchors.centerIn: parent
+                    anchors.verticalCenterOffset: -6
                     spacing: 3
 
                     Rectangle {
@@ -69,12 +70,26 @@ Column {
                         border.width: 2
                         border.color: "#000000"
                     }
-                    PixelText {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: I18n.t("theme." + modelData)
-                        font.pixelSize: 9
-                        color: page.presetText(modelData)
-                    }
+                }
+
+                Rectangle {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
+                    height: 18
+                    color: "#000000"
+                    opacity: 0.62
+                }
+                PixelText {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 3
+                    width: parent.width - 6
+                    horizontalAlignment: Text.AlignHCenter
+                    elide: Text.ElideRight
+                    text: I18n.t("theme." + modelData)
+                    font.pixelSize: 8
+                    color: "#ffffff"
                 }
 
                 MouseArea {

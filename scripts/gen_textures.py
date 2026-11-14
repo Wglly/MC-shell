@@ -427,6 +427,37 @@ def user_icon() -> None:
     pixel_icon(rows, {"X": (250, 214, 160, 255)}, "icon_user.png")
 
 
+def retro_tiles() -> None:
+    """Windows XP (Luna blue) and Windows 95 (flat grey dither) tiles."""
+    xp = Image.new("RGB", (TILE, TILE))
+    px = xp.load()
+    rng = random.Random(31)
+    for y in range(TILE):
+        # gentle vertical gradient like the Luna title bar
+        shift = int((y / TILE) * 34)
+        for x in range(TILE):
+            px[x, y] = (shade("#2f6fd0", shift)[0], shade("#4b8ce0", shift)[1], shade("#8fc0f0", shift)[2])
+    for y in (0, 1):
+        for x in range(TILE):
+            px[x, y] = (200, 225, 255)
+    save(xp, "winxp.png")
+
+    w95 = Image.new("RGB", (TILE, TILE))
+    px = w95.load()
+    rng = random.Random(32)
+    for y in range(TILE):
+        for x in range(TILE):
+            base = 192 + (6 if (x + y) % 2 == 0 else -6)
+            px[x, y] = (base, base, base)
+    for y in (0, 1):
+        for x in range(TILE):
+            px[x, y] = (255, 255, 255)
+    for y in (TILE - 2, TILE - 1):
+        for x in range(TILE):
+            px[x, y] = (128, 128, 128)
+    save(w95, "win95.png")
+
+
 def main() -> None:
     save(noisy_tile("#866043", 14, 1, speckle=6), "dirt.png")
     save(noisy_tile("#7e7e7e", 10, 2, speckle=4), "stone.png")
@@ -447,6 +478,7 @@ def main() -> None:
     themed_tiles()
     dashboard_icon()
     user_icon()
+    retro_tiles()
     icon = block_icon().resize((512, 512), Image.NEAREST)
     icon.save(ROOT / "assets" / "icon.png")
     print("wrote assets/icon.png (512x512)")
