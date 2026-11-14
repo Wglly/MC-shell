@@ -11,6 +11,16 @@ Item {
     implicitWidth: vertical ? column.implicitWidth : row.implicitWidth
     implicitHeight: vertical ? column.implicitHeight : row.implicitHeight
 
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        onClicked: {
+            var p = root.mapToItem(null, root.width / 2, 0);
+            ShellState.barPopupX = p.x;
+            ShellState.toggleBarPopup("stats");
+        }
+    }
+
     Row {
         id: row
         visible: !root.vertical

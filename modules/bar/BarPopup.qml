@@ -69,9 +69,9 @@ PanelWindow {
     }
 
     McPanel {
-        width: root.mode === "calendar" ? 360 : (root.mode === "media" ? 400 : 320)
-        height: root.mode === "calendar" ? 330 : (root.mode === "media" ? 244 : 268)
-        x: root.mode === "user"
+        width: root.mode === "stats" ? 380 : (root.mode === "calendar" ? 360 : (root.mode === "media" ? 400 : 320))
+        height: root.mode === "stats" ? 340 : (root.mode === "calendar" ? 330 : (root.mode === "media" ? 244 : 268))
+        x: (root.mode === "user" || root.mode === "stats")
             ? (ShellState.barPopupX >= 0
                 ? Math.round(Math.max(8, Math.min(parent.width - width - 8, ShellState.barPopupX - width / 2)))
                 : parent.width - width - 96)
@@ -262,6 +262,190 @@ PanelWindow {
                 height: 26
                 label: I18n.t("common.close")
                 onClicked: ShellState.closeBarPopup()
+            }
+        }
+
+        // ---------------------------------------------------------------- stats
+        Column {
+            visible: root.mode === "stats"
+            anchors.fill: parent
+            anchors.margins: 12
+            spacing: 6
+
+            PixelText {
+                width: parent.width
+                text: I18n.t("widget.stats")
+                font.pixelSize: Theme.fontLarge
+                color: Theme.gold
+                styleColor: Theme.panelTextShadow
+            }
+
+            // cpu
+            Row {
+                width: parent.width
+                spacing: 8
+                PixelText {
+                    width: 54
+                    text: "CPU"
+                    font.pixelSize: 10
+                    color: Theme.textOnPanel
+                    styleColor: Theme.panelTextShadow
+                }
+                Rectangle {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: parent.width - 130
+                    height: 12
+                    color: Theme.panelDark
+                    border.width: 1
+                    border.color: Theme.outline
+                    Rectangle {
+                        height: parent.height - 2
+                        y: 1; x: 1
+                        width: Math.max(0, (parent.width - 2) * Stats.cpu)
+                        color: Stats.cpu > 0.8 ? Theme.red : (Stats.cpu > 0.5 ? Theme.gold : Theme.grass)
+                    }
+                }
+                PixelText {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 48
+                    text: Math.round(Stats.cpu * 100) + "%"
+                    font.pixelSize: 10
+                    color: Theme.textOnPanel
+                    styleColor: Theme.panelTextShadow
+                }
+            }
+
+            // memory
+            Row {
+                width: parent.width
+                spacing: 8
+                PixelText {
+                    width: 54
+                    text: "MEM"
+                    font.pixelSize: 10
+                    color: Theme.textOnPanel
+                    styleColor: Theme.panelTextShadow
+                }
+                Rectangle {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: parent.width - 130
+                    height: 12
+                    color: Theme.panelDark
+                    border.width: 1
+                    border.color: Theme.outline
+                    Rectangle {
+                        height: parent.height - 2
+                        y: 1; x: 1
+                        width: Math.max(0, (parent.width - 2) * Stats.mem)
+                        color: Theme.xp
+                    }
+                }
+                PixelText {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 60
+                    text: Stats.memUsed.toFixed(1) + "/" + Stats.memTotal.toFixed(0) + "G"
+                    font.pixelSize: 10
+                    color: Theme.textOnPanel
+                    styleColor: Theme.panelTextShadow
+                }
+            }
+
+            // swap (only when present)
+            Row {
+                width: parent.width
+                spacing: 8
+                visible: Stats.swapTotal > 0.05
+                PixelText {
+                    width: 54
+                    text: "SWAP"
+                    font.pixelSize: 10
+                    color: Theme.textOnPanel
+                    styleColor: Theme.panelTextShadow
+                }
+                Rectangle {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: parent.width - 130
+                    height: 10
+                    color: Theme.panelDark
+                    border.width: 1
+                    border.color: Theme.outline
+                    Rectangle {
+                        height: parent.height - 2
+                        y: 1; x: 1
+                        width: Math.max(0, (parent.width - 2) * (Stats.swapTotal > 0 ? Stats.swapUsed / Stats.swapTotal : 0))
+                        color: Theme.gold
+                    }
+                }
+                PixelText {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 60
+                    text: Stats.swapUsed.toFixed(1) + "G"
+                    font.pixelSize: 10
+                    color: Theme.textOnPanel
+                    styleColor: Theme.panelTextShadow
+                }
+            }
+
+            PixelText {
+                width: parent.width
+                text: I18n.t("stats.load") + "  " + Stats.load1.toFixed(2) + " / "
+                    + Stats.load5.toFixed(2) + " / " + Stats.load15.toFixed(2)
+                font.pixelSize: 10
+                color: Theme.textOnPanel
+                styleColor: Theme.panelTextShadow
+            }
+            PixelText {
+                width: parent.width
+                text: I18n.t("stats.uptime") + "  " + Math.floor(Stats.uptime / 3600) + "h "
+                    + Math.floor((Stats.uptime % 3600) / 60) + "m   ·   "
+                    + I18n.t("stats.processes") + " " + Stats.processes
+                font.pixelSize: 10
+                color: Theme.textOnPanel
+                styleColor: Theme.panelTextShadow
+            }
+
+            Rectangle { width: parent.width; height: 1; color: Theme.bevelDark }
+
+            PixelText {
+                width: parent.width
+                text: I18n.t("stats.top")
+                font.pixelSize: 9
+                color: Theme.textHints
+                styleColor: Theme.panelTextShadow
+            }
+
+            Repeater {
+                model: Stats.top
+
+                delegate: Row {
+                    width: parent.width
+                    spacing: 6
+
+                    PixelText {
+                        width: parent.width - 96
+                        elide: Text.ElideRight
+                        text: modelData.name
+                        font.pixelSize: 9
+                        color: Theme.textOnPanel
+                        styleColor: Theme.panelTextShadow
+                    }
+                    PixelText {
+                        width: 44
+                        horizontalAlignment: Text.AlignRight
+                        text: modelData.cpu.toFixed(1) + "%"
+                        font.pixelSize: 9
+                        color: Theme.textOnPanel
+                        styleColor: Theme.panelTextShadow
+                    }
+                    PixelText {
+                        width: 40
+                        horizontalAlignment: Text.AlignRight
+                        text: modelData.mem.toFixed(1) + "%"
+                        font.pixelSize: 9
+                        color: Theme.textHints
+                        styleColor: Theme.panelTextShadow
+                    }
+                }
             }
         }
 
