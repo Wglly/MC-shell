@@ -126,6 +126,10 @@ One tab per feature group, all changes apply live and are written to
 
 ### Desktop widgets
 
+The user card (and its bar popup) has a **KEEP AWAKE** toggle that holds a Wayland idle
+inhibitor from the bar surface, so the session stays awake while it is on. `mc-shell ipc call
+shell keepAwake` toggles the same state.
+
 Music cards fetch **time-synced lyrics from [lrclib.net](https://lrclib.net)** in the
 background and show the current line (plus the next one) as the track plays — the same
 lyrics appear in the bar's detailed media popup.

@@ -260,6 +260,9 @@ ShellRoot {
         function overview(): void {
             ShellState.toggleOverlay("overview");
         }
+        function keepAwake(): void {
+            ShellState.keepAwake = !ShellState.keepAwake;
+        }
         function barPopup(kind: string): void {
             ShellState.toggleBarPopup(kind);
         }

@@ -70,7 +70,7 @@ PanelWindow {
 
     McPanel {
         width: root.mode === "calendar" ? 360 : (root.mode === "media" ? 400 : 320)
-        height: root.mode === "calendar" ? 330 : (root.mode === "media" ? 244 : 216)
+        height: root.mode === "calendar" ? 330 : (root.mode === "media" ? 244 : 268)
         x: root.mode === "user"
             ? (ShellState.barPopupX >= 0
                 ? Math.round(Math.max(8, Math.min(parent.width - width - 8, ShellState.barPopupX - width / 2)))
@@ -250,7 +250,15 @@ PanelWindow {
             }
 
             McButton {
-                width: 90
+                width: parent.width
+                height: 26
+                label: ShellState.keepAwake ? I18n.t("user.awakeOn") : I18n.t("user.keepAwake")
+                checked: ShellState.keepAwake
+                onClicked: ShellState.keepAwake = !ShellState.keepAwake
+            }
+
+            McButton {
+                width: parent.width
                 height: 26
                 label: I18n.t("common.close")
                 onClicked: ShellState.closeBarPopup()

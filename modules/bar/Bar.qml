@@ -46,6 +46,11 @@ PanelWindow {
     exclusiveZone: root.barVisible ? root.thickness : 0
     exclusionMode: ExclusionMode.Normal
 
+    IdleInhibitor {
+        window: root
+        enabled: ShellState.keepAwake
+    }
+
     McPanel {
         anchors.fill: parent
         bevel: 2

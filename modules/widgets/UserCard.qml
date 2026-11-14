@@ -107,5 +107,13 @@ McPanel {
             font.pixelSize: 10
             color: Theme.cardTextDim
         }
+
+        McButton {
+            width: parent.width
+            height: 26
+            label: ShellState.keepAwake ? I18n.t("user.awakeOn") : I18n.t("user.keepAwake")
+            checked: ShellState.keepAwake
+            onClicked: ShellState.keepAwake = !ShellState.keepAwake
+        }
     }
 }

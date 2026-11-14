@@ -25,6 +25,9 @@ QtObject {
         ShellState.barPopup = "";
     }
 
+    // keep the session awake (idle inhibit)
+    property bool keepAwake: false
+
     // space the dock needs on its edge (driven by Dock.qml)
     property int dockReserve: 0
 
