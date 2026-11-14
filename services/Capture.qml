@@ -24,13 +24,44 @@ QtObject {
     }
 
     function screenshot() {
+        if (slurper.running)
+            return;
+        root.pendingShot = root.shotDir + "/shot-" + root.stamp() + ".png";
+        slurper.running = true;
+    }
+
+    property string pendingShot: ""
+
+    function grab(geometry) {
         var dir = root.shotDir;
-        var file = dir + "/shot-" + root.stamp() + ".png";
+        var file = root.pendingShot;
+        if (file === "")
+            return;
         root.lastShot = file;
-        shotter.command = ["sh", "-c",
-            "mkdir -p \"$1\" && (slurp | grim -g - \"$2\") || grim \"$2\"",
-            "sh", dir, file];
+        var cmd = "mkdir -p \"$1\"; ";
+        if (geometry !== "")
+            cmd += "grim -g \"$2\" \"$3\"";
+        else
+            cmd += "grim \"$3\"";
+        shotter.command = ["sh", "-c", cmd, "sh", dir, geometry, file];
         shotter.running = true;
+    }
+
+    property string geometry: ""
+
+    property Process slurper: Process {
+        command: ["slurp"]
+        stdout: StdioCollector {
+            onStreamFinished: root.geometry = ("" + text).trim()
+        }
+        onExited: exitCode => {
+            if (exitCode === 0) {
+                root.grab(root.geometry);
+            } else {
+                root.geometry = "";
+                root.shotDone("", false);
+            }
+        }
     }
 
     function toggleRecording() {
