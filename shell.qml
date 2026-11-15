@@ -11,6 +11,7 @@ import qs.modules.control
 import qs.modules.osd
 import qs.modules.notifications
 import qs.modules.dock
+import qs.modules.connectivity
 import qs.modules.sidebars
 import qs.modules.widgets
 import qs.modules.settings
@@ -253,6 +254,10 @@ ShellRoot {
         targetScreen: shell.primaryScreen
     }
 
+    Connectivity {
+        targetScreen: shell.primaryScreen
+    }
+
     DockMenu {
         targetScreen: shell.primaryScreen
     }
@@ -337,6 +342,9 @@ ShellRoot {
         }
         function barPopup(kind: string): void {
             ShellState.toggleBarPopup(kind);
+        }
+        function connectivity(): void {
+            ShellState.toggleOverlay("connectivity");
         }
         function basket(side: string): void {
             ShellState.toggleBasket(side);
