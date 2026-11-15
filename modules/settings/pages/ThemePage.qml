@@ -42,7 +42,7 @@ Column {
         spacing: 6
 
         Repeater {
-            model: ["classic", "cave", "snow", "desert", "village", "winxp", "win95"]
+            model: ["classic", "cave", "snow", "desert", "village", "win7", "winxp", "win95"]
 
             delegate: Item {
                 width: 106

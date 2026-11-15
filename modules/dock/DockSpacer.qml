@@ -18,6 +18,7 @@ PanelWindow {
     screen: targetScreen
     color: "transparent"
     visible: Settings.get("dock.visible", true) === true && reserve > 0
+        && Settings.get("dock.mode", "standalone") === "standalone"
     exclusionMode: ExclusionMode.Normal
     exclusiveZone: reserve
     WlrLayershell.layer: WlrLayer.Background

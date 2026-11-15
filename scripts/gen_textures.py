@@ -570,6 +570,56 @@ def basket_icons() -> None:
     pixel_icon(right, {"X": (255, 204, 77, 255)}, "icon_basket_right.png")
 
 
+def win7_tiles() -> None:
+    """Windows 7 Aero-ish glass: dark translucent gradient bar + light dialog."""
+    def ramp(h, stops):
+        img = Image.new("RGB", (16, h))
+        px = img.load()
+        for y in range(h):
+            t = y / (h - 1)
+            c = stops[-1][1]
+            for i in range(len(stops) - 1):
+                p0, c0 = stops[i]
+                p1, c1 = stops[i + 1]
+                if p0 <= t <= p1:
+                    k = (t - p0) / max(1e-6, p1 - p0)
+                    c = tuple(int(c0[j] + (c1[j] - c0[j]) * k) for j in range(3))
+                    break
+            for x in range(16):
+                px[x, y] = c
+        return img
+
+    bar = ramp(64, [(0.0, (58, 78, 100)), (0.12, (40, 58, 78)), (0.5, (30, 44, 60)),
+                    (0.86, (26, 38, 52)), (1.0, (16, 24, 34))])
+    save(bar, "win7_bar.png")
+
+    task = Image.new("RGB", (TILE, TILE))
+    px = task.load()
+    for y in range(TILE):
+        for x in range(TILE):
+            c = (34, 48, 64) if y < 3 else (26, 38, 52)
+            px[x, y] = c
+    save(task, "win7_task.png")
+
+    panel = Image.new("RGB", (TILE, TILE))
+    px = panel.load()
+    rng = random.Random(71)
+    for y in range(TILE):
+        for x in range(TILE):
+            px[x, y] = shade("#f0f0f0", rng.randint(-2, 2))
+    for x in range(TILE):
+        px[x, 0] = (255, 255, 255)
+        px[x, TILE - 1] = (188, 188, 188)
+    save(panel, "win7_panel.png")
+
+    card = Image.new("RGB", (TILE, TILE))
+    px = card.load()
+    for y in range(TILE):
+        for x in range(TILE):
+            px[x, y] = (255, 255, 255)
+    save(card, "win7_card.png")
+
+
 def main() -> None:
     save(noisy_tile("#866043", 14, 1, speckle=6), "dirt.png")
     save(noisy_tile("#7e7e7e", 10, 2, speckle=4), "stone.png")
@@ -595,6 +645,7 @@ def main() -> None:
     user_icon()
     retro_tiles()
     luna_tiles()
+    win7_tiles()
     icon = block_icon().resize((512, 512), Image.NEAREST)
     icon.save(ROOT / "assets" / "icon.png")
     print("wrote assets/icon.png (512x512)")

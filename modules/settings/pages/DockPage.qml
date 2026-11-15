@@ -75,6 +75,29 @@ Column {
 
     SettingRow {
         width: parent.width
+        label: I18n.t("settings.dock.mode")
+
+        Row {
+            anchors.right: parent.right
+            spacing: 6
+
+            McButton {
+                implicitWidth: 90
+                label: I18n.t("settings.dock.modeStandalone")
+                checked: Settings.get("dock.mode", "standalone") === "standalone"
+                onClicked: Settings.set("dock.mode", "standalone")
+            }
+            McButton {
+                implicitWidth: 90
+                label: I18n.t("settings.dock.modeBar")
+                checked: Settings.get("dock.mode", "standalone") === "bar"
+                onClicked: Settings.set("dock.mode", "bar")
+            }
+        }
+    }
+
+    SettingRow {
+        width: parent.width
         label: I18n.t("settings.dock.avoid")
 
         McButton {

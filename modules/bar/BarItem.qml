@@ -28,6 +28,7 @@ Loader {
         : root.kind === "dashboard" ? compDashboard
         : root.kind === "settings" ? compSettings
         : root.kind === "power" ? compPower
+        : root.kind === "dockstrip" ? null
         : null
 
     Component {
@@ -137,6 +138,11 @@ Loader {
             icon: Qt.resolvedUrl("../../assets/textures/icon_gear.png")
             onClicked: ShellState.toggleOverlay("settings")
         }
+    }
+
+    Component {
+        id: compDockStrip
+        DockStrip { visible: Settings.get("dock.mode", "standalone") === "bar" }
     }
 
     Component {

@@ -18,6 +18,10 @@ PanelWindow {
     readonly property bool vertical: pos === "left" || pos === "right"
     readonly property int thickness: Math.max(36, Settings.get("bar.thickness", 40))
     readonly property bool barVisible: Settings.get("bar.visible", true)
+    readonly property bool autoHide: Settings.get("bar.autoHide", false) === true
+    property bool hovered: false
+    readonly property bool collapsed: root.autoHide && !root.hovered
+    readonly property int visibleThickness: root.collapsed ? 6 : root.thickness
 
     readonly property var sections: Settings.get("bar.sections", null)
     readonly property var leftItems: root.sections && root.sections.left ? root.sections.left : []
@@ -39,16 +43,34 @@ PanelWindow {
         top: root.vertical ? true : root.pos === "top"
         bottom: root.vertical ? true : root.pos === "bottom"
     }
-    implicitWidth: root.vertical ? root.thickness : 0
-    implicitHeight: root.vertical ? 0 : root.thickness
+    implicitWidth: root.vertical ? root.visibleThickness : 0
+    implicitHeight: root.vertical ? 0 : root.visibleThickness
     color: "transparent"
     visible: root.barVisible
-    exclusiveZone: root.barVisible ? root.thickness : 0
+    exclusiveZone: root.barVisible ? root.visibleThickness : 0
     exclusionMode: ExclusionMode.Normal
 
     IdleInhibitor {
         window: root
         enabled: ShellState.keepAwake
+    }
+
+    Timer {
+        id: hideTimer
+        interval: 320
+        repeat: false
+        onTriggered: root.hovered = false
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.NoButton
+        hoverEnabled: true
+        onEntered: {
+            hideTimer.stop();
+            root.hovered = true;
+        }
+        onExited: if (root.autoHide) hideTimer.restart()
     }
 
     McPanel {
@@ -62,7 +84,7 @@ PanelWindow {
 
     // ------------------------------------------------------------ horizontal
     Item {
-        visible: !root.vertical
+        visible: !root.vertical && !root.collapsed
         anchors.fill: parent
         anchors.margins: 4
 
@@ -70,6 +92,11 @@ PanelWindow {
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             spacing: 6
+
+            DockStrip {
+                anchors.verticalCenter: parent.verticalCenter
+                visible: Settings.get("dock.mode", "standalone") === "bar"
+            }
             BarItem {
                 kind: "launcher"
                 visible: root.itemEnabled("launcher") && root.inSection("left", "launcher")
@@ -444,7 +471,7 @@ PanelWindow {
 
     // -------------------------------------------------------------- vertical
     Item {
-        visible: root.vertical
+        visible: root.vertical && !root.collapsed
         anchors.fill: parent
         anchors.margins: 4
 
@@ -452,6 +479,11 @@ PanelWindow {
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 6
+
+            DockStrip {
+                anchors.horizontalCenter: parent.horizontalCenter
+                visible: Settings.get("dock.mode", "standalone") === "bar"
+            }
             BarItem {
                 kind: "launcher"
                 visible: root.itemEnabled("launcher") && root.inSection("left", "launcher")

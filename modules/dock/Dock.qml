@@ -50,7 +50,8 @@ PanelWindow {
 
     screen: targetScreen
     color: "transparent"
-    visible: enabled
+    readonly property string mode: Settings.get("dock.mode", "standalone")
+    visible: enabled && root.mode === "standalone"
     // When apps are open the dock tucks itself away (a 4px strip stays at the
     // edge, hovering it brings the dock back), so it never covers a window.
     function boolSetting(key, def) {

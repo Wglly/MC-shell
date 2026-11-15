@@ -32,11 +32,11 @@ QtObject {
                 items: {
                     launcher: true, workspaces: true, title: true, clock: true,
                     media: true, stats: true, net: true, volume: true, battery: true,
-                    tray: true, user: true, basketLeft: true, basketRight: true,
+                    tray: true, user: true, basketLeft: true, basketRight: true, dockstrip: true,
                     overview: true, dashboard: true, settings: true, power: true
                 },
                 sections: {
-                    left: ["launcher", "workspaces", "title"],
+                    left: ["launcher", "workspaces", "dockstrip", "title"],
                     center: ["clock"],
                     right: ["media", "stats", "net", "volume", "battery", "tray",
                             "user", "basketLeft", "basketRight", "overview",
@@ -49,6 +49,7 @@ QtObject {
                 autoHide: false,
                 iconSize: 42,
                 showMedia: true,      // mini player + dashboard button row
+                mode: "standalone",   // standalone | bar (compact strip inside the bar)
                 avoidWindows: true,   // tuck the dock away while apps are open
                 hoverZone: 12,        // px of edge that reacts to the pointer
                 columns: 9,           // free grid: 1..12
@@ -204,6 +205,17 @@ QtObject {
             outline: "#0a246a", bevelLight: "#ffffff", bevelDark: "#7f9db9",
             panelDark: "#d4d0c8", panelTextShadow: "#ffffff",
             cardText: "#1a1a1a", cardTextDim: "#444444", cardTitle: "#0a246a"
+        },
+        win7: {
+            accent: "#3c8cd6", gold: "#ffd34d",
+            barTexture: "win7_bar", panelTexture: "win7_panel", cardTexture: "win7_card",
+            dockTexture: "win7_task", barTextureOpacity: 1.0, barTextureStretch: true,
+            barBg: "#1f2d3d", panel: "#f0f0f0", cardBg: "#ffffff", dockBg: "#1f2d3d",
+            text: "#ffffff", textDim: "#cdd9e5", textOnPanel: "#1a1a1a",
+            textShadow: "#0b1622", textHints: "#555555",
+            outline: "#2b3f55", bevelLight: "#ffffff", bevelDark: "#9aa7b4",
+            panelDark: "#dcdcdc", panelTextShadow: "#ffffff",
+            cardText: "#1a1a1a", cardTextDim: "#555555", cardTitle: "#1f4e79"
         },
         win95: {
             accent: "#000080", gold: "#000080",

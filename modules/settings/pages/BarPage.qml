@@ -144,6 +144,18 @@ Column {
 
     SettingRow {
         width: parent.width
+        label: I18n.t("settings.bar.autoHide")
+
+        McButton {
+            anchors.right: parent.right
+            label: Settings.get("bar.autoHide", false) ? I18n.t("common.on") : I18n.t("common.off")
+            checked: Settings.get("bar.autoHide", false)
+            onClicked: Settings.toggle("bar.autoHide")
+        }
+    }
+
+    SettingRow {
+        width: parent.width
         label: I18n.t("settings.bar.clock")
 
         McButton {

@@ -15,8 +15,8 @@ blocks, hotbar slots and stone GUI panels.
 
 **English · 简体中文 · 繁體中文** — the whole UI is translated and switches live.
 
-**Seven built-in themes** — classic, cave, snow mountain, desert, village, Windows XP and
-Windows 95 — each one a full palette + block-texture set, switchable from Settings → Theme:
+**Eight built-in themes** — classic, cave, snow mountain, desert, village, Windows 7,
+Windows XP and Windows 95 — each one a full palette + block-texture set, switchable from Settings → Theme:
 
 ![Themes](docs/screenshots/16-themes.png)
 
@@ -52,7 +52,9 @@ Windows 95 — each one a full palette + block-texture set, switchable from Sett
 
 ### Bar (4 edges)
 
-Every bar item (workspaces, title, clock, media, stats, net, volume, battery, tray, user,
+The bar can **auto-hide** like the dock: enable it in Settings → Status bar and the bar
+collapses to a 6px strip, expanding when the pointer touches it (the reserved edge follows,
+so windows reclaim the space). Every bar item (workspaces, title, clock, media, stats, net, volume, battery, tray, user,
 baskets, overview, dashboard, settings, power …) has its own **on/off switch** and can be
 assigned to the **left / centre / right** section in Settings → Status bar → Placement.
 
@@ -73,7 +75,8 @@ column automatically.
 ### Dock — the player inventory
 A wooden inventory basket of app slots whose **rows and columns are free** (1–12 columns ×
 1–6 rows, e.g. the classic 9×3 or a compact 5×2). Pin your apps, change the icon size,
-move the dock to **any of the four edges**, or let it auto-hide behind a 4px strip. Empty
+switch it between a floating dock and a compact **strip inside the bar**
+(Settings → Dock → *dock style*), move it to **any of the four edges**, or let it auto-hide behind a 4px strip. Empty
 slots are drawn too, because an inventory without empty slots isn't an inventory.
 
 Besides pinned apps the dock lists **everything running on the current workspace** (green
