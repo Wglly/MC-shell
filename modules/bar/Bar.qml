@@ -48,7 +48,7 @@ PanelWindow {
     implicitHeight: root.vertical ? (root.scr ? root.scr.height : 1080) : root.visibleThickness
     color: "transparent"
     visible: root.barVisible
-    exclusiveZone: root.barVisible ? root.visibleThickness : 0
+    exclusiveZone: 0
     exclusionMode: ExclusionMode.Normal
 
     IdleInhibitor {

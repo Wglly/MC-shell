@@ -237,6 +237,11 @@ ShellRoot {
         targetScreen: shell.primaryScreen
     }
 
+    BarSpacer {
+        targetScreen: shell.primaryScreen
+    }
+
+
     BarPopup {
         targetScreen: shell.primaryScreen
     }
