@@ -571,7 +571,7 @@ def basket_icons() -> None:
 
 
 def win7_tiles() -> None:
-    """Windows 7 Aero-ish glass: dark translucent gradient bar + light dialog."""
+    """Windows 7 Aero: glass taskbar gradient and clean light dialogs."""
     def ramp(h, stops):
         img = Image.new("RGB", (16, h))
         px = img.load()
@@ -589,34 +589,40 @@ def win7_tiles() -> None:
                 px[x, y] = c
         return img
 
-    bar = ramp(64, [(0.0, (58, 78, 100)), (0.12, (40, 58, 78)), (0.5, (30, 44, 60)),
-                    (0.86, (26, 38, 52)), (1.0, (16, 24, 34))])
+    bar = ramp(64, [(0.0, (214, 236, 250)), (0.03, (96, 128, 152)),
+                    (0.10, (52, 80, 104)), (0.45, (37, 57, 76)),
+                    (0.85, (27, 42, 58)), (1.0, (14, 22, 32))])
     save(bar, "win7_bar.png")
 
     task = Image.new("RGB", (TILE, TILE))
     px = task.load()
     for y in range(TILE):
         for x in range(TILE):
-            c = (34, 48, 64) if y < 3 else (26, 38, 52)
+            if y == 0:
+                c = (120, 152, 178)
+            elif y < 3:
+                c = (58, 84, 108)
+            else:
+                c = (34, 52, 70)
             px[x, y] = c
     save(task, "win7_task.png")
 
     panel = Image.new("RGB", (TILE, TILE))
     px = panel.load()
-    rng = random.Random(71)
     for y in range(TILE):
+        v = 250 - int(8 * y / TILE)
         for x in range(TILE):
-            px[x, y] = shade("#f0f0f0", rng.randint(-2, 2))
+            px[x, y] = (v, v, v)
     for x in range(TILE):
         px[x, 0] = (255, 255, 255)
-        px[x, TILE - 1] = (188, 188, 188)
+        px[x, TILE - 1] = (178, 178, 178)
     save(panel, "win7_panel.png")
 
     card = Image.new("RGB", (TILE, TILE))
     px = card.load()
     for y in range(TILE):
         for x in range(TILE):
-            px[x, y] = (255, 255, 255)
+            px[x, y] = (255, 255, 255) if y < TILE - 2 else (242, 242, 242)
     save(card, "win7_card.png")
 
 

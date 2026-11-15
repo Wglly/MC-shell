@@ -207,15 +207,15 @@ QtObject {
             cardText: "#1a1a1a", cardTextDim: "#444444", cardTitle: "#0a246a"
         },
         win7: {
-            accent: "#3c8cd6", gold: "#ffd34d",
+            accent: "#4aa3df", gold: "#ffd34d",
             barTexture: "win7_bar", panelTexture: "win7_panel", cardTexture: "win7_card",
             dockTexture: "win7_task", barTextureOpacity: 1.0, barTextureStretch: true,
-            barBg: "#1f2d3d", panel: "#f0f0f0", cardBg: "#ffffff", dockBg: "#1f2d3d",
-            text: "#ffffff", textDim: "#cdd9e5", textOnPanel: "#1a1a1a",
-            textShadow: "#0b1622", textHints: "#555555",
-            outline: "#2b3f55", bevelLight: "#ffffff", bevelDark: "#9aa7b4",
-            panelDark: "#dcdcdc", panelTextShadow: "#ffffff",
-            cardText: "#1a1a1a", cardTextDim: "#555555", cardTitle: "#1f4e79"
+            barBg: "#24384c", panel: "#f2f2f2", cardBg: "#ffffff", dockBg: "#24384c",
+            text: "#ffffff", textDim: "#c9d7e3", textOnPanel: "#1a1a1a",
+            textShadow: "#0a141f", textHints: "#5a6672",
+            outline: "#4a6480", bevelLight: "#e8f4ff", bevelDark: "#8fa6ba",
+            panelDark: "#e2e2e2", panelTextShadow: "#ffffff",
+            cardText: "#1a1a1a", cardTextDim: "#5a6672", cardTitle: "#1f4e79"
         },
         win95: {
             accent: "#000080", gold: "#000080",
