@@ -17,10 +17,18 @@ PanelWindow {
     exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Top
 
+    // leave the basket columns uncovered so clicks inside them reach the basket
+    readonly property int leftPad: ShellState.leftBasket
+        ? Math.max(0, Settings.get("sidebars.left.width", 260) + 24) : 0
+    readonly property int rightPad: ShellState.rightBasket
+        ? Math.max(0, Settings.get("sidebars.right.width", 260) + 24) : 0
+
     anchors.top: true
     anchors.bottom: true
     anchors.left: true
     anchors.right: true
+    margins.left: root.leftPad
+    margins.right: root.rightPad
 
     MouseArea {
         anchors.fill: parent
