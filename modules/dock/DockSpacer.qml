@@ -17,8 +17,12 @@ PanelWindow {
 
     screen: targetScreen
     color: "transparent"
+    // vertical docks never reserve an edge band: it would shrink other layer surfaces
+    // (the bar) and the dock already hides itself while windows are open
+    readonly property bool horizontalDock: root.edge === "top" || root.edge === "bottom"
     visible: Settings.get("dock.visible", true) === true && reserve > 0
         && Settings.get("dock.mode", "standalone") === "standalone"
+        && root.horizontalDock
     exclusionMode: ExclusionMode.Normal
     exclusiveZone: reserve
     WlrLayershell.layer: WlrLayer.Background
