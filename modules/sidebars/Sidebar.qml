@@ -58,6 +58,10 @@ PanelWindow {
         ? (barPos === "left" ? barThickness : 0) + 4
           + (dockVisible && dockPos === "left" ? dockVertSize + 4 : 0)
         : 0
+    readonly property int spacerZone: (ShellState.leftBasket && side === "left")
+        ? Settings.get("sidebars.left.width", 260) + 12
+        : ((ShellState.rightBasket && side === "right")
+            ? Settings.get("sidebars.right.width", 260) + 12 : 0)
     margins.right: side === "right"
         ? (barPos === "right" ? barThickness : 0) + 4
           + (dockVisible && dockPos === "right" ? dockVertSize + 4 : 0)
