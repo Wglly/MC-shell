@@ -111,6 +111,7 @@ QtObject {
             },
             sidebars: {
                 closeMode: "click",
+                closeDelay: 450,
                 left: { enabled: true, width: 260, widgets: ["perfmon", "wallpaper", "widgetmanager"] },
                 right: { enabled: true, width: 260, widgets: ["user", "toggles", "sliders", "messages"] }
             },

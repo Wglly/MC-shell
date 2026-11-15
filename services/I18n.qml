@@ -128,7 +128,7 @@ QtObject {
             "settings.sidebars.left": "LEFT BASKET", "settings.sidebars.right": "RIGHT BASKET",
             "settings.sidebars.enabled": "SHOW", "settings.sidebars.width": "WIDTH",
             "settings.sidebars.widgets": "WIDGETS",
-            "settings.sidebars.close": "CLOSE BASKETS", "settings.sidebars.closeClick": "CLICK OUTSIDE", "settings.sidebars.closeHover": "ON MOUSE LEAVE",
+            "settings.sidebars.close": "CLOSE BASKETS", "settings.sidebars.closeDelay": "LEAVE DELAY", "settings.sidebars.closeDelay": "LEAVE DELAY", "settings.sidebars.closeClick": "CLICK OUTSIDE", "settings.sidebars.closeHover": "ON MOUSE LEAVE",
             "settings.sidebars.note": "Baskets dock to the screen edges and host widgets.",
 
             "widget.clock": "CLOCK", "widget.weather": "WEATHER", "widget.visualizer": "MUSIC",
@@ -262,7 +262,7 @@ QtObject {
             "settings.sidebars.left": "左侧边篮", "settings.sidebars.right": "右侧边篮",
             "settings.sidebars.enabled": "显示", "settings.sidebars.width": "宽度",
             "settings.sidebars.widgets": "组件",
-            "settings.sidebars.close": "CLOSE BASKETS", "settings.sidebars.closeClick": "CLICK OUTSIDE", "settings.sidebars.closeHover": "ON MOUSE LEAVE",
+            "settings.sidebars.close": "CLOSE BASKETS", "settings.sidebars.closeDelay": "LEAVE DELAY", "settings.sidebars.closeDelay": "LEAVE DELAY", "settings.sidebars.closeClick": "CLICK OUTSIDE", "settings.sidebars.closeHover": "ON MOUSE LEAVE",
             "settings.sidebars.note": "侧边篮贴靠屏幕左右边缘，用来承载组件。",
 
             "widget.clock": "时钟", "widget.weather": "天气", "widget.visualizer": "音乐",
@@ -389,7 +389,7 @@ QtObject {
             "settings.sidebars.left": "左側邊籃", "settings.sidebars.right": "右側邊籃",
             "settings.sidebars.enabled": "顯示", "settings.sidebars.width": "寬度",
             "settings.sidebars.widgets": "元件",
-            "settings.sidebars.close": "CLOSE BASKETS", "settings.sidebars.closeClick": "CLICK OUTSIDE", "settings.sidebars.closeHover": "ON MOUSE LEAVE",
+            "settings.sidebars.close": "CLOSE BASKETS", "settings.sidebars.closeDelay": "LEAVE DELAY", "settings.sidebars.closeDelay": "LEAVE DELAY", "settings.sidebars.closeClick": "CLICK OUTSIDE", "settings.sidebars.closeHover": "ON MOUSE LEAVE",
             "settings.sidebars.note": "側邊籃貼靠螢幕左右邊緣，用來承載元件。",
 
             "widget.clock": "時鐘", "widget.weather": "天氣", "widget.visualizer": "音樂",

@@ -39,7 +39,7 @@ PanelWindow {
 
     Timer {
         id: leaveTimer
-        interval: 450
+        interval: Math.max(0, Settings.get("sidebars.closeDelay", 450))
         repeat: false
         onTriggered: if (root.open) root.closeAll()
     }

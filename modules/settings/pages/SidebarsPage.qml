@@ -120,6 +120,29 @@ Column {
 
     SettingRow {
         width: page.width
+        label: I18n.t("settings.sidebars.closeDelay")
+
+        Row {
+            anchors.right: parent.right
+            spacing: 8
+            McSlider {
+                width: 150
+                value: (Settings.get("sidebars.closeDelay", 450) - 100) / 1400
+                onMoved: v => Settings.set("sidebars.closeDelay", Math.round(100 + v * 1400))
+            }
+            PixelText {
+                anchors.verticalCenter: parent.verticalCenter
+                width: 56
+                text: Settings.get("sidebars.closeDelay", 450) + "ms"
+                font.pixelSize: Theme.fontSmall
+                color: Theme.textOnPanel
+                styleColor: Theme.panelTextShadow
+            }
+        }
+    }
+
+    SettingRow {
+        width: page.width
         label: I18n.t("settings.sidebars.close")
 
         Row {
