@@ -200,7 +200,7 @@ QtObject {
         winxp: {
             accent: "#316ac5", gold: "#ffd34d",
             barTexture: "winxp_bar", panelTexture: "winxp_panel", cardTexture: "winxp_card",
-            dockTexture: "winxp_task", barTextureOpacity: 1.0, barTextureStretch: true,
+            dockTexture: "", barTextureOpacity: 1.0, barTextureStretch: true,
             barBg: "#245edb", panel: "#ece9d8", cardBg: "#ffffff", dockBg: "#245edb",
             text: "#ffffff", textDim: "#dbe8ff", textOnPanel: "#000000",
             textShadow: "#08316e", textHints: "#4a4a4a",
