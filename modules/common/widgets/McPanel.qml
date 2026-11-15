@@ -16,7 +16,8 @@ Item {
     // 0 = flat frame, 1 = classic inset GUI look
     property bool inset: false
 
-    readonly property real radius: Theme.cornerRadius
+    property bool liquid: false
+    readonly property real radius: Theme.cornerRadius > 0 && root.liquid ? Theme.cornerRadius + 6 : Theme.cornerRadius
     readonly property bool glass: Theme.cornerRadius > 0
 
     default property alias content: contentItem.data
@@ -57,7 +58,8 @@ Item {
         anchors.margins: 1
         radius: Math.max(0, root.radius - 1)
         color: root.glass
-            ? Qt.rgba(root.background.r, root.background.g, root.background.b, Theme.glassOpacity)
+            ? Qt.rgba(root.background.r, root.background.g, root.background.b,
+                      Math.min(1, Theme.glassOpacity * (root.liquid ? 0.66 : 1.0)))
             : root.background
     }
 
@@ -68,9 +70,9 @@ Item {
         anchors.margins: 2
         radius: Math.max(0, root.radius - 2)
         gradient: Gradient {
-            GradientStop { position: 0.0; color: "#38ffffff" }
+            GradientStop { position: 0.0; color: root.liquid ? "#5cffffff" : "#38ffffff" }
             GradientStop { position: 0.45; color: "#00ffffff" }
-            GradientStop { position: 1.0; color: "#12000000" }
+            GradientStop { position: 1.0; color: root.liquid ? "#1f000000" : "#12000000" }
         }
     }
 

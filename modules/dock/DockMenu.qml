@@ -54,6 +54,7 @@ PanelWindow {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 150
+        liquid: true
         background: Theme.panel
         texture: Theme.texturePath(Theme.panelTexture)
         textureOpacity: 0.35

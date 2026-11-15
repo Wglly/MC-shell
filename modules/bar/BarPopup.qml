@@ -79,6 +79,7 @@ PanelWindow {
             : Math.round((parent.width - width) / 2)
         anchors.top: parent.top
         anchors.topMargin: Theme.barHeight + 6
+        liquid: true
         background: Theme.panel
         texture: Theme.texturePath(Theme.panelTexture)
         textureOpacity: 0.35

@@ -40,6 +40,13 @@ ShellRoot {
     //   hl.bind("Print", hl.dsp.global("mc-shell:screenshot"))
     GlobalShortcut {
         appid: "mc-shell"
+        name: "overview"
+        description: "MC-shell: desktop overview"
+        onPressedChanged: if (pressed) ShellState.toggleOverlay("overview")
+    }
+
+    GlobalShortcut {
+        appid: "mc-shell"
         name: "screenshot"
         description: "MC-shell: screenshot"
         onPressedChanged: if (pressed) Capture.screenshot()
