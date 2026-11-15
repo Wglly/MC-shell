@@ -12,9 +12,10 @@ QtObject {
     // ---------------------------------------------------------------- fonts
     // Overwritten by the FontLoader in shell.qml once Monocraft is ready.
     property string fontFamily: "Monocraft"
-    readonly property int fontSmall: 12
-    readonly property int fontNormal: 14
-    readonly property int fontLarge: 18
+    property real uiScale: 1.0
+    readonly property int fontSmall: Math.round(12 * uiScale)
+    readonly property int fontNormal: Math.round(14 * uiScale)
+    readonly property int fontLarge: Math.round(18 * uiScale)
     readonly property int fontTitle: 22
 
     // ------------------------------------------------------------- palette
@@ -71,7 +72,8 @@ QtObject {
 
     // -------------------------------------------------------------- sizing
     readonly property int barHeight: 40
-    readonly property int slotSize: 34
+    readonly property int slotSizeBase: 34
+    readonly property int slotSize: Math.round(slotSizeBase * uiScale)
     readonly property int gap: 6
     readonly property int pad: 10
 

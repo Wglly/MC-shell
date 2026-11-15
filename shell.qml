@@ -153,6 +153,11 @@ ShellRoot {
     }
     Binding {
         target: Theme
+        property: "uiScale"
+        value: Settings.get("theme.scale", 1.0)
+    }
+    Binding {
+        target: Theme
         property: "bevelSize"
         value: Settings.get("theme.bevelSize", 2)
     }

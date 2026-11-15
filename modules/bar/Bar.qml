@@ -16,7 +16,8 @@ PanelWindow {
 
     readonly property string pos: Settings.get("bar.position", "top")
     readonly property bool vertical: pos === "left" || pos === "right"
-    readonly property int thickness: Math.max(36, Settings.get("bar.thickness", 40))
+    readonly property int thickness: Math.max(36,
+        Math.round(Settings.get("bar.thickness", 40) * Theme.uiScale))
     readonly property bool barVisible: Settings.get("bar.visible", true)
     readonly property bool autoHide: Settings.get("bar.autoHide", false) === true
     property bool hovered: false
