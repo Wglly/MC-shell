@@ -1,6 +1,7 @@
 pragma Singleton
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Io
 
 // System.qml — brightness and session actions, the few things that need shell
@@ -65,10 +66,16 @@ QtObject {
     }
     // Quits the compositor (logs the user out of the Wayland session).
     function quitCompositor() {
-        if (Compositor.backend === "hyprland")
-            run("hyprctl dispatch exit");
-        else if (Compositor.backend === "niri")
+        if (Compositor.backend === "hyprland") {
+            // Hyprland 0.57 Lua configs reject the legacy "dispatch exit"; the Lua
+            // dispatcher must be used instead.
+            if (Compositor.hyprLua)
+                Hyprland.dispatch("hl.dsp.exit()");
+            else
+                run("hyprctl dispatch exit");
+        } else if (Compositor.backend === "niri") {
             run("niri msg action quit");
+        }
     }
 
     function uptimeText() {
