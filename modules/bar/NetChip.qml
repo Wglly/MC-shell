@@ -21,5 +21,5 @@ Chip {
 
     value: root.connected ? I18n.t("common.on") : I18n.t("common.off")
     valueColor: root.connected ? Theme.grass : Theme.red
-    onClicked: ShellState.toggleOverlay("control")
+    onClicked: ShellState.toggleOverlay("connectivity")
 }
