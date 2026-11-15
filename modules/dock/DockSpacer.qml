@@ -20,9 +20,12 @@ PanelWindow {
     // vertical docks never reserve an edge band: it would shrink other layer surfaces
     // (the bar) and the dock already hides itself while windows are open
     readonly property bool horizontalDock: spacer.edge === "top" || spacer.edge === "bottom"
+    // when the bar already owns this edge, the bar's own exclusive zone is enough:
+    // adding a second band made Hyprland push the bar outward
+    readonly property bool sharesBarEdge: spacer.edge === Settings.get("bar.position", "top")
     visible: Settings.get("dock.visible", true) === true && reserve > 0
         && Settings.get("dock.mode", "standalone") === "standalone"
-        && spacer.horizontalDock
+        && spacer.horizontalDock && !spacer.sharesBarEdge
     exclusionMode: ExclusionMode.Normal
     exclusiveZone: reserve
     WlrLayershell.layer: WlrLayer.Background
