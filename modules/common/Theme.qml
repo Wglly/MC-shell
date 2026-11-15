@@ -78,6 +78,8 @@ QtObject {
     // ------------------------------------------------------------- helpers
     // Texture names live in assets/textures/<name>.png
     function texturePath(name) {
+        if (!name)
+            return "";
         var n = ("" + (name || "deepslate")).replace(/[^a-z0-9_]/g, "");
         return Qt.resolvedUrl("../../assets/textures/" + n + ".png");
     }

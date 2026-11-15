@@ -220,8 +220,8 @@ QtObject {
         },
         win95: {
             accent: "#000080", gold: "#000080",
-            barTexture: "win95", panelTexture: "win95", cardTexture: "win95",
-            dockTexture: "win95", barTextureOpacity: 1.0, barTextureStretch: false,
+            barTexture: "", panelTexture: "", cardTexture: "",
+            dockTexture: "", barTextureOpacity: 1.0, barTextureStretch: false,
             barBg: "#c0c0c0", panel: "#c0c0c0", cardBg: "#c0c0c0", dockBg: "#c0c0c0",
             text: "#000000", textDim: "#404040", textOnPanel: "#000000",
             textShadow: "#ffffff", textHints: "#000000",
