@@ -209,11 +209,10 @@ mc-shell              # start it
 ```
 
 Arch-based: `./install.sh` · Fedora: `./install-fedora.sh` · Debian/Ubuntu:
-`./install-debian.sh` — the distro scripts install the runtime dependencies
-(`curl`, `grim`, `slurp`, `wf-recorder`, `cava`, `brightnessctl`, PipeWire,
-NetworkManager, BlueZ) and then run the same per-user install. Quickshell itself is
-not packaged on Fedora/Debian yet; the scripts print the one-time source build
-instructions if `qs` is missing.
+`./install-debian.sh` — the distro scripts are one-click: they install every runtime
+dependency, try the distro package for Quickshell, and otherwise build Quickshell into
+`~/.local` automatically (build deps included, no manual steps). If `~/.local/bin` is
+not on `PATH`, the script adds it to `~/.bashrc` / `~/.zshrc` / `~/.profile`.
 
 Autostart:
 
