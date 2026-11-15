@@ -16,22 +16,62 @@ Item {
     // 0 = flat frame, 1 = classic inset GUI look
     property bool inset: false
 
+    readonly property real radius: Theme.cornerRadius
+    readonly property bool glass: Theme.cornerRadius > 0
+
     default property alias content: contentItem.data
 
     implicitWidth: 200
     implicitHeight: 120
 
-    // 1. hard black outline
+    // 0. aero drop shadow (glass mode)
+    Rectangle {
+        z: -3
+        visible: root.glass
+        anchors.fill: parent
+        anchors.margins: -8
+        radius: root.radius + 8
+        color: "#000000"
+        opacity: 0.10
+    }
+    Rectangle {
+        z: -2
+        visible: root.glass
+        anchors.fill: parent
+        anchors.margins: -4
+        radius: root.radius + 4
+        color: "#000000"
+        opacity: 0.14
+    }
+
+    // 1. frame
     Rectangle {
         anchors.fill: parent
-        color: root.outlineColor
+        radius: root.radius
+        color: root.glass ? Theme.glassBorder : root.outlineColor
     }
 
     // 2. base fill
     Rectangle {
         anchors.fill: parent
         anchors.margins: 1
-        color: root.background
+        radius: Math.max(0, root.radius - 1)
+        color: root.glass
+            ? Qt.rgba(root.background.r, root.background.g, root.background.b, Theme.glassOpacity)
+            : root.background
+    }
+
+    // glass sheen
+    Rectangle {
+        visible: root.glass
+        anchors.fill: parent
+        anchors.margins: 2
+        radius: Math.max(0, root.radius - 2)
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "#38ffffff" }
+            GradientStop { position: 0.45; color: "#00ffffff" }
+            GradientStop { position: 1.0; color: "#12000000" }
+        }
     }
 
     // 3. tiled pixel texture
@@ -41,30 +81,34 @@ Item {
         source: root.texture
         fillMode: root.textureFillMode
         opacity: root.textureOpacity
-        visible: root.texture !== ""
+        visible: root.texture !== "" && !root.glass
         smooth: false
         mipmap: false
     }
 
     // 4. bevel: light on top/left, dark on bottom/right
     Rectangle {
+        visible: !root.glass
         anchors { left: parent.left; right: parent.right; top: parent.top; margins: 1 }
         height: root.bevel
         color: Theme.bevelLight
         opacity: root.inset ? 0.55 : 1.0
     }
     Rectangle {
+        visible: !root.glass
         anchors { left: parent.left; top: parent.top; bottom: parent.bottom; margins: 1 }
         width: root.bevel
         color: Theme.bevelLight
         opacity: root.inset ? 0.55 : 1.0
     }
     Rectangle {
+        visible: !root.glass
         anchors { left: parent.left; right: parent.right; bottom: parent.bottom; margins: 1 }
         height: root.bevel
         color: Theme.bevelDark
     }
     Rectangle {
+        visible: !root.glass
         anchors { right: parent.right; top: parent.top; bottom: parent.bottom; margins: 1 }
         width: root.bevel
         color: Theme.bevelDark

@@ -215,7 +215,8 @@ QtObject {
             textShadow: "#0a141f", textHints: "#5a6672",
             outline: "#4a6480", bevelLight: "#e8f4ff", bevelDark: "#8fa6ba",
             panelDark: "#e2e2e2", panelTextShadow: "#ffffff",
-            cardText: "#1a1a1a", cardTextDim: "#5a6672", cardTitle: "#1f4e79"
+            cardText: "#1a1a1a", cardTextDim: "#5a6672", cardTitle: "#1f4e79",
+            cornerRadius: 10, glassOpacity: 0.9, glassBorder: "#7fb4d6"
         },
         win95: {
             accent: "#000080", gold: "#000080",
@@ -237,6 +238,13 @@ QtObject {
         root.set("theme.preset", name);
         for (var key in preset)
             root.set("theme." + key, preset[key]);
+        // glass surfaces only exist in themes that ask for them
+        if (preset.cornerRadius === undefined)
+            root.set("theme.cornerRadius", 0);
+        if (preset.glassOpacity === undefined)
+            root.set("theme.glassOpacity", 1.0);
+        if (preset.glassBorder === undefined)
+            root.set("theme.glassBorder", "#1a1a1a");
     }
 
     // Bring older config files forward when the basket layout changes.

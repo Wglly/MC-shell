@@ -146,6 +146,21 @@ ShellRoot {
     }
     Binding {
         target: Theme
+        property: "cornerRadius"
+        value: Settings.get("theme.cornerRadius", 0)
+    }
+    Binding {
+        target: Theme
+        property: "glassOpacity"
+        value: Settings.get("theme.glassOpacity", 1.0)
+    }
+    Binding {
+        target: Theme
+        property: "glassBorder"
+        value: Settings.get("theme.glassBorder", "#1a1a1a")
+    }
+    Binding {
+        target: Theme
         property: "widgetFontScale"
         value: Settings.get("widgets.fontScale", 1.0)
     }
