@@ -21,8 +21,8 @@ Chip {
 
     value: root.connected ? I18n.t("common.on") : I18n.t("common.off")
     valueColor: root.connected ? Theme.grass : Theme.red
-    onClicked: mouse => {
-        var p = parent.mapToItem(null, mouse.x, mouse.y);
+    onClicked: {
+        var p = root.mapToItem(null, root.width / 2, root.height / 2);
         ShellState.barPopupX = p.x;
         ShellState.popupAnchorY = p.y;
         ShellState.toggleOverlay("connectivity");
