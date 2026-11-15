@@ -51,7 +51,7 @@ PanelWindow {
         PixelText {
             x: Math.round((parent.width - width) / 2)
             text: I18n.t("power.title")
-            font.pixelSize: 44
+            font.pixelSize: Theme.raw(44)
             color: Theme.text
         }
 
@@ -89,7 +89,7 @@ PanelWindow {
         PixelText {
             x: Math.round((parent.width - width) / 2)
             text: I18n.t("power.hint")
-            font.pixelSize: 10
+            font.pixelSize: Theme.raw(10)
             color: Theme.textDim
         }
     }

@@ -49,7 +49,7 @@ McPanel {
             width: parent.width
             text: Stats.memUsed.toFixed(1) + " / " + Stats.memTotal.toFixed(1) + " GB   "
                   + "UP " + System.uptimeText()
-            font.pixelSize: 10
+            font.pixelSize: Theme.raw(10)
             color: Theme.cardTextDim
         }
     }

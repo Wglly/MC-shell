@@ -143,7 +143,7 @@ PanelWindow {
                     horizontalAlignment: Text.AlignRight
                     elide: Text.ElideRight
                     text: I18n.t("overview.hint")
-                    font.pixelSize: 9
+                    font.pixelSize: Theme.raw(9)
                     color: Theme.textDim
                 }
             }
@@ -204,12 +204,12 @@ PanelWindow {
                                 PixelText {
                                     visible: card.isCurrent
                                     text: I18n.t("overview.current")
-                                    font.pixelSize: 9
+                                    font.pixelSize: Theme.raw(9)
                                     color: Theme.grass
                                 }
                                 PixelText {
                                     text: card.wins.length
-                                    font.pixelSize: 9
+                                    font.pixelSize: Theme.raw(9)
                                     color: Theme.textDim
                                 }
                             }
@@ -250,7 +250,7 @@ PanelWindow {
                                             elide: Text.ElideRight
                                             text: Settings.get("overview.titles", true)
                                                 ? modelData.title : (modelData.appId || modelData.title)
-                                            font.pixelSize: 10
+                                            font.pixelSize: Theme.raw(10)
                                             color: Theme.text
                                         }
                                     }
@@ -291,13 +291,13 @@ PanelWindow {
                             PixelText {
                                 visible: card.wins.length === 0
                                 text: I18n.t("overview.empty")
-                                font.pixelSize: 10
+                                font.pixelSize: Theme.raw(10)
                                 color: Theme.textDim
                             }
                             PixelText {
                                 visible: card.wins.length > 5
                                 text: "+" + (card.wins.length - 5) + " " + I18n.t("overview.more")
-                                font.pixelSize: 9
+                                font.pixelSize: Theme.raw(9)
                                 color: Theme.textDim
                             }
                         }
@@ -324,7 +324,7 @@ PanelWindow {
                 anchors.margins: 8
                 elide: Text.ElideRight
                 text: root.dragWin ? root.dragWin.title : ""
-                font.pixelSize: 10
+                font.pixelSize: Theme.raw(10)
                 color: Theme.gold
             }
         }

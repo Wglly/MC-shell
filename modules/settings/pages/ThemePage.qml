@@ -88,7 +88,7 @@ Column {
                     horizontalAlignment: Text.AlignHCenter
                     elide: Text.ElideRight
                     text: I18n.t("theme." + modelData)
-                    font.pixelSize: 8
+                    font.pixelSize: Theme.raw(8)
                     color: "#ffffff"
                 }
 
@@ -261,7 +261,7 @@ Column {
     PixelText {
         width: parent.width
         text: I18n.t("settings.theme.note")
-        font.pixelSize: 9
+        font.pixelSize: Theme.raw(9)
         color: Theme.textHints
         styleColor: Theme.panelTextShadow
         wrapMode: Text.Wrap

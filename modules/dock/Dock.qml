@@ -179,7 +179,7 @@ PanelWindow {
                         text: root.player
                             ? (root.player.trackTitle || I18n.t("control.nothingPlaying"))
                             : I18n.t("control.nothingPlaying")
-                        font.pixelSize: 10
+                        font.pixelSize: Theme.raw(10)
                         color: Theme.text
                     }
                     PixelText {
@@ -187,7 +187,7 @@ PanelWindow {
                         elide: Text.ElideRight
                         visible: root.player !== null
                         text: root.player ? (root.player.trackArtist || "") : ""
-                        font.pixelSize: 9
+                        font.pixelSize: Theme.raw(9)
                         color: Theme.textDim
                     }
                 }

@@ -33,12 +33,12 @@ McPanel {
                 spacing: 2
                 PixelText {
                     text: Weather.ok ? (Weather.tempC + "°C") : (Weather.loading ? "…" : "--°C")
-                    font.pixelSize: 26
+                    font.pixelSize: Theme.raw(26)
                     color: Theme.cardText
                 }
                 PixelText {
                     text: Weather.ok ? Weather.condition : I18n.t("weather.loading")
-                    font.pixelSize: 10
+                    font.pixelSize: Theme.raw(10)
                     color: Theme.cardTextDim
                     elide: Text.ElideRight
                     width: 150
@@ -52,14 +52,14 @@ McPanel {
             text: Weather.ok
                 ? (Weather.location + "   " + Weather.maxC + "° / " + Weather.minC + "°")
                 : I18n.t("weather.unavailable")
-            font.pixelSize: 10
+            font.pixelSize: Theme.raw(10)
             color: Theme.cardTextDim
         }
 
         PixelText {
             visible: Weather.ok
             text: "H " + Weather.humidity + "%   W " + Weather.windKmph + " km/h"
-            font.pixelSize: 10
+            font.pixelSize: Theme.raw(10)
             color: Theme.cardTextDim
         }
     }

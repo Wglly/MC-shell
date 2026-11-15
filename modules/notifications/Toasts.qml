@@ -50,7 +50,7 @@ PanelWindow {
                         width: parent.width
                         elide: Text.ElideRight
                         text: modelData.app.toUpperCase()
-                        font.pixelSize: 10
+                        font.pixelSize: Theme.raw(10)
                         color: Theme.gold
                     }
                     PixelText {
@@ -67,7 +67,7 @@ PanelWindow {
                         wrapMode: Text.Wrap
                         maximumLineCount: 2
                         text: modelData.body
-                        font.pixelSize: 10
+                        font.pixelSize: Theme.raw(10)
                         color: Theme.textDim
                     }
                 }

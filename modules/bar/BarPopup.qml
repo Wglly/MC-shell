@@ -143,7 +143,7 @@ PanelWindow {
                 width: parent.width
                 horizontalAlignment: Text.AlignHCenter
                 text: I18n.t("calendar.weekdays")
-                font.pixelSize: 10
+                font.pixelSize: Theme.raw(10)
                 color: Theme.textHints
                 styleColor: Theme.panelTextShadow
             }
@@ -176,7 +176,7 @@ PanelWindow {
                         PixelText {
                             anchors.centerIn: parent
                             text: inMonth ? day : ""
-                            font.pixelSize: 11
+                            font.pixelSize: Theme.raw(11)
                             color: isToday ? "#1a1a1a" : Theme.textOnPanel
                             styleColor: Theme.panelTextShadow
                         }
@@ -234,7 +234,7 @@ PanelWindow {
                         id: menuHost
                         width: parent.width
                         elide: Text.ElideRight
-                        font.pixelSize: 10
+                        font.pixelSize: Theme.raw(10)
                         color: Theme.textOnPanel
                         styleColor: Theme.panelTextShadow
                     }
@@ -248,14 +248,14 @@ PanelWindow {
                 text: I18n.t("user.uptime") + "  "
                     + Math.floor(Stats.uptime / 3600) + "h "
                     + Math.floor((Stats.uptime % 3600) / 60) + "m"
-                font.pixelSize: 10
+                font.pixelSize: Theme.raw(10)
                 color: Theme.textOnPanel
                 styleColor: Theme.panelTextShadow
             }
             PixelText {
                 width: parent.width
                 text: I18n.t("user.session") + "  " + Compositor.backend + " · MC-shell"
-                font.pixelSize: 10
+                font.pixelSize: Theme.raw(10)
                 color: Theme.textOnPanel
                 styleColor: Theme.panelTextShadow
             }
@@ -299,7 +299,7 @@ PanelWindow {
                 PixelText {
                     width: 54
                     text: "CPU"
-                    font.pixelSize: 10
+                    font.pixelSize: Theme.raw(10)
                     color: Theme.textOnPanel
                     styleColor: Theme.panelTextShadow
                 }
@@ -321,7 +321,7 @@ PanelWindow {
                     anchors.verticalCenter: parent.verticalCenter
                     width: 48
                     text: Math.round(Stats.cpu * 100) + "%"
-                    font.pixelSize: 10
+                    font.pixelSize: Theme.raw(10)
                     color: Theme.textOnPanel
                     styleColor: Theme.panelTextShadow
                 }
@@ -334,7 +334,7 @@ PanelWindow {
                 PixelText {
                     width: 54
                     text: "MEM"
-                    font.pixelSize: 10
+                    font.pixelSize: Theme.raw(10)
                     color: Theme.textOnPanel
                     styleColor: Theme.panelTextShadow
                 }
@@ -356,7 +356,7 @@ PanelWindow {
                     anchors.verticalCenter: parent.verticalCenter
                     width: 60
                     text: Stats.memUsed.toFixed(1) + "/" + Stats.memTotal.toFixed(0) + "G"
-                    font.pixelSize: 10
+                    font.pixelSize: Theme.raw(10)
                     color: Theme.textOnPanel
                     styleColor: Theme.panelTextShadow
                 }
@@ -370,7 +370,7 @@ PanelWindow {
                 PixelText {
                     width: 54
                     text: "SWAP"
-                    font.pixelSize: 10
+                    font.pixelSize: Theme.raw(10)
                     color: Theme.textOnPanel
                     styleColor: Theme.panelTextShadow
                 }
@@ -392,7 +392,7 @@ PanelWindow {
                     anchors.verticalCenter: parent.verticalCenter
                     width: 60
                     text: Stats.swapUsed.toFixed(1) + "G"
-                    font.pixelSize: 10
+                    font.pixelSize: Theme.raw(10)
                     color: Theme.textOnPanel
                     styleColor: Theme.panelTextShadow
                 }
@@ -410,7 +410,7 @@ PanelWindow {
                         width: 74
                         elide: Text.ElideRight
                         text: modelData.mount
-                        font.pixelSize: 9
+                        font.pixelSize: Theme.raw(9)
                         color: Theme.textOnPanel
                         styleColor: Theme.panelTextShadow
                     }
@@ -433,7 +433,7 @@ PanelWindow {
                         width: 62
                         horizontalAlignment: Text.AlignRight
                         text: Stats.diskText(modelData.used, modelData.total)
-                        font.pixelSize: 9
+                        font.pixelSize: Theme.raw(9)
                         color: Theme.textOnPanel
                         styleColor: Theme.panelTextShadow
                     }
@@ -452,14 +452,14 @@ PanelWindow {
                         width: 74
                         elide: Text.ElideRight
                         text: modelData.name
-                        font.pixelSize: 9
+                        font.pixelSize: Theme.raw(9)
                         color: Theme.textOnPanel
                         styleColor: Theme.panelTextShadow
                     }
                     PixelText {
                         width: parent.width - 80
                         text: "↓ " + Stats.rateText(modelData.rx) + "    ↑ " + Stats.rateText(modelData.tx)
-                        font.pixelSize: 9
+                        font.pixelSize: Theme.raw(9)
                         color: Theme.textOnPanel
                         styleColor: Theme.panelTextShadow
                     }
@@ -470,7 +470,7 @@ PanelWindow {
                 width: parent.width
                 text: I18n.t("stats.load") + "  " + Stats.load1.toFixed(2) + " / "
                     + Stats.load5.toFixed(2) + " / " + Stats.load15.toFixed(2)
-                font.pixelSize: 10
+                font.pixelSize: Theme.raw(10)
                 color: Theme.textOnPanel
                 styleColor: Theme.panelTextShadow
             }
@@ -479,7 +479,7 @@ PanelWindow {
                 text: I18n.t("stats.uptime") + "  " + Math.floor(Stats.uptime / 3600) + "h "
                     + Math.floor((Stats.uptime % 3600) / 60) + "m   ·   "
                     + I18n.t("stats.processes") + " " + Stats.processes
-                font.pixelSize: 10
+                font.pixelSize: Theme.raw(10)
                 color: Theme.textOnPanel
                 styleColor: Theme.panelTextShadow
             }
@@ -489,7 +489,7 @@ PanelWindow {
             PixelText {
                 width: parent.width
                 text: I18n.t("stats.top")
-                font.pixelSize: 9
+                font.pixelSize: Theme.raw(9)
                 color: Theme.textHints
                 styleColor: Theme.panelTextShadow
             }
@@ -505,7 +505,7 @@ PanelWindow {
                         width: parent.width - 96
                         elide: Text.ElideRight
                         text: modelData.name
-                        font.pixelSize: 9
+                        font.pixelSize: Theme.raw(9)
                         color: Theme.textOnPanel
                         styleColor: Theme.panelTextShadow
                     }
@@ -513,7 +513,7 @@ PanelWindow {
                         width: 44
                         horizontalAlignment: Text.AlignRight
                         text: modelData.cpu.toFixed(1) + "%"
-                        font.pixelSize: 9
+                        font.pixelSize: Theme.raw(9)
                         color: Theme.textOnPanel
                         styleColor: Theme.panelTextShadow
                     }
@@ -521,7 +521,7 @@ PanelWindow {
                         width: 40
                         horizontalAlignment: Text.AlignRight
                         text: modelData.mem.toFixed(1) + "%"
-                        font.pixelSize: 9
+                        font.pixelSize: Theme.raw(9)
                         color: Theme.textHints
                         styleColor: Theme.panelTextShadow
                     }
@@ -573,7 +573,7 @@ PanelWindow {
                         width: parent.width
                         elide: Text.ElideRight
                         text: root.player ? (root.player.trackAlbum || "") : ""
-                        font.pixelSize: 9
+                        font.pixelSize: Theme.raw(9)
                         color: Theme.textHints
                         styleColor: Theme.panelTextShadow
                     }

@@ -44,7 +44,7 @@ McPanel {
                     width: parent.width - 62
                     elide: Text.ElideRight
                     text: I18n.t("widget." + modelData)
-                    font.pixelSize: 10
+                    font.pixelSize: Theme.raw(10)
                     color: Theme.cardText
                 }
                 McButton {

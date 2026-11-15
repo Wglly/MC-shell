@@ -181,7 +181,7 @@ McPanel {
                         anchors.left: parent.left
                         anchors.margins: 3
                         text: modelData.label
-                        font.pixelSize: 8
+                        font.pixelSize: Theme.raw(8)
                         color: "#ffffff"
                     }
                     MouseArea {
@@ -223,7 +223,7 @@ McPanel {
             elide: Text.ElideRight
             text: "" + (root.statusText !== "" ? root.statusText
                 : (I18n.t("widget.wallpaper.folder") + ": " + root.folder))
-            font.pixelSize: 8
+            font.pixelSize: Theme.raw(8)
             color: root.statusText !== "" ? Theme.red : Theme.cardTextDim
         }
 

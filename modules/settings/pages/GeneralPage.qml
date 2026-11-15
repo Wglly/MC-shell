@@ -43,7 +43,7 @@ Column {
 
     PixelText {
         text: I18n.t("settings.general.languageHint")
-        font.pixelSize: 9
+        font.pixelSize: Theme.raw(9)
         color: Theme.textHints
         styleColor: Theme.panelTextShadow
     }
@@ -59,7 +59,7 @@ Column {
 
     PixelText {
         text: I18n.t("settings.general.hint")
-        font.pixelSize: 10
+        font.pixelSize: Theme.raw(10)
         color: Theme.textOnPanel
         styleColor: Theme.panelTextShadow
     }
@@ -74,7 +74,7 @@ Column {
         PixelText {
             anchors.fill: parent
             anchors.margins: 10
-            font.pixelSize: 10
+            font.pixelSize: Theme.raw(10)
             color: Theme.textOnPanel
             wrapMode: Text.Wrap
             text: "mc-shell ipc call shell launcher\n"

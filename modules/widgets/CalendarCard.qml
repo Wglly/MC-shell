@@ -72,7 +72,7 @@ McPanel {
                     width: 32
                     horizontalAlignment: Text.AlignHCenter
                     text: modelData
-                    font.pixelSize: 9
+                    font.pixelSize: Theme.raw(9)
                     color: Theme.cardTextDim
                 }
             }
@@ -88,7 +88,7 @@ McPanel {
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     text: modelData === 0 ? "" : ("" + modelData)
-                    font.pixelSize: 11
+                    font.pixelSize: Theme.raw(11)
                     color: modelData === root.today.getDate()
                            && root.monthOffset === 0 ? Theme.gold : Theme.text
                 }

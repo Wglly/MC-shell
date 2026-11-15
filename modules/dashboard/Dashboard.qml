@@ -66,7 +66,7 @@ PanelWindow {
                     anchors.rightMargin: 12
                     anchors.verticalCenter: parent.verticalCenter
                     text: I18n.t("dashboard.hint")
-                    font.pixelSize: 9
+                    font.pixelSize: Theme.raw(9)
                     color: Theme.textHints
                     styleColor: Theme.panelTextShadow
                 }

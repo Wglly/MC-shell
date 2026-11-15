@@ -32,7 +32,7 @@ McPanel {
             width: parent.width
             elide: Text.ElideRight
             text: root.player ? (root.player.trackArtist || "") : ""
-            font.pixelSize: 10
+            font.pixelSize: Theme.raw(10)
             color: Theme.cardTextDim
         }
 
@@ -53,7 +53,7 @@ McPanel {
                     text: Lyrics.loading ? I18n.t("music.lyrics.loading")
                         : (Lyrics.current !== "" ? Lyrics.current
                         : I18n.t("music.lyrics.none"))
-                    font.pixelSize: 10
+                    font.pixelSize: Theme.raw(10)
                     color: Lyrics.current !== "" ? Theme.gold : Theme.cardTextDim
                 }
                 PixelText {
@@ -61,7 +61,7 @@ McPanel {
                     elide: Text.ElideRight
                     visible: Lyrics.next !== ""
                     text: Lyrics.next
-                    font.pixelSize: 9
+                    font.pixelSize: Theme.raw(9)
                     color: Theme.cardTextDim
                 }
             }

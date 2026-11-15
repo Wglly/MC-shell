@@ -80,7 +80,7 @@ Column {
 
     PixelText {
         text: I18n.t("settings.widgets.hint")
-        font.pixelSize: 9
+        font.pixelSize: Theme.raw(9)
         color: Theme.textHints
         styleColor: Theme.panelTextShadow
     }
@@ -107,7 +107,7 @@ Column {
                     anchors.verticalCenter: parent.verticalCenter
                     width: 40
                     text: Math.round(Settings.get("widgets." + modelData + ".scale", 1.0) * 100) + "%"
-                    font.pixelSize: 9
+                    font.pixelSize: Theme.raw(9)
                     color: Theme.textOnPanel
                     styleColor: Theme.panelTextShadow
                 }

@@ -195,7 +195,7 @@ PanelWindow {
                         Layout.fillWidth: true
                         elide: Text.ElideRight
                         text: root.player ? (root.player.trackArtist || "") : ""
-                        font.pixelSize: 11
+                        font.pixelSize: Theme.raw(11)
                         color: Theme.textDim
                     }
                     RowLayout {

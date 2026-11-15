@@ -32,7 +32,7 @@ McPanel {
             PixelText {
                 width: 40
                 text: "CPU"
-                font.pixelSize: 10
+                font.pixelSize: Theme.raw(10)
                 color: Theme.cardTextDim
             }
             Rectangle {
@@ -54,7 +54,7 @@ McPanel {
                 width: 34
                 horizontalAlignment: Text.AlignRight
                 text: Math.round(Stats.cpu * 100) + "%"
-                font.pixelSize: 10
+                font.pixelSize: Theme.raw(10)
                 color: Theme.cardText
             }
         }
@@ -67,7 +67,7 @@ McPanel {
             PixelText {
                 width: 40
                 text: "RAM"
-                font.pixelSize: 10
+                font.pixelSize: Theme.raw(10)
                 color: Theme.cardTextDim
             }
             Rectangle {
@@ -89,7 +89,7 @@ McPanel {
                 width: 34
                 horizontalAlignment: Text.AlignRight
                 text: Math.round(Stats.mem * 100) + "%"
-                font.pixelSize: 10
+                font.pixelSize: Theme.raw(10)
                 color: Theme.cardText
             }
         }
@@ -102,17 +102,17 @@ McPanel {
 
         PixelText {
             text: "LOAD  " + Stats.load1.toFixed(2) + " / " + Stats.load5.toFixed(2)
-            font.pixelSize: 9
+            font.pixelSize: Theme.raw(9)
             color: Theme.cardTextDim
         }
         PixelText {
             text: "MEM   " + Stats.memUsed.toFixed(1) + " / " + Stats.memTotal.toFixed(1) + " GB"
-            font.pixelSize: 9
+            font.pixelSize: Theme.raw(9)
             color: Theme.cardTextDim
         }
         PixelText {
             text: I18n.t("control.up") + "  " + System.uptimeText()
-            font.pixelSize: 9
+            font.pixelSize: Theme.raw(9)
             color: Theme.cardTextDim
         }
     }

@@ -22,7 +22,7 @@ McPanel {
 
         PixelText {
             text: Util.clockText(root.now)
-            font.pixelSize: 40
+            font.pixelSize: Theme.raw(40)
             color: Theme.cardTitle
         }
         PixelText {
@@ -34,7 +34,7 @@ McPanel {
             text: I18n.t("bar.dayFormat")
                 .replace("{d}", Util.dayNumber(root.now))
                 .replace("{t}", Util.clockText(root.now))
-            font.pixelSize: 11
+            font.pixelSize: Theme.raw(11)
             color: Theme.cardTextDim
         }
     }

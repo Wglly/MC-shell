@@ -52,7 +52,7 @@ McPanel {
         PixelText {
             visible: Notifs.history.length === 0
             text: I18n.t("widget.messages.empty")
-            font.pixelSize: 9
+            font.pixelSize: Theme.raw(9)
             color: Theme.cardTextDim
         }
 
@@ -67,14 +67,14 @@ McPanel {
                     width: parent.width
                     elide: Text.ElideRight
                     text: modelData.app.toUpperCase()
-                    font.pixelSize: 8
+                    font.pixelSize: Theme.raw(8)
                     color: Theme.grass
                 }
                 PixelText {
                     width: parent.width
                     elide: Text.ElideRight
                     text: modelData.summary
-                    font.pixelSize: 10
+                    font.pixelSize: Theme.raw(10)
                     color: Theme.cardText
                 }
             }

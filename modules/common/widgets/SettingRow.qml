@@ -33,7 +33,7 @@ Item {
         anchors.topMargin: 2
         width: Math.max(120, root.width * 0.42)
         text: root.hint
-        font.pixelSize: 9
+        font.pixelSize: Theme.raw(9)
         color: Theme.textHints
         styleColor: Theme.panelTextShadow
         elide: Text.ElideRight

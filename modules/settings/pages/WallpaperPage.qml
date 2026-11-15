@@ -78,7 +78,7 @@ Column {
     PixelText {
         width: parent.width
         text: I18n.t("settings.wallpaper.note")
-        font.pixelSize: 9
+        font.pixelSize: Theme.raw(9)
         color: Theme.textHints
         styleColor: Theme.panelTextShadow
         wrapMode: Text.Wrap

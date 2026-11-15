@@ -221,7 +221,7 @@ PanelWindow {
                             width: grid.cellWidth - 8
                             horizontalAlignment: Text.AlignHCenter
                             elide: Text.ElideRight
-                            font.pixelSize: 11
+                            font.pixelSize: Theme.raw(11)
                             color: index === root.selected ? Theme.textOnPanel : Theme.textOnPanel
                             styleColor: Theme.panelTextShadow
                             text: modelData.name
@@ -236,7 +236,7 @@ PanelWindow {
             PixelText {
                 width: parent.width
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 11
+                font.pixelSize: Theme.raw(11)
                 color: Theme.textHints
                 styleColor: Theme.panelTextShadow
                 text: I18n.t("launcher.hint")

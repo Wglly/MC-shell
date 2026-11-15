@@ -32,7 +32,7 @@ McPanel {
                 width: 42
                 anchors.verticalCenter: parent.verticalCenter
                 text: "VOL"
-                font.pixelSize: 10
+                font.pixelSize: Theme.raw(10)
                 color: Theme.cardTextDim
             }
             McSlider {
@@ -57,7 +57,7 @@ McPanel {
                 width: 42
                 anchors.verticalCenter: parent.verticalCenter
                 text: "BRI"
-                font.pixelSize: 10
+                font.pixelSize: Theme.raw(10)
                 color: Theme.cardTextDim
             }
             McSlider {
@@ -70,7 +70,7 @@ McPanel {
                 width: 34
                 anchors.verticalCenter: parent.verticalCenter
                 text: Math.round(System.brightness * 100) + "%"
-                font.pixelSize: 9
+                font.pixelSize: Theme.raw(9)
                 color: Theme.cardTextDim
             }
         }

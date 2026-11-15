@@ -77,12 +77,12 @@ McPanel {
                 }
                 PixelText {
                     text: root.hostName !== "" ? root.hostName : "localhost"
-                    font.pixelSize: 10
+                    font.pixelSize: Theme.raw(10)
                     color: Theme.cardTextDim
                 }
                 PixelText {
                     text: I18n.t("widget.user.online")
-                    font.pixelSize: 9
+                    font.pixelSize: Theme.raw(9)
                     color: Theme.grass
                 }
             }
@@ -97,14 +97,14 @@ McPanel {
         PixelText {
             width: parent.width
             text: I18n.t("widget.user.uptime") + " " + System.uptimeText()
-            font.pixelSize: 10
+            font.pixelSize: Theme.raw(10)
             color: Theme.cardTextDim
         }
 
         PixelText {
             width: parent.width
             text: I18n.t("widget.user.shell") + "  MC-shell"
-            font.pixelSize: 10
+            font.pixelSize: Theme.raw(10)
             color: Theme.cardTextDim
         }
 

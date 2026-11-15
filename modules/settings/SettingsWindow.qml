@@ -73,7 +73,7 @@ PanelWindow {
                 Item { Layout.fillWidth: true }
                 PixelText {
                     text: I18n.languageLabel
-                    font.pixelSize: 10
+                    font.pixelSize: Theme.raw(10)
                     color: Theme.textHints
                     styleColor: Theme.panelTextShadow
                 }

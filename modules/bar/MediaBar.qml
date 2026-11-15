@@ -43,14 +43,14 @@ Item {
                     width: parent.width
                     elide: Text.ElideRight
                     text: root.player ? (root.player.trackTitle || I18n.t("control.nothingPlaying")) : ""
-                    font.pixelSize: 10
+                    font.pixelSize: Theme.raw(10)
                     color: Theme.gold
                 }
                 PixelText {
                     width: parent.width
                     elide: Text.ElideRight
                     text: root.player ? (root.player.trackArtist || "") : ""
-                    font.pixelSize: 8
+                    font.pixelSize: Theme.raw(8)
                     color: Theme.textDim
                 }
             }

@@ -51,6 +51,11 @@ QtObject {
 
     property real widgetFontScale: 1.0
 
+    // Scale a raw pixel size by the global UI scale.
+    function raw(px) {
+        return Math.max(6, Math.round(px * Theme.uiScale));
+    }
+
     // Scale a font size for the desktop widgets.
     function fs(px) {
         return Math.max(7, Math.round(px * Theme.widgetFontScale));

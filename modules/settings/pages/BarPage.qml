@@ -177,7 +177,7 @@ Column {
     PixelText {
         width: parent.width
         text: I18n.t("settings.bar.sectionsHint")
-        font.pixelSize: 9
+        font.pixelSize: Theme.raw(9)
         color: Theme.textHints
         styleColor: Theme.panelTextShadow
         wrapMode: Text.Wrap
@@ -223,7 +223,7 @@ Column {
     PixelText {
         width: parent.width
         text: I18n.t("settings.bar.note")
-        font.pixelSize: 9
+        font.pixelSize: Theme.raw(9)
         color: Theme.textHints
         styleColor: Theme.panelTextShadow
         wrapMode: Text.Wrap
