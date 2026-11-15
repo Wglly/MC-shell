@@ -111,7 +111,6 @@ QtObject {
             },
             sidebars: {
                 closeMode: "click",
-                reserveSpace: false,  // opt-in: may shift the basket surface on some compositors
                 closeDelay: 450,
                 left: { enabled: true, width: 260, widgets: ["perfmon", "wallpaper", "widgetmanager"] },
                 right: { enabled: true, width: 260, widgets: ["user", "toggles", "sliders", "messages"] }
