@@ -16,6 +16,7 @@ QtObject {
     property string barPopup: ""
     // screen x of the anchor icon (-1 = centre)
     property real barPopupX: -1
+    property real popupAnchorY: -1
 
     function toggleBarPopup(kind) {
         ShellState.barPopup = (ShellState.barPopup === kind) ? "" : kind;

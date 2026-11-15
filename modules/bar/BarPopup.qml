@@ -72,13 +72,22 @@ PanelWindow {
         width: root.mode === "stats" ? 400 : (root.mode === "calendar" ? 360 : (root.mode === "media" ? 400 : 320))
         height: root.mode === "stats"
             ? Math.min(parent.height - Theme.barHeight - 24, statsCol.implicitHeight + 24) : (root.mode === "calendar" ? 330 : (root.mode === "media" ? 244 : 268))
-        x: (root.mode === "user" || root.mode === "stats")
-            ? (ShellState.barPopupX >= 0
-                ? Math.round(Math.max(8, Math.min(parent.width - width - 8, ShellState.barPopupX - width / 2)))
-                : parent.width - width - 96)
-            : Math.round((parent.width - width) / 2)
-        anchors.top: parent.top
-        anchors.topMargin: Theme.barHeight + 6
+        readonly property string barPos: Settings.get("bar.position", "top")
+        readonly property bool barVertical: root.barPos === "left" || root.barPos === "right"
+        readonly property int barThick: Math.max(36, Settings.get("bar.thickness", 40))
+
+        x: root.barVertical
+            ? (root.barPos === "left" ? root.barThick + 8 : parent.width - width - root.barThick - 8)
+            : ((root.mode === "user" || root.mode === "stats")
+                ? (ShellState.barPopupX >= 0
+                    ? Math.round(Math.max(8, Math.min(parent.width - width - 8, ShellState.barPopupX - width / 2)))
+                    : parent.width - width - 96)
+                : Math.round((parent.width - width) / 2))
+        y: root.barVertical
+            ? Math.round(Math.max(8, Math.min(parent.height - height - 8, shell.popupAnchorY - height / 2)))
+            : (root.barPos === "bottom"
+                ? parent.height - height - root.barThick - 6
+                : root.barThick + 6)
         liquid: true
         background: Theme.panel
         texture: Theme.texturePath(Theme.panelTexture)

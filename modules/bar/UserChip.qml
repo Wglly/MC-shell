@@ -45,6 +45,7 @@ Item {
         onClicked: {
             var p = root.mapToItem(null, root.width / 2, 0);
             ShellState.barPopupX = p.x;
+            ShellState.popupAnchorY = p.y;
             ShellState.toggleBarPopup("user");
         }
     }
