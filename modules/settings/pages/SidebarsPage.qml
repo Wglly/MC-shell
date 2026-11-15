@@ -143,6 +143,18 @@ Column {
 
     SettingRow {
         width: page.width
+        label: I18n.t("settings.sidebars.reserve")
+
+        McButton {
+            anchors.right: parent.right
+            label: Settings.get("sidebars.reserveSpace", true) ? I18n.t("common.on") : I18n.t("common.off")
+            checked: Settings.get("sidebars.reserveSpace", true)
+            onClicked: Settings.toggle("sidebars.reserveSpace")
+        }
+    }
+
+    SettingRow {
+        width: page.width
         label: I18n.t("settings.sidebars.close")
 
         Row {

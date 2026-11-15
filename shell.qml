@@ -259,6 +259,10 @@ ShellRoot {
         side: "right"
     }
 
+    BasketSpacer {
+        targetScreen: shell.primaryScreen
+    }
+
     BasketCatcher {
         targetScreen: shell.primaryScreen
     }
