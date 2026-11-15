@@ -37,14 +37,15 @@ PanelWindow {
         return !!list && list.indexOf(key) >= 0;
     }
 
-    anchors {
-        left: root.vertical ? root.pos === "left" : true
-        right: root.vertical ? root.pos === "right" : true
-        top: root.vertical ? true : root.pos === "top"
-        bottom: root.vertical ? true : root.pos === "bottom"
-    }
-    implicitWidth: root.vertical ? root.visibleThickness : 0
-    implicitHeight: root.vertical ? 0 : root.visibleThickness
+    // Anchor to a single edge and size explicitly: stretching between two anchors lets
+    // compositor exclusive zones (baskets, dock) push the bar inward.
+    readonly property var scr: root.modelData
+    anchors.left: root.vertical ? root.pos === "left" : true
+    anchors.right: root.vertical ? root.pos === "right" : false
+    anchors.top: root.vertical ? true : root.pos === "top"
+    anchors.bottom: !root.vertical && root.pos === "bottom"
+    implicitWidth: root.vertical ? root.visibleThickness : (root.scr ? root.scr.width : 1920)
+    implicitHeight: root.vertical ? (root.scr ? root.scr.height : 1080) : root.visibleThickness
     color: "transparent"
     visible: root.barVisible
     exclusiveZone: root.barVisible ? root.visibleThickness : 0

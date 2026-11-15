@@ -30,6 +30,7 @@ PanelWindow {
     WlrLayershell.keyboardFocus: (ShellState.leftBasket || ShellState.rightBasket)
         ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
+    // single-edge anchoring so compositor exclusive zones cannot shift the basket
     anchors.left: side === "left"
     anchors.right: side === "right"
     anchors.top: true
