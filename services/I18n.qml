@@ -103,6 +103,9 @@ QtObject {
             "theme.winxp": "WINDOWS XP", "theme.win95": "WINDOWS 95",
             "settings.theme.scale": "UI SCALE",
             "settings.theme.texture": "BAR TEXTURE", "settings.theme.panelTexture": "PANEL TEXTURE",
+            "settings.theme.glass": "GLASS OPACITY",
+            "settings.theme.glass": "玻璃不透明度",
+            "settings.theme.glass": "玻璃不透明度",
             "settings.theme.note": "Textures are generated pixel art; pick the block that fits.",
 
             "settings.dock.visible": "SHOW DOCK", "settings.dock.position": "DOCK POSITION",

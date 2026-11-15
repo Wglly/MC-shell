@@ -216,7 +216,7 @@ QtObject {
             outline: "#4a6480", bevelLight: "#e8f4ff", bevelDark: "#8fa6ba",
             panelDark: "#e2e2e2", panelTextShadow: "#ffffff",
             cardText: "#1a1a1a", cardTextDim: "#5a6672", cardTitle: "#1f4e79",
-            cornerRadius: 10, glassOpacity: 0.9, glassBorder: "#7fb4d6"
+            cornerRadius: 10, glassOpacity: 0.8, glassBorder: "#7fb4d6"
         },
         win95: {
             accent: "#000080", gold: "#000080",

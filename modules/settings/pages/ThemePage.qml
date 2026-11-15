@@ -235,6 +235,29 @@ Column {
         }
     }
 
+    SettingRow {
+        width: parent.width
+        label: I18n.t("settings.theme.glass")
+
+        Row {
+            anchors.right: parent.right
+            spacing: 8
+            McSlider {
+                width: 150
+                value: (Settings.get("theme.glassOpacity", 0.8) - 0.3) / 0.7
+                onMoved: v => Settings.set("theme.glassOpacity", Math.round((0.3 + v * 0.7) * 100) / 100)
+            }
+            PixelText {
+                anchors.verticalCenter: parent.verticalCenter
+                width: 48
+                text: Math.round(Settings.get("theme.glassOpacity", 0.8) * 100) + "%"
+                font.pixelSize: Theme.fontSmall
+                color: Theme.textOnPanel
+                styleColor: Theme.panelTextShadow
+            }
+        }
+    }
+
     PixelText {
         width: parent.width
         text: I18n.t("settings.theme.note")

@@ -39,7 +39,7 @@ Item {
         radius: Math.max(0, root.radius - 1)
         color: root.glass
             ? Qt.rgba(root.background.r, root.background.g, root.background.b,
-                      Math.min(1, Theme.glassOpacity * (root.liquid ? 0.66 : 1.0)))
+                      Math.min(1, root.liquid ? Theme.glassOpacity : Theme.glassOpacity + 0.1))
             : root.background
     }
 
