@@ -43,6 +43,7 @@ QtObject {
     property color textDim: "#b9b9b9"
     property color textOnPanel: "#3f3f3f"
     property color textHints: "#6a6a6a"
+    property int bevelSize: 2
     property real cornerRadius: 0
     property real glassOpacity: 1.0
     property color glassBorder: "#1a1a1a"

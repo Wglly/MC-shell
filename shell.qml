@@ -153,6 +153,11 @@ ShellRoot {
     }
     Binding {
         target: Theme
+        property: "bevelSize"
+        value: Settings.get("theme.bevelSize", 2)
+    }
+    Binding {
+        target: Theme
         property: "cornerRadius"
         value: Settings.get("theme.cornerRadius", 0)
     }

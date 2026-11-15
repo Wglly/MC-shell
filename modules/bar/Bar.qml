@@ -75,7 +75,7 @@ PanelWindow {
 
     McPanel {
         anchors.fill: parent
-        bevel: 2
+        bevel: Theme.bevelSize
         background: Theme.barBg
         texture: Theme.texturePath(Settings.get("theme.barTexture", "deepslate"))
         textureOpacity: Theme.barTextureOpacity

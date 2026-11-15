@@ -227,7 +227,8 @@ QtObject {
             textShadow: "#ffffff", textHints: "#000000",
             outline: "#000000", bevelLight: "#ffffff", bevelDark: "#808080",
             panelDark: "#a0a0a0", panelTextShadow: "#ffffff",
-            cardText: "#000000", cardTextDim: "#404040", cardTitle: "#000080"
+            cardText: "#000000", cardTextDim: "#404040", cardTitle: "#000080",
+            bevelSize: 0
         }
     })
 
@@ -245,6 +246,8 @@ QtObject {
             root.set("theme.glassOpacity", 1.0);
         if (preset.glassBorder === undefined)
             root.set("theme.glassBorder", "#1a1a1a");
+        if (preset.bevelSize === undefined)
+            root.set("theme.bevelSize", 2);
     }
 
     // Bring older config files forward when the basket layout changes.

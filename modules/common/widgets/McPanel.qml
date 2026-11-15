@@ -12,7 +12,7 @@ Item {
     property real textureOpacity: 0.55
     // Tile keeps pixel textures crisp; Stretch is used for long gradient bars.
     property int textureFillMode: Image.Tile
-    property int bevel: 2
+    property int bevel: Theme.bevelSize
     // 0 = flat frame, 1 = classic inset GUI look
     property bool inset: false
 
