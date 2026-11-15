@@ -25,26 +25,6 @@ Item {
     implicitWidth: 200
     implicitHeight: 120
 
-    // 0. aero drop shadow (glass mode)
-    Rectangle {
-        z: -3
-        visible: root.glass
-        anchors.fill: parent
-        anchors.margins: -8
-        radius: root.radius + 8
-        color: "#000000"
-        opacity: 0.10
-    }
-    Rectangle {
-        z: -2
-        visible: root.glass
-        anchors.fill: parent
-        anchors.margins: -4
-        radius: root.radius + 4
-        color: "#000000"
-        opacity: 0.14
-    }
-
     // 1. frame
     Rectangle {
         anchors.fill: parent
