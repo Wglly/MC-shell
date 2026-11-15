@@ -15,7 +15,7 @@ PanelWindow {
     visible: root.open
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
-    WlrLayershell.layer: WlrLayer.Bottom
+    WlrLayershell.layer: WlrLayer.Top
 
     anchors.top: true
     anchors.bottom: true
