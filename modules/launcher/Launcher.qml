@@ -69,6 +69,7 @@ PanelWindow {
 
     // ------------------------------------------------------------------- panel
     McPanel {
+        liquid: true
         id: panel
         anchors.centerIn: parent
         width: Math.min(760, parent.width - 80)

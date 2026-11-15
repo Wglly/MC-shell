@@ -135,6 +135,7 @@ PanelWindow {
 
         // dashboard-only row for vertical docks
         McPanel {
+            liquid: true
             visible: root.vertical
             width: parent.width
             height: 30
@@ -153,6 +154,7 @@ PanelWindow {
 
         // mini media player + dashboard button
         McPanel {
+            liquid: true
             visible: !root.vertical && root.showMedia
             width: parent.width
             height: root.mediaH
@@ -228,6 +230,7 @@ PanelWindow {
 
         // inventory
         McPanel {
+            liquid: true
             width: parent.width
             height: root.panelH
             background: Theme.dockBg

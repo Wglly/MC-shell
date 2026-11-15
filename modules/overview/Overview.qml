@@ -173,6 +173,7 @@ PanelWindow {
                         height: grid.cardH
 
                         McPanel {
+                            liquid: true
                             anchors.fill: parent
                             background: card.isCurrent ? "#27301b" : Theme.cardBg
                             texture: Theme.texturePath(card.isCurrent ? "grass_block_top" : "deepslate")
@@ -217,6 +218,7 @@ PanelWindow {
                                 model: card.wins.slice(0, 5)
 
                                 delegate: McPanel {
+                                    liquid: true
                                     width: parent.width
                                     height: 30
                                     background: Theme.panelDark
@@ -306,6 +308,7 @@ PanelWindow {
 
         // floating drag ghost
         McPanel {
+            liquid: true
             visible: root.dragActive && root.dragWin !== null
             x: root.dragPos.x + 10
             y: root.dragPos.y + 6

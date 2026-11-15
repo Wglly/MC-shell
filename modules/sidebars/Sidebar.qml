@@ -63,6 +63,7 @@ PanelWindow {
         : 0
 
     McPanel {
+        liquid: true
         anchors.fill: parent
         background: Theme.cardBg
         texture: Theme.texturePath(Settings.get("theme.panelTexture", "dirt"))
