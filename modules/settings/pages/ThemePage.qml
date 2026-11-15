@@ -244,8 +244,8 @@ Column {
             spacing: 8
             McSlider {
                 width: 150
-                value: (Settings.get("theme.glassOpacity", 0.8) - 0.3) / 0.7
-                onMoved: v => Settings.set("theme.glassOpacity", Math.round((0.3 + v * 0.7) * 100) / 100)
+                value: (Settings.get("theme.glassOpacity", 0.8) - 0.1) / 0.9
+                onMoved: v => Settings.set("theme.glassOpacity", Math.round((0.1 + v * 0.9) * 100) / 100)
             }
             PixelText {
                 anchors.verticalCenter: parent.verticalCenter

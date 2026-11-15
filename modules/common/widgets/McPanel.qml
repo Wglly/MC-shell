@@ -46,6 +46,8 @@ Item {
     // glass sheen
     Rectangle {
         visible: root.glass
+        // let the desktop show through when the glass is very transparent
+        opacity: Math.min(1.0, Theme.glassOpacity * 1.1)
         anchors.fill: parent
         anchors.margins: 2
         radius: Math.max(0, root.radius - 2)
