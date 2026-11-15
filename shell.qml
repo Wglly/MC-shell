@@ -249,6 +249,20 @@ ShellRoot {
         targetScreen: shell.primaryScreen
     }
 
+    BasketEdge {
+        targetScreen: shell.primaryScreen
+        side: "left"
+    }
+
+    BasketEdge {
+        targetScreen: shell.primaryScreen
+        side: "right"
+    }
+
+    BasketCatcher {
+        targetScreen: shell.primaryScreen
+    }
+
     Sidebar {
         side: "left"
         targetScreen: shell.primaryScreen
