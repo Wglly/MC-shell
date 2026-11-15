@@ -62,6 +62,13 @@ Row {
         return out;
     }
 
+    Slot {
+        width: 26
+        height: 26
+        icon: Qt.resolvedUrl("../../assets/textures/icon_launcher.png")
+        onClicked: ShellState.toggleOverlay("launcher")
+    }
+
     Repeater {
         model: root.entries
 
@@ -99,10 +106,4 @@ Row {
         }
     }
 
-    Slot {
-        width: 26
-        height: 26
-        icon: Qt.resolvedUrl("../../assets/textures/icon_launcher.png")
-        onClicked: ShellState.toggleOverlay("launcher")
-    }
 }
