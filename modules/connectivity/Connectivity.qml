@@ -88,8 +88,14 @@ PanelWindow {
 
     McPanel {
         liquid: true
-        width: 720; height: 540
-        anchors.centerIn: parent
+        width: 460; height: 620
+        x: ShellState.barPopupX >= 0
+            ? Math.round(Math.max(8, Math.min(parent.width - width - 8, ShellState.barPopupX - width / 2)))
+            : Math.round((parent.width - width) / 2)
+        y: ShellState.popupAnchorY >= 0
+            ? Math.round(Math.max(8, Math.min(parent.height - height - 8,
+                (ShellState.popupAnchorY > parent.height / 2 ? ShellState.popupAnchorY - height : ShellState.popupAnchorY))))
+            : Math.round((parent.height - height) / 2)
         background: Theme.panel
         texture: Theme.texturePath(Theme.panelTexture)
 
@@ -108,14 +114,14 @@ PanelWindow {
             PixelText { text: I18n.t("connectivity.wifi") + "  (" + root.wifi.length + ")"; font.pixelSize: Theme.raw(12); color: Theme.textOnPanel; styleColor: Theme.panelTextShadow }
 
             Flickable {
-                width: parent.width; height: 200; clip: true
+                width: parent.width; height: 250; clip: true
                 contentHeight: wifiGrid.height
                 Grid {
-                    id: wifiGrid; width: parent.width; columns: 2; spacing: 4
+                    id: wifiGrid; width: parent.width; columns: 1; spacing: 4
                     Repeater {
                         model: root.wifi
                         delegate: McButton {
-                            width: (wifiGrid.width - 4) / 2; height: 26
+                            width: wifiGrid.width; height: 26
                             label: modelData.ssid + "  " + modelData.signal + "%" + (modelData.security !== "" && modelData.security !== "--" ? " 🔒" : "")
                             checked: modelData.active
                             onClicked: root.connectWifi(modelData.ssid, modelData.security)
@@ -139,11 +145,11 @@ PanelWindow {
                 width: parent.width; height: 140; clip: true
                 contentHeight: btGrid.height
                 Grid {
-                    id: btGrid; width: parent.width; columns: 2; spacing: 4
+                    id: btGrid; width: parent.width; columns: 1; spacing: 4
                     Repeater {
                         model: root.bt
                         delegate: McButton {
-                            width: (btGrid.width - 4) / 2; height: 26
+                            width: btGrid.width; height: 26
                             label: modelData.name
                             onClicked: {
                                 runner.command = ["bluetoothctl", "connect", modelData.mac];
