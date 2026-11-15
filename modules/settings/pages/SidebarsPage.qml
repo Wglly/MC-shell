@@ -118,6 +118,28 @@ Column {
         }
     }
 
+    SettingRow {
+        width: page.width
+        label: I18n.t("settings.sidebars.close")
+
+        Row {
+            anchors.right: parent.right
+            spacing: 6
+            McButton {
+                implicitWidth: 120
+                label: I18n.t("settings.sidebars.closeClick")
+                checked: Settings.get("sidebars.closeMode", "click") === "click"
+                onClicked: Settings.set("sidebars.closeMode", "click")
+            }
+            McButton {
+                implicitWidth: 130
+                label: I18n.t("settings.sidebars.closeHover")
+                checked: Settings.get("sidebars.closeMode", "hover") === "hover"
+                onClicked: Settings.set("sidebars.closeMode", "hover")
+            }
+        }
+    }
+
     PixelText {
         width: parent.width
         text: I18n.t("settings.sidebars.note")

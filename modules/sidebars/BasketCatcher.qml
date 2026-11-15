@@ -30,11 +30,31 @@ PanelWindow {
     margins.left: root.leftPad
     margins.right: root.rightPad
 
+    readonly property bool hoverClose: Settings.get("sidebars.closeMode", "click") === "hover"
+
+    function closeAll() {
+        ShellState.leftBasket = false;
+        ShellState.rightBasket = false;
+    }
+
+    Timer {
+        id: leaveTimer
+        interval: 450
+        repeat: false
+        onTriggered: if (root.open) root.closeAll()
+    }
+
     MouseArea {
         anchors.fill: parent
-        onClicked: {
-            ShellState.leftBasket = false;
-            ShellState.rightBasket = false;
+        hoverEnabled: root.hoverClose
+        onClicked: if (!root.hoverClose) root.closeAll()
+        onContainsMouseChanged: {
+            if (!root.hoverClose)
+                return;
+            if (containsMouse)
+                leaveTimer.restart();
+            else
+                leaveTimer.stop();
         }
     }
 }
