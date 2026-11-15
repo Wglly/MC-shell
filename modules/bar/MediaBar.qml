@@ -58,7 +58,12 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
-                onClicked: ShellState.toggleBarPopup("media")
+                onClicked: {
+                    var p = root.mapToItem(null, root.width / 2, root.height / 2);
+                    ShellState.barPopupX = p.x;
+                    ShellState.popupAnchorY = p.y;
+                    ShellState.toggleBarPopup("media");
+                }
             }
         }
 

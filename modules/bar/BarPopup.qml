@@ -78,7 +78,7 @@ PanelWindow {
 
         x: barVertical
             ? (barPos === "left" ? barThick + 8 : parent.width - width - barThick - 8)
-            : ((root.mode === "user" || root.mode === "stats")
+            : ((root.mode === "user" || root.mode === "stats" || root.mode === "media")
                 ? (ShellState.barPopupX >= 0
                     ? Math.round(Math.max(8, Math.min(parent.width - width - 8, ShellState.barPopupX - width / 2)))
                     : parent.width - width - 96)
